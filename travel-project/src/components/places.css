@@ -1,0 +1,81 @@
+
+.contain {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 40px;
+}
+.popular
+{
+    padding-top: 30px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.box {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 300px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+
+.box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.box img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.box h4 {
+  font-size: 20px;
+  margin: 15px;
+  color: #333;
+}
+.box h5 {
+  font-size: 15px;
+  margin: 15px;
+  color: #333;
+}
+
+.box button {
+  height: 40px;
+  margin: 15px;
+  background-color: #0A1A4B;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.box button:hover {
+  background-color: #0A1A4B;
+}
+
+.price
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+
+
+
+.box p {
+  font-size: 15px;
+  margin: 0 15px 15px;
+  color: #666;
+  line-height: 1.4;
+}
+
+

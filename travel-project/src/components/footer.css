@@ -1,0 +1,57 @@
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #003049;
+  color: #F5F5F5;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.footer-container > div {
+  flex: 1;
+  min-width: 250px;
+  margin: 10px;
+}
+
+.footer-container .left p,
+.footer-container .center h4 {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.footer-container .center h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #F5F5F5;
+    margin-top: 30px;
+}
+
+.footer-container .right ul {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  gap: 10px;
+  margin-left: 30px;
+}
+
+.footer-container .right ul li a {
+  color: #f8fafc;
+  font-size: 24px;
+  transition: color 0.3s ease;
+}
+
+.footer-container .right ul li a:hover {
+  color: #FF6B6B;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-container .right ul {
+    justify-content: center;
+  }
+}
