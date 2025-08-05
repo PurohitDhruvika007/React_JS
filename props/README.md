@@ -1,12 +1,53 @@
-# React + Vite
+<h1>🧑‍💼 json placeholder(props)</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>This project renders dynamic user data using <strong>React</strong>, styled with a <em>glassmorphism</em>-inspired UI for a modern and elegant presentation. It's a perfect example of combining <code>map()</code> iteration with custom CSS for responsive design.</p>
 
-Currently, two official plugins are available:
+<h2>🌟 Features</h2>
+<ul>
+  <li>Beautiful glassmorphism user cards</li>
+  <li>Dynamic rendering using <code>map()</code></li>
+  <li>Responsive layout with flexbox</li>
+  <li>Hover animations for interaction</li>
+  <li>Gradient background and clean UI</li>
+</ul>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>🔧 How to Run</h2>
+<ol>
+  <li>Clone the repository</li>
+  <li>Install dependencies using <code>npm install</code></li>
+  <li>Run the app with <code>npm run dev</code></li>
+</ol>
 
-## Expanding the ESLint configuration
+<h2>📁 File Structure</h2>
+<pre>
+📁 src
+ ┣ 📁 components
+ ┃ ┗ 📄 Users.jsx
+ ┣ 📁 data
+ ┃ ┗ 📄 user_data.js
+ ┣ 📄 App.jsx
+ ┣ 📄 user.css
+</pre>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<h2>🧠 What You'll Learn</h2>
+<ul>
+  <li>How to map through an array in JSX</li>
+  <li>How to pass and render nested objects (like address)</li>
+  <li>Applying advanced CSS for stunning UI</li>
+</ul>
+
+<h2>🎥 video</h2>
+
+
+<h2>🚀 Technologies Used</h2>
+<ul>
+  <li>React</li>
+  <li>JavaScript (ES6+)</li>
+  <li>CSS3 (flexbox, blur, gradient, glass effect)</li>
+</ul>
+
+
+
+<hr />
+
+<p align="center"><strong>Crafted with 💜 by Dhruvika Purohit</strong></p>
