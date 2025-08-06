@@ -36,9 +36,6 @@
   <li>Applying advanced CSS for stunning UI</li>
 </ul>
 
-<h2>🎥 video</h2>
-
-
 <h2>🚀 Technologies Used</h2>
 <ul>
   <li>React</li>
@@ -46,7 +43,9 @@
   <li>CSS3 (flexbox, blur, gradient, glass effect)</li>
 </ul>
 
+<h2>🎥 video</h2>
 
+https://github.com/user-attachments/assets/bc44dd9d-f0c4-43f2-8c83-f01d6d1bfe50
 
 <hr />
 
