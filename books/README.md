@@ -1,12 +1,69 @@
-# React + Vite
+# 📚 Book Manager App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautifully designed React-based Book Manager application that allows users to **add**, **edit**, **update**, and **delete** books. The interface is enhanced with a **glassmorphism effect**, smooth transitions, and a stunning background to make managing books a visually delightful experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Features
 
-## Expanding the ESLint configuration
+- 🎨 Elegant, modern UI with glassmorphism and animated transitions
+- ➕ Add new books with title and author
+- ✏️ Edit existing books and update them
+- ❌ Delete books from the list
+- 📱 Fully responsive design – mobile & desktop friendly
+- 🛠️ Built using **React** and **CSS3**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🖼️ Preview
+
+![Book Manager UI Preview](https://images.unsplash.com/photo-1524995997946-a1c2e315a42f)
+
+> The UI features a blurred glass panel with animated buttons and clean input fields for seamless interaction.
+
+---
+
+## 📂 Project Structure
+
+<pre>
+    /book-manager
+│
+├── public/
+│ └── index.html # HTML entry point
+│
+├── src/
+│ ├── main.jsx # Main React DOM rendering
+│ ├── Books.jsx # Book Manager component
+│ └── books.css # Stylish and responsive CSS
+│
+└── package.json # Project metadata and dependencies
+</pre>
+
+---
+
+## 🧑‍💻 Tech Stack
+
+- **React JS**
+- **Vite**
+- **CSS3** (Glassmorphism + Animations)
+- **HTML5**
+
+---
+
+## 📱 Responsive Design
+
+Responsive for:
+
+- ✅ Mobile Phones  
+- ✅ Tablets  
+- ✅ Laptops & Desktops  
+
+---
+
+## 🎥 video
+
+---
+
+## 🙌 Author
+
+Made with 💙 by **Dhruvika Purohit**
