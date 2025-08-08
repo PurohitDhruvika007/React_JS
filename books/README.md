@@ -13,13 +13,7 @@ A beautifully designed React-based Book Manager application that allows users to
 - 📱 Fully responsive design – mobile & desktop friendly
 - 🛠️ Built using **React** and **CSS3**
 
----
 
-## 🖼️ Preview
-
-![Book Manager UI Preview](https://images.unsplash.com/photo-1524995997946-a1c2e315a42f)
-
-> The UI features a blurred glass panel with animated buttons and clean input fields for seamless interaction.
 
 ---
 
@@ -62,8 +56,12 @@ Responsive for:
 
 ## 🎥 video
 
+https://github.com/user-attachments/assets/fbca66e8-9998-42c6-be22-d0791c1d15f9
+
+
+
 ---
 
 ## 🙌 Author
 
-Made with 💙 by **Dhruvika Purohit**
+<center>Made with 💙 by **Dhruvika Purohit**</center>
