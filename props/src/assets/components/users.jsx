@@ -1,17 +1,18 @@
 import "./user.css";
-import UsersData from '../user_data.js'
 
-const Users = () => {
+const Users = (props) => {
     return (
-        <div className="user-container">
-            {UsersData.map((user, index) => (
-                <div className="user-card" key={index}>
-                    <h3>name : {user.name}</h3>
-                    <h5>email : {user.email}</h5>
-                    <h5>address : {user.address.street}</h5>
+        
+            <div className="user-container">
+                
+                    <div className="user-card">
+                    <h3>name : {props.name}</h3>
+                    <h5>email : {props.email}</h5>
+                    <h5>address : {props.address}</h5>
+                
                 </div>
-            ))}
         </div>
+        
     );
 }
 
