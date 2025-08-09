@@ -76,5 +76,9 @@ budget-tracker/
   <p>Made with 💙 by Dhruvika Purohit</p>
 
   <h2>🎥 video</h2>
-  
+
+
+https://github.com/user-attachments/assets/867c922f-a86a-4e48-a810-abad271f4be6
+
 </section>
+
