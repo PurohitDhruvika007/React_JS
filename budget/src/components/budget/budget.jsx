@@ -55,30 +55,30 @@ const Budget = () => {
   function Income(budget) {
     if(budget.type=="income")
     {
-        income+=budget.amount;
+        income+=parseInt(budget.amount);
     }
   }
   function Expense(budget)
   {
     if(budget.type=="expense")
     {
-        expense+=budget.amount;
+        expense+=parseInt(budget.amount);
     }
   }
   function Balance(budget)
   {
     if(budget.type=="income")
     {
-        balance+=budget.amount;
+        balance+=parseInt(budget.amount);
     }
     else
     {
-        balance-=budget.amount;
+        balance-=parseInt(budget.amount);
     }
   }
   return (
     <>
-      <h1>💸Income/Expense Budget📝</h1>
+      <h1>💸  Income/Expense Budget  📝</h1>
       <input
         type="text"
         placeholder="Enter the name..."
@@ -111,27 +111,33 @@ const Budget = () => {
         value={type}
         onChange={(e) => setType(e.target.value)}
       />
-      <button id="add-btn" onClick={() => add()}>Add</button>
+      <div className="main-btn">
+        <button id="add-btn" onClick={() => add()}>Add</button>
       <button id="update-btn" onClick={() => update(i)}>Update</button>
+      </div>
       {budgets.map((budget, index) => (
         <div key={index} id="main-container">
-          <div id="name-budget">
+          <div id="name-date">
             <h3 className="name">{budget.name}</h3>
             <p className="date">{budget.date}</p>
           </div>
           <h4 className="type">{budget.type}</h4>
           <h3 className="amount">{budget.amount}$</h3>
-          <button id="delete-btn" onClick={() => deleteAm(index)}>Delete</button>
+          <div className="sub-btn">
+            <button id="delete-btn" onClick={() => deleteAm(index)}>Delete</button>
           <button id="edit-btn" onClick={() => edit(index)}>Edit</button>
+          </div>
           {Income(budget)}
           {Expense(budget)}
           {Balance(budget)}
         </div>
       ))}
       {}
-      <h2 className="income">Total Income : {income}$</h2>
+      <div className="total-container">
+        <h2 className="income">Total Income : {income}$</h2>
       <h2 className="expense">Total Expense : {expense}$</h2>
       <h2 className="balance">Total balance : {balance}$</h2>
+      </div>
     </>
   );
 };
