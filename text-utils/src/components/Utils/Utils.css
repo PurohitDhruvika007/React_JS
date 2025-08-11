@@ -1,0 +1,119 @@
+/* === Base Layout === */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+
+}
+
+/* === Input Field === */
+#input {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  outline: none;
+  margin-bottom: 15px;
+  background: #fff;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+  resize: none;
+  height: 80px;
+  transition: 0.3s ease;
+}
+
+#input:focus {
+  box-shadow: 0px 4px 15px rgba(102, 166, 255, 0.5);
+}
+
+/* === Buttons === */
+button {
+  padding: 10px 18px;
+  margin: 5px 8px 20px 0;
+  border: none;
+  border-radius: 25px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add {
+  background: linear-gradient(90deg, #43cea2, #185a9d);
+}
+
+.update {
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+}
+
+.delete {
+  background: linear-gradient(90deg, #ff5f6d, #ffc371);
+}
+
+.edit {
+  background: linear-gradient(90deg, #36d1dc, #5b86e5);
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+}
+
+
+
+.elements {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+
+
+.elements:hover {
+  transform: translateY(-5px);
+}
+
+/* === Headings & Stats === */
+.main-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* === Responsive for Mobile/Tablets === */
+@media (max-width: 900px) {
+  .main-box {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .main-box {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 per row */
+  gap: 20px; /* space between cards */
+ 
+}
+
+/* Card styling */
+.card-container {
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+
+
+
