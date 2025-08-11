@@ -55,26 +55,14 @@ budget-tracker/
 └── README.md
   </code></pre>
 
-  <h2>🚀 Future Improvements</h2>
-  <ul>
-    <li>Add <strong>categories</strong> (e.g., Food, Transport, Salary) for richer grouping.</li>
-    <li>Persist data using <strong>localStorage</strong> or a backend (Firebase, Node + DB).</li>
-    <li>Show charts and visualizations for expenses over time (use Recharts or Chart.js).</li>
-    <li>Improve form validation and user feedback (success/error messages).</li>
-    <li>Allow currency selection and localization.</li>
-    <li>Add import/export (CSV) and monthly/annual summaries.</li>
-  </ul>
-
-  <h2>✅ Notes & Tips</h2>
-  <ul>
-    <li>Ensure <code>amount</code> is stored as a number (use <code>Number(e.target.value)</code> on input change).</li>
-    <li>Initialize state arrays as <code>[]</code> to avoid runtime errors with <code>.map()</code>.</li>
-    <li>Use meaningful keys when rendering lists (avoid using array index as key for dynamic lists).</li>
-  </ul>
 
   <h2>Author</h2>
   <p>Made with 💙 by Dhruvika Purohit</p>
 
   <h2>🎥 video</h2>
-  
+
+
+https://github.com/user-attachments/assets/867c922f-a86a-4e48-a810-abad271f4be6
+
 </section>
+
