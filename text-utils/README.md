@@ -1,6 +1,6 @@
-<h1 align="center">📝 Text Utils</h1>
+<h1>📝 Text Utils</h1>
 
-<p align="center">
+<p>
   A React-based text utility app that lets you add, edit, delete, and analyze text with useful statistics like word count, character count, vowel/consonant count, and estimated reading time — all in a clean, card-based grid layout.
 </p>
 
@@ -52,3 +52,6 @@ npm start
 </pre>
 
 <h2>🎥 video</h2>
+
+https://github.com/user-attachments/assets/88c0c697-3436-479a-a171-ec292a766cc0
+
