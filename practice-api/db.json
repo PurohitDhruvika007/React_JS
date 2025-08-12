@@ -1,0 +1,102 @@
+{"user":[
+  {
+    "id": 1,
+    "name": "Aarav Sharma",
+    "email": "aarav.sharma@example.com",
+    "address": {
+      "street": "MG Road",
+      "city": "Mumbai",
+      "pincode": "400001"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Priya Patel",
+    "email": "priya.patel@example.com",
+    "address": {
+      "street": "C G Road",
+      "city": "Ahmedabad",
+      "pincode": "380009"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Rohan Mehta",
+    "email": "rohan.mehta@example.com",
+    "address": {
+      "street": "Park Street",
+      "city": "Kolkata",
+      "pincode": "700016"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Ishita Singh",
+    "email": "ishita.singh@example.com",
+    "address": {
+      "street": "Connaught Place",
+      "city": "Delhi",
+      "pincode": "110001"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Vikram Verma",
+    "email": "vikram.verma@example.com",
+    "address": {
+      "street": "Banjara Hills",
+      "city": "Hyderabad",
+      "pincode": "500034"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Neha Gupta",
+    "email": "neha.gupta@example.com",
+    "address": {
+      "street": "Civil Lines",
+      "city": "Jaipur",
+      "pincode": "302006"
+    }
+  },
+  {
+    "id": 7,
+    "name": "Aniket Deshmukh",
+    "email": "aniket.deshmukh@example.com",
+    "address": {
+      "street": "FC Road",
+      "city": "Pune",
+      "pincode": "411005"
+    }
+  },
+  {
+    "id": 8,
+    "name": "Kavya Iyer",
+    "email": "kavya.iyer@example.com",
+    "address": {
+      "street": "Anna Salai",
+      "city": "Chennai",
+      "pincode": "600002"
+    }
+  },
+  {
+    "id": 9,
+    "name": "Manish Kumar",
+    "email": "manish.kumar@example.com",
+    "address": {
+      "street": "Lalbagh Road",
+      "city": "Bangalore",
+      "pincode": "560027"
+    }
+  },
+  {
+    "id": 10,
+    "name": "Sneha Reddy",
+    "email": "sneha.reddy@example.com",
+    "address": {
+      "street": "MG Road",
+      "city": "Secunderabad",
+      "pincode": "500003"
+    }
+  }
+]}
