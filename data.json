@@ -1,0 +1,64 @@
+{
+  "product": [
+    {
+      "id": "2",
+      "name": "Stainless Steel Water Bottle",
+      "price": 599,
+      "currency": "INR",
+      "category": "Home & Kitchen",
+      "stock": 50,
+      "description": "750ml insulated bottle to keep drinks hot or cold for hours."
+    },
+    {
+      "id": "3",
+      "name": "Men's Casual Cotton T-Shirt",
+      "price": 799,
+      "currency": "INR",
+      "category": "Fashion",
+      "stock": 35,
+      "description": "Soft, breathable cotton T-shirt available in multiple colors."
+    },
+    {
+      "id": "4",
+      "name": "gamer house",
+      "price": 14499,
+      "currency": "INR",
+      "category": "Electronics",
+      "stock": 15,
+      "description": "Ergonomic gamer mouse with 6 programmable buttons and adjustable DPA."
+    },
+    {
+      "id": "5",
+      "name": "Ceramic Coffee Mug",
+      "price": 299,
+      "currency": "INR",
+      "category": "Home & Kitchen",
+      "stock": 60,
+      "description": "350ml ceramic mug with a smooth finish, perfect for coffee or tea."
+    },
+    {
+      "id": "1",
+      "name": "Bluetooth Headphones",
+      "price": 1499,
+      "currency": "INR",
+      "category": "Electronics",
+      "stock": 25,
+      "description": "Over-ear headphones with noise cancellation and 20-hour battery life."
+    },
+    {
+      "id": "4",
+      "name": "Gaming Mouse",
+      "price": 1499,
+      "currency": "INR",
+      "category": "Electronics",
+      "stock": 15,
+      "description": "Ergonomic gaming mouse with 6 programmable buttons and adjustable DPI."
+    },
+    {
+      "id": 6,
+      "name": "purohit dhruvika",
+      "product": "clothes",
+      "price": 1999
+    }
+  ]
+}
