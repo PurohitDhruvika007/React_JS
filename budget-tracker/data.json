@@ -1,0 +1,50 @@
+{
+    "account":{
+
+    },
+    "history":[
+        {
+            "id":"1",
+            "amount":450.00,
+            "category":"shopping",
+            "status":"expense",
+            "description":"i purchase bag",
+            "date":"4-5-25",
+            "payment mode":"UPI"
+        }
+    ],
+    "category":[
+        {
+            "id":"1",
+            "name":"shopping"
+        },
+        {
+            "id":"2",
+            "name":"food"
+        },
+        {
+            "id":"3",
+            "name":"personal"
+        },
+        {
+            "id":"4",
+            "name":"Investment"
+        },
+        {
+            "id":"5",
+            "name":"Education"
+        },
+        {
+            "id":"6",
+            "name":"Home"
+        },
+        {
+            "id":"7",
+            "name":"Donate"
+        },
+        {
+            "id":"8",
+            "name":"freinds"
+        }
+    ]
+}
