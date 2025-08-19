@@ -1,0 +1,16 @@
+.about-section
+{
+    width:90%;
+    margin: auto;
+    justify-content: space-between;
+}
+h1
+{
+    font-size: 40px;
+}
+h1:hover::after
+{
+    content:" ";
+    border-bottom: 2px solid white;
+
+}
