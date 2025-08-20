@@ -1,16 +1,29 @@
 .about-section
 {
-    width:90%;
+   
+    margin-top: 10px;
+    background-color: #3F72AF;
+    padding: 20px 0px;
+    
+}
+.about
+{
+     width:90%;
     margin: auto;
     justify-content: space-between;
+    display: flex;
 }
 h1
 {
     font-size: 40px;
 }
-h1:hover::after
+.content
 {
-    content:" ";
-    border-bottom: 2px solid white;
-
+    width: 50%;
+    align-items: center;
+}
+.image img
+{
+    height: 350px;
+    border-radius: 100%;
 }
