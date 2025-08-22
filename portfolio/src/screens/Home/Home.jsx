@@ -2,6 +2,7 @@ import React,{useState,useEffect} from 'react'
 import About from '../../components/About/About'
 import axios from 'axios';
 import Projects from '../../components/Projects/Projects';
+import Contact from '../../components/Contact/Contact';
 
 export default function Home() {
 
@@ -20,9 +21,10 @@ export default function Home() {
     return res.data;
   }
   return (
-    <div>
+    <div id="Home">
       <About user={githubData}/>
       <Projects repos={githubRepo}/>
+      <Contact/>
     </div>
   )
 }

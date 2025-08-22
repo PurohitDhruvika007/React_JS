@@ -1,12 +1,34 @@
-# React + Vite
+<h1>🌐 My Portfolio</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p>
+A personal portfolio website built with <b>React.js</b>, showcasing my <b>About</b>, 
+<b>Projects</b>, and <b>Contact</b> sections. The website dynamically fetches my 
+<b>GitHub profile</b> and <b>repositories</b> using the GitHub API, keeping it always 
+up-to-date with my latest work.
+</p>
 
-Currently, two official plugins are available:
+<h2>🚀 Features</h2>
+<ul>
+  <li>📌 Sticky Navbar with smooth navigation</li>
+  <li>👩‍💻 About section (auto-fetched GitHub profile data)</li>
+  <li>📂 Projects section (live repositories from GitHub)</li>
+  <li>📬 Contact form (basic input validation with alerts)</li>
+  <li>🎨 Responsive design with custom CSS styling</li>
+</ul>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2>🛠️ Tech Stack</h2>
+<ul>
+  <li><b>Frontend:</b> React.js</li>
+  <li><b>Styling:</b> CSS</li>
+  <li><b>API:</b> GitHub REST API</li>
+  <li><b>Package:</b> Axios</li>
+</ul>
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+<h2>🔗 Live Demo</h2>
+👉 
+
+<h2>🏷️ Tags</h2>
+<p>
+#React #Portfolio #WebDevelopment #Frontend #GitHubAPI #JavaScript #Axios #CSS #ResponsiveDesign
+</p>

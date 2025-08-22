@@ -1,50 +1,51 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: #112D4E; /* dark background */
+  background: #DDE6ED;
+  color: #27374D;
 }
 
 .main {
-  background: #3F72AF; /* navbar background */
-  width: 100%;
-  padding: 10px 0;
+  background: #27374D;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar {
-  height: 60px;
   width: 90%;
   margin: auto;
+  height: 70px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo h2 {
-  color: #F9F7F7;
+  color: #DDE6ED;
   margin: 0;
-  font-size: 24px;
 }
 
-ul {
+.links ul {
   display: flex;
-  gap: 25px;
+  gap: 30px;
   margin: 0;
   padding: 0;
 }
 
-li {
+.links li {
   list-style: none;
 }
 
-li a {
-  color: #DBE2EF;
+.links a {
+  color: #9DB2BF;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.3s ease, border-bottom 0.3s ease;
-  padding: 5px 0;
+  padding-bottom: 3px;
 }
 
-li a:hover {
-  color: #F9F7F7;
-  border-bottom: 2px solid #F9F7F7;
+.links a:hover {
+  color: #DDE6ED;
+  border-bottom: 2px solid #DDE6ED;
 }

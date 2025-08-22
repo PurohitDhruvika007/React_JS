@@ -4,7 +4,7 @@ import './About.css'
 export default function About(props) {
   const{name,bio,avatar_url}=props.user;
   return (
-    <section className='about-section'>
+    <section className='about-section' id="About">
       <div className="about">
         <div className="content">
         <h1>{name}</h1>
