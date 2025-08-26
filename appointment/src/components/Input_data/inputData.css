@@ -1,0 +1,102 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.form-box {
+    max-width: 450px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 12px 0 6px;
+    font-weight: 500;
+    color: #34495e;
+}
+
+input,
+select,
+textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+textarea {
+    resize: none;
+    height: 80px;
+}
+
+.gender-box {
+    display: flex;
+    gap: 15px;
+    margin: 8px 0;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+input[type="submit"] {
+    margin-top: 20px;
+    padding: 12px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+    background: #2980b9;
+}
+
+.gender-age {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.gender-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+
+.gender-options {
+    display: flex;
+    gap: 5px;
+}
