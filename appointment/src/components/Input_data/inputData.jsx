@@ -2,54 +2,70 @@ import React, { useState } from 'react'
 import './inputData.css'
 
 export default function InputData() {
+  const date=new Date();
     const [userData,setUserData]=useState({
-        name:"",
+        userName:"",
         phone:"",
-        gender:"",
+        gender:"male",
         age:"",
-        date:"",
+        date:`${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
         doctor:"",
         problem:""
     });
     const inputHandleData=(e)=>{
-        const{key:value}=e.target;
-        const newData=[...userData,{[key]:value}]
-        setUserData(newData);
+        const{name,value}=e.target;
+        setUserData({...userData,[name]:value.trim()});
+    }
+    const submitData=(e)=>{
+      e.preventDefault();
+      if(userData.userName!="" && userData.phone!="" && userData.age!="" && userData.problem!="")
+      {
+        console.log(userData);
+      }
+      else
+      {
+        alert("fill all the required feilds")
+      }
+      
     }
   return (
     <div>
       <h1>Book an Appointment</h1>
       <div className="form-box">
-        <form action="input" className="form">
+        <form action="input" className="form" onSubmit={submitData}>
             <label>Fullname : </label>
-            <input type="text" name="name" placeholder="enter the fullname"/>
+            <input type="text" onChange={inputHandleData} name="userName" placeholder="enter the fullname"/>
             <label>Mobile no. : </label>
-            <input type="tel" name="phone" placeholder="enter the mobile no." maxLength={10}/>
+            <input type="tel" onChange={inputHandleData} name="phone" placeholder="enter the mobile no." maxLength={10}/>
             <div className="gender-age">
                 <div className="gender-box">
                     <label>Gender</label>
             <div className='gender-options'>
-                <input type="radio" name="gender" />Male
-            <input type="radio" name="gender" />Female
+                <input type="radio" name="gender" onChange={inputHandleData} value="male" defaultChecked/>Male
+            <input type="radio" name="gender" onChange={inputHandleData} value="female"/>Female
             </div>
                 </div>
             <label>Age</label>
-            <input type="number" name="age" placeholder="enter the age"/>
+            <input type="number" name="age" onChange={inputHandleData} placeholder="enter the age"/>
             </div>
             <label>Date : </label>
-            <input type="date" name="date" />
+            <input type="date" onChange={inputHandleData} name="date" />
             <label>Doctor : </label>
-            <select name="doctor">
+            <select name="doctor" onChange={inputHandleData}>
                 <option>select doctor:</option>
-                <option>Dr.Agarwal</option>
-                <option>Dr.panwala</option>
-                <option>Dr.walawala</option>
-                <option>Dr.patel</option>
+                <option value="Dr.Agarwal">Dr.Agarwal</option>
+                <option value="Dr.panwala">Dr.panwala</option>
+                <option value="Dr.walawala">Dr.walawala</option>
+                <option value="Dr.patel">Dr.patel</option>
             </select>
             <label>Problem : </label>
-            <textarea name="problem" placeholder="enter the problem..."></textarea>
-            <input type="submit" />
+            <textarea name="problem" placeholder="enter the problem..." onChange={inputHandleData}></textarea>
+            <input type="submit"/>
             </form>
+      </div>
+      <div>
+        <h1>output</h1>
+        <p>{userData.userName}</p>
       </div>
     </div>
   )
