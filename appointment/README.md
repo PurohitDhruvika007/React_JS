@@ -1,12 +1,62 @@
-# React + Vite
+# 🏥 Appointment Booking App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **React.js Appointment Booking Application** with a clean and modern UI.  
+Users can book an appointment by filling out a form and view all booked appointments dynamically.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 📋 **Form Input** for patient details (Name, Phone, Gender, Age, Date, Doctor, Problem).  
+- ✅ **Validation**: Ensures required fields are filled.  
+- 🖼️ **Responsive Design** with a clean UI.  
+- 📄 **Data List Section** to display all submitted appointments.  
+- 🎨 Styled with **CSS** for an attractive and professional look.  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+- **React.js** (Frontend Framework)  
+- **CSS3** (Custom Styling)  
+- **JavaScript (ES6+)**  
+- **HTML5**
+
+---
+
+## 📂 Project Structure
+<pre>📦 appointment-booking
+ ┣ 📂 src
+ ┃ ┣ 📂 components
+ ┃ ┃ ┣ 📂 inputData
+ ┃ ┃ ┃ ┣ InputData.jsx
+ ┃ ┃ ┃ ┗ inputData.css
+ ┃ ┃ ┣ 📂 dataList
+ ┃ ┃ ┃ ┣ DataList.jsx
+ ┃ ┃ ┃ ┗ dataList.css
+ ┃ ┗ App.js
+ ┗ README.md</pre>
+
+---
+
+## 📌 Future Improvements
+
+🔹 Add edit & delete functionality for appointments.
+
+🔹 Integrate with a backend API for database storage.
+
+🔹 Add authentication (Login/Register).
+
+🔹 Implement search & filter in appointment list.
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/appointment-booking-app.git
+
+# Navigate into the project folder
+cd appointment-booking-app
+
+# Install dependencies
+npm install
+
+# Start the development server
+npm start
+
