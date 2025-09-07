@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../App.css'
 
@@ -8,7 +8,7 @@ export default function Products() {
         const res = await axios.get("https://dummyjson.com/products");
         setProducts(res.data.products)
     }
-    getApi();
+    useEffect(() => { getApi() }, []);
     return (
         <div className='container mb-5' id="products">
             <h1 className='text-center fs-1'>Products</h1>
@@ -18,7 +18,7 @@ export default function Products() {
                         <div key={index} className='col'>
                             <div className='card shadow-sm p-4 shadow'>
                                 <img src={product.thumbnail} alt="" />
-                                <p className='fs-5'><strong>{product.title}</strong></p>
+                                <p className='fs-5 text-truncate'><strong>{product.title}</strong></p>
                                 <p className='text-secondary' style={{
                                     display: '-webkit-box',
                                     WebkitLineClamp: 2,

@@ -1,12 +1,57 @@
-# React + Vite
+# 🛍️ React E-commerce Website  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple, responsive **E-commerce website** built with **React and Bootstrap**.  
+This project demonstrates the use of **React components, API integration, and modern UI design** to simulate an online shopping experience.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features  
 
-## Expanding the ESLint configuration
+- ✅ **Responsive Navbar** – Sticky top navigation with smooth scrolling to sections  
+- ✅ **Hero Section** – Image carousel with sliding banners  
+- ✅ **About Section** – Overview of the store, mission, and categories offered  
+- ✅ **Products Section** –  
+  - Fetches live product data from [DummyJSON API](https://dummyjson.com/products)  
+  - Displays product cards with images, description, and price  
+  - “Buy Now” button (future scope: cart integration)  
+- ✅ **Contact Section** – Store information (Email, Phone, Address) with social media icons  
+- ✅ **Footer** – Copyright text with dynamic year  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🖼️ Project Structure  
+
+<pre>ecommerce-website/
+│
+├── public/                 
+│   └── index.html          # Root HTML file
+│
+├── src/
+│   ├── components/         
+│   │   ├── Navbar.jsx      # Navigation bar
+│   │   ├── Hero.jsx        # Carousel
+│   │   ├── About.jsx       # About section
+│   │   ├── Products.jsx    # Product listing with API
+│   │   └── Contact.jsx     # Contact & Footer
+│   │
+│   ├── App.jsx             # Main component structure
+│   ├── App.css             # Styles
+│   └── main.jsx            # Entry point
+│
+├── package.json            # Dependencies & scripts
+└── README.md               # Documentation
+</pre>
+
+---
+
+## 🛠️ Technologies Used  
+
+- **React 18** – UI library  
+- **Bootstrap 5** – Styling & responsiveness  
+- **Axios** – API requests  
+- **Remix Icons** – Social & UI icons  
+- **DummyJSON API** – Fake product API for testing  
+
+---
+
+## 🎥 video

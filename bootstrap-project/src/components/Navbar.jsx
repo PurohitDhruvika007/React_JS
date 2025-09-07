@@ -25,6 +25,8 @@ export default function Navbar() {
                         <a className="nav-link" href="#about">About</a>
                         <a className="nav-link" href="#products">Products</a>
                         <a className="nav-link" href="#contact">Contact</a>
+                        <a className="btn btn-dark me-md-2 mb-2 mb-md-0" href="#">Login</a>
+                        <a className="btn btn-dark" href="#">Register</a>
                     </div>
                 </div>
             </div>
