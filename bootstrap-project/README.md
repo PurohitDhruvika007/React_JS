@@ -55,3 +55,6 @@ This project demonstrates the use of **React components, API integration, and mo
 ---
 
 ## 🎥 video
+
+https://github.com/user-attachments/assets/a8690471-f077-456f-8de3-406eba55b6ad
+
