@@ -1,0 +1,34 @@
+nav {
+    display: flex;
+    position: sticky;
+    top: 0px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    padding: 0.9rem 2rem;
+}
+
+nav h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+nav ul li a {
+    color: #ddd;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+
+nav ul li a:hover {
+    color: #7794c7;
+    border-bottom: 2px solid #7794c7;
+}
