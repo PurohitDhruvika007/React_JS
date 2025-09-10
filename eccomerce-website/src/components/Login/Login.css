@@ -1,70 +1,82 @@
-.login-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-
+/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Container */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #000000, #1a1a1a);
+    /* Dark Gradient Background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-
+/* Glassmorphism Form */
 .login-form {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    /* Transparent glass */
     padding: 2rem;
     border-radius: 1rem;
     width: 380px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(15px);
+    /* Glass blur effect */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
     text-align: center;
+    color: #e0e0e0;
 }
 
-
+/* Title */
 .login-title {
     font-size: 40px;
     margin-bottom: 1rem;
-    color: #000000;
+    color: white;
+    /* Cyan glow */
 }
 
-
+/* Labels */
 .form-label {
     display: block;
     margin: 0.8rem 0 0.3rem;
     text-align: left;
     font-weight: 500;
-    color: #1a1919;
+    color: #f1f1f1;
 }
 
-
+/* Inputs */
 .form-input {
     width: 90%;
     padding: 0.75rem;
-    border: 1px solid #ccc;
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.5rem;
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    transition: border 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: border 0.3s, background 0.3s;
 }
 
 .form-input:focus {
-    border-color: #2575fc;
+    border-color: #00e0ff;
+    background: rgba(255, 255, 255, 0.2);
     outline: none;
 }
 
-
+/* Options */
 .form-options {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
     font-size: 0.85rem;
+    color: #ccc;
 }
 
 .remember-me {
@@ -74,7 +86,7 @@
 }
 
 .forgot-password a {
-    color: #2575fc;
+    color: #00e0ff;
     text-decoration: none;
 }
 
@@ -82,57 +94,64 @@
     text-decoration: underline;
 }
 
+/* Login button */
 .login-btn {
     width: 100%;
     padding: 0.8rem;
-    background: #2575fc;
-    color: white;
+    background: linear-gradient(135deg, #00e0ff, #00bfff);
+    color: #000;
     border: none;
     border-radius: 0.5rem;
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
     margin-bottom: 1rem;
+    box-shadow: 0 0 15px rgba(0, 224, 255, 0.5);
 }
 
 .login-btn:hover {
-    background: #1a5ed7;
+    background: linear-gradient(135deg, #00bfff, #009acd);
+    transform: scale(1.05);
 }
 
+/* Google button */
 .google-btn {
     width: 100%;
     padding: 0.7rem;
-    background: white;
-    border: 1px solid #ddd;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 0.5rem;
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s;
+    color: #fff;
 }
 
 .google-btn:hover {
-    background: #f5f5f5;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .google-btn a {
     text-decoration: none;
-    color: #333;
+    color: #fff;
     display: inline-block;
     width: 100%;
 }
 
+/* Signup text */
 .signup-text {
     margin-top: 1.2rem;
     font-size: 0.9rem;
-    color: #666;
+    color: #ddd;
 }
 
 .signup-text span {
-    color: #2575fc;
+    color: #00e0ff;
     font-weight: bold;
     cursor: pointer;
+
 }
 
 .signup-text span:hover {
