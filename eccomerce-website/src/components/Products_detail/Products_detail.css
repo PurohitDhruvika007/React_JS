@@ -130,3 +130,12 @@
         justify-content: center;
     }
 }
+
+.detail-description {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}

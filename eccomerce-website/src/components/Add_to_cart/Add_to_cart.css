@@ -1,0 +1,15 @@
+* {
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f9f9f9;
+
+}
+
+.add-to-cart {
+    text-align: center;
+    margin-top: 15px;
+}

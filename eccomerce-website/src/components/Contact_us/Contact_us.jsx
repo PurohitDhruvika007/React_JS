@@ -19,7 +19,7 @@ export default function Contact_us() {
                             <li><Link to={'/Home'}>Home</Link></li>
                             <li><Link to={'/ProductList'}>Products</Link></li>
                             <li><a href="#contact" >Contact us</a></li>
-                            <li><Link to={'/AddToCart'}>Carts</Link></li>
+                            <li><Link to={'/AddToCart'}>Cart</Link></li>
                         </ul>
                     </div>
 
