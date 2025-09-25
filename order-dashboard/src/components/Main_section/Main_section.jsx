@@ -50,7 +50,7 @@ export default function Main() {
 
                         <div className="col-md-2">
                             <select className="form-select" value={status} onChange={(e) => { setStatus(e.target.value) }}>
-                                <option value="select">select</option>
+                                <option value="">select</option>
                                 <option value="new">New</option>
                                 <option value="completed">Completed</option>
                                 <option value="pending">Pending</option>
