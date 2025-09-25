@@ -14,7 +14,7 @@
  }
 
  .search-box {
-     max-width: 350px;
+     min-width: 440px;
  }
 
  .user-info img {
