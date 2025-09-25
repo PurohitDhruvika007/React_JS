@@ -7,7 +7,7 @@ export default function Header() {
             <div className="container-fluid p-4">
                 {/* Header */}
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                    <h3>Orders</h3>
+                    <p className='fs-4 fw-bold'>Orders</p>
                     <div className="d-flex align-items-center gap-3">
 
                         <div className="user-info d-flex align-items-center gap-2">
