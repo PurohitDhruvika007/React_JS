@@ -5,13 +5,29 @@ import { Data } from './assets/data.js'
 
 export default function Home() {
     const [search, setSearch] = useState("");
-    const [sortOrder, setSortOrder] = useState(true);
-    let filtering = Data.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
-    filtering = filtering.sort((a, b) => sortOrder ? a.price - b.price : b.price - a.price);
+    const [sortOrder, setSortOrder] = useState(null);
+    const [category, setCategory] = useState("all");
+    const [range, setRange] = useState(0);
+    let filtering = [...Data];
+    if (search) {
+        filtering = filtering.filter((product) => product.title.toLowerCase().includes(search.toLowerCase()))
+    }
+    if (sortOrder !== null) {
+        filtering = filtering.sort((a, b) => sortOrder ? a.price - b.price : b.price - a.price);
+    }
+    if (category !== "all") {
+        filtering = filtering.filter(product => product.category.toLowerCase().includes(category.toLowerCase()))
+    }
+    if (range > 0) {
+        filtering = filtering.filter(product => product.rating >= range)
+    }
     return (
         <div>
-            <input placeholder="search here..." onChange={(e) => setSearch(e.target.value)} />
-            <button onClick={() => setSortOrder(!sortOrder)}>Sort</button>
+            <input placeholder="title here..." onChange={(e) => setSearch(e.target.value)} />
+            <input placeholder="category here..." onChange={(e) => setCategory(e.target.value)} />
+            <label for="price">{range}</label>
+            <input type="range" min={0} max={10} step={1} onChange={(e) => setRange(Number(e.target.value))} />
+            <button onClick={() => setSortOrder(sortOrder ? false : true)}>Sort</button>
             {
                 filtering.map((product, index) => (
                     <div key={index}>
