@@ -8,7 +8,7 @@ export default function Main() {
         e.preventDefault()
         let ans = Data;
         if (order_id) {
-            ans = ans.filter(product => product.order_id === order_id)
+            ans = ans.filter(product => product.order_id === Number(order_id))
 
         }
         if (customer) {
@@ -19,19 +19,19 @@ export default function Main() {
         }
         if (date) {
             const formattedDate = new Date(date).toLocaleDateString("en-US");
-            ans = ans.filter(product => new Date(product.date).toLocaleDateString("en-US") === formattedDate);
+            ans = ans.filter(product => new Date(product.date).toLocaleDateString("en-US") >= formattedDate);
         }
 
         if (product) {
             ans = ans.filter(pro => pro.product.toLowerCase().includes(product.toLowerCase()))
         }
         if (price) {
-            ans = ans.filter(product => product.price == price)
+            ans = ans.filter(product => product.price >= Number(price))
         }
         setFiltering(ans)
     }
-    const [order_id, setOrder_id] = useState("");
-    const [price, setPrice] = useState("");
+    const [order_id, setOrder_id] = useState(0);
+    const [price, setPrice] = useState(0);
     const [customer, setCustomer] = useState("");
     const [product, setProduct] = useState("");
     const [status, setStatus] = useState("");
@@ -61,13 +61,13 @@ export default function Main() {
                             <input type="date" className="form-control" onChange={(e) => setDate(e.target.value)} />
                         </div>
                         <div className="col-12 text-end">
-                            <div className="d-flex">
+                            <div className="d-flex g-3 row">
                                 <div className="col-md-2 ">
                                     <input
                                         type="text"
                                         className="form-control"
                                         placeholder="Price"
-                                        onChange={(e) => setPrice(e.target.value)}
+                                        onChange={(e) => setPrice((e.target.value ? Number(e.target.value) : 0))}
                                     />
                                 </div>
                                 <div className="col-md-2">
