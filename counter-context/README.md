@@ -1,16 +1,49 @@
-# React + Vite
+# ⚛️ React Context Counter App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **simple yet powerful counter application** built with **React** and **Context API**, demonstrating **global state management** without prop drilling. Perform arithmetic operations on a counter with a clean, responsive UI.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- 🔼 **Increment / Decrement**: Increase or decrease the counter by 1  
+- ✖️ **Multiply / Divide**: Multiply or divide the counter by 2  
+- 🌐 **Global State**: Managed with **React Context API**  
+- 🎨 **Clean UI**: Minimalistic and responsive design  
+- ♻️ **Reusable & Scalable**: Easy to extend with additional functionality  
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black) **React** – Frontend library  
+- ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white) **CSS** – Styling and layout  
+- ⚡ **Context API** – Global state management  
+
+---
+
+## 📂 Folder Structure
+
+<pre>src/
+├── App.js
+├── App.css
+├── context/
+│   └── CounterProvider.jsx
+└── Pages/
+    └── Home/
+        ├── Home.jsx
+        └── Home.css
+</pre>
+---
+
+## ⚙️ How It Works
+
+- `CounterProvider` uses `useState` and `createContext` to create a **global counter state**.  
+- `Home` component accesses the counter via `useContext(CounterContext)`.  
+- Buttons update the counter using `setCount()`.  
+- Any component inside `CounterProvider` can use the counter state without **prop drilling**.
+
+
+## 🎥video
+https://github.com/user-attachments/assets/7adf1f6a-3a06-4622-9c0d-0440e4617fb3
+
