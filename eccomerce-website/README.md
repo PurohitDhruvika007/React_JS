@@ -66,3 +66,6 @@ StyleSphere is a modern and responsive **React-based e-commerce web application*
 
 
 ## 🎥video
+
+https://github.com/user-attachments/assets/a72031ba-b88b-46f3-a137-1abd0569e1ad
+
