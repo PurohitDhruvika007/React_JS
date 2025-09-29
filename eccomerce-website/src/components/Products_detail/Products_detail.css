@@ -1,17 +1,19 @@
 /* Product Detail Page */
 .product-detail {
     padding: 4rem 2rem;
-    background: #f9f9f9;
+    background: linear-gradient(160deg, #f0f4f8, #dbe6f1);
     min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Heading */
 .detail-heading {
-    font-size: 2.5rem;
-    font-weight: 700;
+    font-size: 3rem;
+    font-weight: 800;
     text-align: center;
     margin-bottom: 3rem;
-    color: #222;
+    color: #1a1a1a;
+    text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Layout container */
@@ -21,101 +23,145 @@
     gap: 3rem;
     max-width: 1100px;
     margin: 0 auto;
-    align-items: center;
+    align-items: start;
 }
 
-/* Image wrapper */
+/* Image wrapper with glassmorphism */
 .detail-image-wrapper {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.15);
     padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s, box-shadow 0.4s;
+}
+
+.detail-image-wrapper:hover {
+    transform: translateY(-5px) scale(1.08);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
 }
 
 .detail-image {
     max-width: 100%;
     max-height: 400px;
     object-fit: contain;
+    border-radius: 12px;
+    transition: transform 0.4s;
+}
+
+.detail-image:hover {
+    transform: scale(1.05);
 }
 
 /* Info section */
 .detail-info {
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1rem;
     text-align: left;
 }
 
 .detail-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
-    color: #333;
+    color: #1a1a1a;
+    text-transform: capitalize;
 }
 
+/* Rating */
+.detail-rating {
+    font-size: 1.2rem;
+    color: #ffb400;
+    font-weight: 600;
+}
+
+.detail-rating span {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Description */
 .detail-description {
     font-size: 1rem;
     color: #555;
     line-height: 1.6;
+    max-height: 160px;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    border-left: 4px solid #2575fc;
+    padding-left: 0.8rem;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
 }
 
+.detail-description::-webkit-scrollbar {
+    width: 6px;
+}
+
+.detail-description::-webkit-scrollbar-thumb {
+    background: #2575fc;
+    border-radius: 3px;
+}
+
+/* Price */
 .detail-price {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.8rem;
+    font-weight: 800;
     color: #2575fc;
 }
 
+/* Category */
 .detail-category {
-    font-size: 1.3rem;
-    color: #666;
-}
-
-.detail-rating {
     font-size: 1.1rem;
-    font-weight: 600;
-    color: #ff9800;
+    color: #666;
 }
 
 /* Buttons */
 .detail-buttons {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .btn {
     padding: 0.8rem 2rem;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .buy-btn {
-    background: rgb(43, 42, 42);
+    background: #333;
     color: white;
 }
 
 .buy-btn:hover {
-    background: black;
+    background: #111;
     transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .cart-btn {
-    background: #2575fc;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
     color: white;
 }
 
 .cart-btn:hover {
-    background: #1a5ed7;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #1a5ed7, #4b0fb3);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .detail-container {
         grid-template-columns: 1fr;
         text-align: center;
@@ -129,13 +175,4 @@
     .detail-buttons {
         justify-content: center;
     }
-}
-
-.detail-description {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.6;
-    max-height: 150px;
-    overflow-y: auto;
-    padding-right: 0.5rem;
 }

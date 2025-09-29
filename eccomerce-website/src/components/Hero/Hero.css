@@ -3,8 +3,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 90vh;
-    background: url('https://plus.unsplash.com/premium_photo-1664201890375-f8fa405cdb7d?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    height: 95vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1521334884684-d80222895322?ixlib=rb-4.1.0&auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
     color: #fff;
     text-align: center;
     overflow: hidden;
@@ -16,54 +16,74 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-
+    background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3));
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 600px;
-    padding: 0 1rem;
-    animation: fadeInUp 1s ease forwards;
+    max-width: 650px;
+    padding: 0 1.5rem;
+    animation: fadeInUp 1.2s ease forwards;
 }
 
 .hero-content h1 {
-    font-size: 3rem;
+    font-size: 3.5rem;
     margin-bottom: 1rem;
-    font-weight: 700;
-    animation: fadeInUp 1s 0.2s ease forwards;
+    font-weight: 800;
+    text-transform: uppercase;
+    background: linear-gradient(270deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+    background-size: 800% 800%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMove 6s ease infinite, fadeInUp 1.2s 0.2s ease forwards;
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    animation: fadeInUp 1s 0.4s ease forwards;
+    font-size: 1.3rem;
+    margin-bottom: 2.2rem;
+    line-height: 1.6;
+    color: #eee;
+    animation: fadeInUp 1.2s 0.4s ease forwards;
 }
 
 .cta-btn {
-    padding: 0.8rem 2rem;
-    background: #2575fc;
+    padding: 0.9rem 2.5rem;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
     border: none;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
-    animation: fadeInUp 1s 0.6s ease forwards;
+    transition: all 0.3s ease;
+    animation: fadeInUp 1.2s 0.6s ease forwards;
 }
 
 .cta-btn:hover {
-    background: #1a5ed7;
-    transform: scale(1.05);
+    background: linear-gradient(135deg, #1a5ed7, #4b0fb3);
+    transform: scale(1.08) translateY(-2px);
 }
 
 /* Fade in animation */
 @keyframes fadeInUp {
     0% {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
     }
 
     100% {
@@ -75,7 +95,7 @@
 /* Responsive typography */
 @media (max-width: 768px) {
     .hero-content h1 {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
     }
 
     .hero-content p {
