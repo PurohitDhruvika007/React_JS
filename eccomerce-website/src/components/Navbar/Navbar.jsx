@@ -6,14 +6,14 @@ export default function Navbar() {
     return (
         <div>
             <nav>
-                <div>
+                <div className="logo">
                     <h1>StyleSphere</h1>
                 </div>
-                <ul>
-                    <li><Link to={'/Home'}>Home</Link></li>
-                    <li><Link to={'/ProductList'}>Products</Link></li>
-                    <li><a href="#contact" >Contact us</a></li>
-                    <li><Link to={'/AddToCart'}>Cart</Link></li>
+                <ul className="nav-links">
+                    <li><Link to="/Home">Home</Link></li>
+                    <li><Link to="/ProductList">Products</Link></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><Link to="/AddToCart">Cart</Link></li>
                 </ul>
             </nav>
         </div>

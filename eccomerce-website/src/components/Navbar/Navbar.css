@@ -1,34 +1,75 @@
+/* Navbar container */
 nav {
     display: flex;
     position: sticky;
-    top: 0px;
+    top: 0;
     justify-content: space-between;
     align-items: center;
-    background-color: #000000;
+    background: #000;
     padding: 0.9rem 2rem;
+    z-index: 1000;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
-nav h1 {
+/* Logo */
+.logo h1 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    color: #fff;
+    font-size: 1.9rem;
+    background: linear-gradient(135deg, #00e0ff, #7794c7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
 }
 
-nav ul {
+/* Nav Links */
+.nav-links {
     list-style: none;
     display: flex;
     gap: 2rem;
 }
 
-nav ul li a {
+.nav-links li a {
+    position: relative;
     color: #ddd;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    padding-bottom: 4px;
 }
 
+.nav-links li a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #7794c7;
+    transition: width 0.3s ease;
+}
 
-nav ul li a:hover {
+.nav-links li a:hover {
     color: #7794c7;
-    border-bottom: 2px solid #7794c7;
+}
+
+.nav-links li a:hover::after {
+    width: 100%;
+}
+
+/* Sign In button */
+.signin-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #7794c7;
+    border-radius: 0.4rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    background: linear-gradient(135deg, #7794c7, #4a65a3);
+    transition: all 0.3s ease;
+}
+
+.signin-btn:hover {
+    background: linear-gradient(135deg, #4a65a3, #7794c7);
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(119, 148, 199, 0.6);
 }

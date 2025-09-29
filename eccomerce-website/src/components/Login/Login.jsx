@@ -1,6 +1,6 @@
-import React from 'react'
-import './Login.css'
-import { useNavigate } from 'react-router'
+import React from 'react';
+import './Login.css';
+import { useNavigate } from 'react-router';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -11,36 +11,35 @@ export default function Login() {
     };
 
     return (
-        <div className="login-container">
-            <h1 className="login-title">Login Page</h1>
-            <form className="login-form" onSubmit={handleSubmit}>
+        <div className="login-wrapper">
+            <div className="bg-particles"></div>
 
+            <form className="login-card" onSubmit={handleSubmit}>
+                <h1 className="login-heading">Welcome Back</h1>
 
-                <label htmlFor="email" className="form-label">Email:</label>
-                <input type="email" className="form-input" placeholder="Enter the email.." required />
+                <label className="form-label">Email</label>
+                <input type="email" className="form-input" placeholder="Enter your email" required />
 
-                <label htmlFor="password" className="form-label">Password:</label>
-                <input type="password" className="form-input" placeholder="Enter the password.." required />
+                <label className="form-label">Password</label>
+                <input type="password" className="form-input" placeholder="Enter your password" required />
 
                 <div className="form-options">
-                    <div className="remember-me">
+                    <label className="remember-me">
                         <input type="checkbox" />
-                        <p>Remember me</p>
-                    </div>
-                    <div className="forgot-password">
-                        <a href="#">Forget password ?</a>
-                    </div>
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" className="forgot-link">Forgot password?</a>
                 </div>
 
-                <button type="submit" className="login-btn">Login In</button>
+                <button type="submit" className="btn neon-btn">Login</button>
 
-                <button type="button" className="google-btn">
+                <button type="button" className="btn google-btn">
                     <a href="https://accounts.google.com/signin/v2/identifier?service=accountsettings">
                         Sign in with Google
                     </a>
                 </button>
 
-                <p className="signup-text">Don't have an account? <span>Sign up</span></p>
+                <p className="signup-text">Don’t have an account? <span>Sign up</span></p>
             </form>
         </div>
     );
