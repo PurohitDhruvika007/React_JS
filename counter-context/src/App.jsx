@@ -1,20 +1,16 @@
-
-import './App.css'
+import React from 'react'
 import CounterProvider from './context/CounterProvider'
-import Todoprovider from './context/Todoprovider'
 import Home from './Pages/Home/Home'
 import Todo from './Pages/Todo/Todo'
-function App() {
+import './app.css'
+
+export default function App() {
   return (
-    <>
-      {/* <CounterProvider>
+    <div>
+      <CounterProvider>
         <Home />
-      </CounterProvider> */}
-      <Todoprovider>
         <Todo />
-      </Todoprovider>
-    </>
+      </CounterProvider>
+    </div>
   )
 }
-
-export default App

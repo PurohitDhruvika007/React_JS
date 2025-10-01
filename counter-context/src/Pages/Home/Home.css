@@ -12,6 +12,14 @@
     padding: 20px;
 }
 
+.todo-heading {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
 @keyframes gradientBG {
     0% {
         background-position: 0% 50%;
