@@ -5,6 +5,7 @@ import './App.css'
 import { Route, Routes } from 'react-router'
 import SignIn from './Components/SignIn/SignIn'
 import Movie from './Components/Movie/Movie'
+import Favorites from './Components/Favorites/Favorites'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/movie" element={<Movie />} />
+        <Route path="/favorites" element={<Favorites />} />
       </Routes>
     </>
   )

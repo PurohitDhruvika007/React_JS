@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+    overflow: hidden;
+    /* full-page layout */
+}
+
+/* Flowing gradient background */
+.liquid-bg {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #a18cd1, #fbc2eb);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Gradient animation */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Card */
+.liquid-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(25px);
+    border-radius: 40px;
+    padding: 50px 40px;
+    width: 360px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+    animation: floatLiquid 6s ease-in-out infinite alternate;
+}
+
+/* Card floating animation */
+@keyframes floatLiquid {
+    0% {
+        transform: translateY(0) rotateZ(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotateZ(2deg);
+    }
+
+    100% {
+        transform: translateY(0) rotateZ(0deg);
+    }
+}
+
+/* Title */
+.liquid-title {
+    font-size: 28px;
+    color: #1b1b1b;
+    /* black text */
+    margin-bottom: 15px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Welcome message */
+.liquid-welcome {
+    font-size: 14px;
+    color: #1b1b1b;
+    /* black text */
+    margin-bottom: 20px;
+}
+
+/* Input fields with orb effect */
+.liquid-input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.liquid-input-group input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    /* light background for black text */
+    color: #1b1b1b;
+    /* black text */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
+
+.liquid-input-group input::placeholder {
+    color: #555;
+    /* dark gray placeholder */
+}
+
+.liquid-input-group input:focus {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Button */
+.liquid-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, #fbc2eb, #a18cd1);
+    color: #1b1b1b;
+    /* black text */
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.liquid-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
