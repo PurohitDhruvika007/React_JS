@@ -1,9 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { addCustomers } from '../../slices/CustomerSlice';
+import { addCustomers, insertCustomer } from '../../slices/CustomerSlice';
 import { fetchCustomer } from '../../slices/CustomerSlice.js'
+import { useState } from 'react';
 
 export default function Home() {
+    const [email, setEmail] = useState("");
+    const [title, setTitle] = useState("");
     const dispatch = useDispatch();
     const { customers } = useSelector((state) => state.customer)
 
@@ -13,6 +16,8 @@ export default function Home() {
 
     return (
         <div>
+            <input type="text" placeholder='enter the title' value={title} onChange={(e) => setTitle(e.target.value)} required />
+            <input type="text" placeholder='enter the email' value={email} onChange={(e) => setEmail(e.target.value)} required />
             {
                 customers.map((customer, index) => (
                     <div key={index}>
@@ -20,7 +25,7 @@ export default function Home() {
                     </div>
                 ))
             }
-            <button onClick={() => { dispatch(addCustomers("add events")) }}>ADD</button>
+            <button onClick={() => { dispatch(insertCustomer({ title: title, email: email })) }}>ADD</button>
         </div>
     )
 }

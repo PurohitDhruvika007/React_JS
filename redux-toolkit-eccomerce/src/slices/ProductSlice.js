@@ -6,7 +6,11 @@ const initialState = {
     error: null
 }
 export const fetchProducts = createAsyncThunk("products/get", async () => {
-    const res = await axios.get("https://fakestoreapi.com/products")
+    const res = await axios.get("http://localhost:3000/products")
+    return res.data;
+})
+export const insertProducts = createAsyncThunk("products/post", async ({ title, price }) => {
+    const res = await axios.post("http://localhost:3000/products", { title, price })
     return res.data;
 })
 const ProductSlice = createSlice({
@@ -26,6 +30,14 @@ const ProductSlice = createSlice({
         }).addCase(fetchProducts.rejected, (state) => {
             state.isLoading = false;
             state.error = "data is not fetched successfully";
+        }).addCase(insertProducts.pending, (state, action) => {
+            state.isLoading = true
+        }).addCase(insertProducts.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.products.push(action.payload)
+        }).addCase(insertProducts.rejected, (state, action) => {
+            state.isLoading = true;
+            state.error = "products are not able to inserted"
         })
     }
 })

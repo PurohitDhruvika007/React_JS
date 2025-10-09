@@ -8,9 +8,16 @@ const initialState = {
 export const fetchCustomer = createAsyncThunk("customer/get", async () => {
     // const res = await axios.get("https://fakestoreapi.com/users")
     // return res.data;
-    const res = await fetch("https://fakestoreapi.com/users")
+    const res = await fetch("http://localhost:3000/customer")
     const data = await res.json()
     return data
+})
+export const insertCustomer = createAsyncThunk("customer/post", async ({ title, email }) => {
+    const res = await axios.post("http://localhost:3000/customer", {
+        title, email
+    })
+    console.log(res.data)
+    return res.data;
 })
 const customerSlice = createSlice({
     name: "customer",
@@ -30,6 +37,14 @@ const customerSlice = createSlice({
         }).addCase(fetchCustomer.rejected, (state) => {
             state.isLoading = false;
             state.error = "not able to fetch data successfully"
+        }).addCase(insertCustomer.pending, (state, action) => {
+            state.isLoading = true
+        }).addCase(insertCustomer.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.customers.push(action.payload)
+        }).addCase(insertCustomer.rejected, (state, action) => {
+            state.isLoading = true;
+            state.error = "data does not inserted successfully"
         })
     }
 })
