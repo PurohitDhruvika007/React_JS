@@ -23,9 +23,10 @@ export default function Login() {
                     ? "/manager-dashboard"
                     : "/employee-dashboard";
 
-            navigate(path, { replace: true }); // <-- must be here
+            navigate(path, { replace: true }); // ✅ This is the only replace we need
         }
     }, [currentUser, navigate]);
+
 
     useEffect(() => {
         return () => dispatch(clearError());
