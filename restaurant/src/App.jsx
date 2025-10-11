@@ -14,12 +14,12 @@ function App() {
 
         {/* Manager Protected Route */}
         <Route element={<PrivateRoute role="manager" />}>
-          <Route path="/manager-dashboard" element={<ManagerDashboard />} />
+          <Route path="/manager-dashboard/*" element={<ManagerDashboard />} />
         </Route>
 
         {/* Employee Protected Route */}
         <Route element={<PrivateRoute role="employee" />}>
-          <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
+          <Route path="/employee-dashboard/*" element={<EmployeeDashboard />} />
         </Route>
       </Routes>
     </Router>

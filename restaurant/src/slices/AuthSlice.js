@@ -25,19 +25,25 @@ export const loginUser = createAsyncThunk(
     }
 );
 
+// Initialize state from localStorage
+const initialState = {
+    currentUser: JSON.parse(localStorage.getItem("currentUser")) || null,
+    isAuthenticated: localStorage.getItem("isAuthenticated") === "true" || false,
+    loading: false,
+    error: null,
+};
+
 const authSlice = createSlice({
     name: "auth",
-    initialState: {
-        currentUser: null,
-        isAuthenticated: false,
-        loading: false,
-        error: null,
-    },
+    initialState,
     reducers: {
         logout: (state) => {
             state.currentUser = null;
             state.isAuthenticated = false;
             state.error = null;
+            // Clear localStorage on logout
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("isAuthenticated");
         },
         clearError: (state) => {
             state.error = null;
@@ -54,6 +60,10 @@ const authSlice = createSlice({
                 state.currentUser = action.payload;
                 state.isAuthenticated = true;
                 state.error = null;
+
+                // Persist to localStorage
+                localStorage.setItem("currentUser", JSON.stringify(action.payload));
+                localStorage.setItem("isAuthenticated", "true");
             })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loading = false;
