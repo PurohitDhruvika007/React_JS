@@ -19,6 +19,7 @@ export default function MenuEmployees() {
 
     const [menu, setMenu] = useState([]);
     const [localEdits, setLocalEdits] = useState({});
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         axios.get("http://localhost:3000/menu")
@@ -29,6 +30,10 @@ export default function MenuEmployees() {
     }, [dispatch]);
 
     const selectedOrder = orders.find(o => o.id === selectedOrderId && o.employeeId === user.id);
+
+    const filteredMenu = menu.filter(item =>
+        item.itemName.toLowerCase().includes(search.toLowerCase())
+    );
 
     const handleFieldChange = (field, value) => {
         setLocalEdits(prev => ({ ...prev, [field]: value }));
@@ -120,16 +125,32 @@ export default function MenuEmployees() {
         dispatch(selectOrder(null));
         setLocalEdits({});
 
-        // Navigate to orders page
-        navigate("/employee-dashboard/order");  // ← updated to match the dashboard route
+        navigate("/employee-dashboard/order");
     };
+
     return (
         <div style={{ display: "flex", gap: 20, padding: 20 }}>
             {/* Menu */}
             <div style={{ flex: 7, background: "#fff", padding: 16, borderRadius: 8 }}>
                 <h2>🍽 Menu</h2>
+
+                {/* Search bar */}
+                <input
+                    type="text"
+                    placeholder="Search dishes..."
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    style={{
+                        width: "100%",
+                        padding: "8px 12px",
+                        marginBottom: 16,
+                        borderRadius: 6,
+                        border: "1px solid #ddd"
+                    }}
+                />
+
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
-                    {menu.map(item => (
+                    {filteredMenu.map(item => (
                         <div key={item.itemId || item.id} style={{ width: 220, border: "1px solid #ddd", padding: 10, borderRadius: 8 }}>
                             <img src={item.image} alt={item.itemName} style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 6 }} />
                             <h4>{item.itemName}</h4>

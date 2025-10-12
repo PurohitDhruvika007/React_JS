@@ -1541,6 +1541,68 @@
       "gst": 93.5,
       "discount": 57,
       "total": 606.5
+    },
+    {
+      "id": "3169",
+      "employeeId": "3",
+      "employeeName": "Priya Sharma",
+      "customerName": "",
+      "customerContact": "",
+      "customerAddress": "",
+      "tableNo": "",
+      "paymentMode": "Cash",
+      "status": "Pending",
+      "items": [
+        {
+          "itemId": 13,
+          "itemName": "Masala Dosa",
+          "category": "South Indian",
+          "price": 120,
+          "description": "Crispy rice crepe filled with spiced potato mixture, served with chutney and sambar.",
+          "availability": true,
+          "taxRate": 0.12,
+          "image": "https://i.pinimg.com/736x/76/98/c3/7698c35478a01b3a90075c9af7388e5e.jpg",
+          "rating": 4.7,
+          "preparationTime": "12 mins",
+          "special": true,
+          "id": "b637",
+          "quantity": 1
+        },
+        {
+          "itemId": 5,
+          "itemName": "Butter Naan",
+          "category": "Breads",
+          "price": 35,
+          "description": "Soft tandoor-baked naan brushed with butter.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/736x/fb/a1/ab/fba1abc348e524089bbbbbcbf4a561ec.jpg",
+          "rating": 4.3,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "8bae",
+          "quantity": 4
+        },
+        {
+          "itemId": 15,
+          "itemName": "Medu Vada",
+          "category": "South Indian",
+          "price": 110,
+          "description": "Crispy lentil donuts served with sambar and chutney.",
+          "availability": true,
+          "taxRate": 0.12,
+          "image": "https://i.pinimg.com/1200x/b3/97/35/b39735b8aec0947aca0f798e7cacfa47.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "79b3",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 370,
+      "gst": 34.599999999999994,
+      "discount": 37,
+      "total": 367.6
     }
   ],
   "invoices": []
