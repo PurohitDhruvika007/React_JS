@@ -7,26 +7,34 @@ export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
     return response.data;
 });
 
-// Create a new empty order
-export const createEmptyOrder = createAsyncThunk("orders/createEmptyOrder", async ({ employeeId, employeeName }) => {
-    const newOrder = {
-        employeeId,
-        employeeName,
-        customerName: "",
-        customerContact: "",
-        customerAddress: "",
-        tableNo: "",
-        paymentMode: "Cash",
-        status: "Pending",
-        items: [],
-        subtotal: 0,
-        gst: 0,
-        discount: 0,
-        total: 0,
-    };
-    const response = await axios.post("http://localhost:3000/orders", newOrder);
+// Fetch all invoices
+export const fetchInvoices = createAsyncThunk("orders/fetchInvoices", async () => {
+    const response = await axios.get("http://localhost:3000/invoices");
     return response.data;
 });
+
+// Create a new empty order
+export const createEmptyOrder = createAsyncThunk(
+    "orders/createEmptyOrder",
+    async ({ employeeId, employeeName }) => {
+        const newOrder = {
+            employeeId,
+            employeeName,
+            customerName: "",
+            customerContact: "",
+            customerAddress: "",
+            tableNo: "",
+            paymentMode: "Cash",
+            status: "Pending",
+            items: [],
+            subtotal: 0,
+            gst: 0,
+            discount: 0,
+            total: 0,
+        };
+        const response = await axios.post("http://localhost:3000/orders", newOrder);
+        return response.data;
+    });
 
 // Patch/update an order
 export const patchOrder = createAsyncThunk("orders/patchOrder", async ({ id, patch }) => {
@@ -40,17 +48,21 @@ export const deleteOrder = createAsyncThunk("orders/deleteOrder", async (id) => 
     return id;
 });
 
-// Finalize order
-export const finalizeOrder = createAsyncThunk("orders/finalizeOrder", async ({ id, invoicePayload }) => {
-    await axios.post("http://localhost:3000/invoices", invoicePayload);
-    await axios.delete(`http://localhost:3000/orders/${id}`);
-    return id;
-});
+// Finalize order: moves order to invoices
+export const finalizeOrder = createAsyncThunk(
+    "orders/finalizeOrder",
+    async ({ id, invoicePayload }) => {
+        await axios.post("http://localhost:3000/invoices", invoicePayload);
+        await axios.delete(`http://localhost:3000/orders/${id}`);
+        return { orderId: id, invoice: invoicePayload };
+    }
+);
 
 const OrderSlice = createSlice({
     name: "orders",
     initialState: {
         orders: [],
+        invoices: [], // ✅ store invoice history here
         selectedOrderId: null,
         status: "idle",
         error: null,
@@ -62,8 +74,15 @@ const OrderSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchOrders.fulfilled, (state, action) => { state.orders = action.payload; })
-            .addCase(createEmptyOrder.fulfilled, (state, action) => { state.orders.push(action.payload); })
+            .addCase(fetchOrders.fulfilled, (state, action) => {
+                state.orders = action.payload;
+            })
+            .addCase(fetchInvoices.fulfilled, (state, action) => {
+                state.invoices = action.payload;
+            })
+            .addCase(createEmptyOrder.fulfilled, (state, action) => {
+                state.orders.push(action.payload);
+            })
             .addCase(patchOrder.fulfilled, (state, action) => {
                 const index = state.orders.findIndex(o => o.id === action.payload.id);
                 if (index !== -1) state.orders[index] = action.payload;
@@ -72,7 +91,10 @@ const OrderSlice = createSlice({
                 state.orders = state.orders.filter(o => o.id !== action.payload);
             })
             .addCase(finalizeOrder.fulfilled, (state, action) => {
-                state.orders = state.orders.filter(o => o.id !== action.payload);
+                // Remove order from orders
+                state.orders = state.orders.filter(o => o.id !== action.payload.orderId);
+                // Add invoice to invoices
+                state.invoices.push(action.payload.invoice);
             });
     },
 });

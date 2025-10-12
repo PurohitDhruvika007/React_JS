@@ -8,11 +8,33 @@ export default function ProfileEmployees() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchEmployee = async () => {
+        const fetchEmployeeData = async () => {
             try {
-                const res = await axios.get("http://localhost:3000/employees");
-                const employee = res.data.find(emp => emp.id === currentUser.id);
-                setEmployeeData(employee);
+                // Fetch employee info
+                const resEmployees = await axios.get("http://localhost:3000/employees");
+                const employee = resEmployees.data.find(emp => emp.id === currentUser.id);
+                if (!employee) return setEmployeeData(null);
+
+                // Fetch current orders
+                const resOrders = await axios.get("http://localhost:3000/orders");
+                const empOrders = resOrders.data.filter(o => o.employeeId === currentUser.id);
+
+                // Fetch past invoices
+                const resInvoices = await axios.get("http://localhost:3000/invoices");
+                const empInvoices = resInvoices.data.filter(inv => inv.employeeId === currentUser.id);
+
+                // Calculate totals
+                const totalOrders = empOrders.length + empInvoices.length;
+                const totalSales = [
+                    ...empOrders,
+                    ...empInvoices
+                ].reduce((sum, o) => sum + o.total, 0);
+
+                setEmployeeData({
+                    ...employee,
+                    totalOrders,
+                    totalSales: parseFloat(totalSales.toFixed(2))
+                });
             } catch (err) {
                 console.error("Error fetching employee data:", err);
             } finally {
@@ -20,7 +42,7 @@ export default function ProfileEmployees() {
             }
         };
 
-        if (currentUser) fetchEmployee();
+        if (currentUser) fetchEmployeeData();
     }, [currentUser]);
 
     if (loading) return <p>Loading profile...</p>;
