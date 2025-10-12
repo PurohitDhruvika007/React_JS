@@ -1047,173 +1047,10 @@
   ],
   "orders": [
     {
-      "id": "9db0",
+      "id": "6ad4",
+      "employeeId": "3",
+      "employeeName": "Priya Sharma",
       "items": [
-        {
-          "itemId": 3,
-          "itemName": "Veg Biryani",
-          "price": 200,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
-          "quantity": 2
-        },
-        {
-          "itemId": 2,
-          "itemName": "Dal Tadka",
-          "price": 140,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
-          "quantity": 1
-        },
-        {
-          "itemId": 1,
-          "itemName": "Paneer Butter Masala",
-          "price": 180,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/09/be/24/09be24167434a60754de2256162d0b12.jpg",
-          "quantity": 1
-        }
-      ],
-      "subtotal": 720,
-      "gst": 129.6,
-      "discount": 72,
-      "total": 777.6,
-      "date": "10/11/2025, 1:41:52 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
-    },
-    {
-      "id": "af07",
-      "items": [
-        {
-          "itemId": 2,
-          "itemName": "Dal Tadka",
-          "price": 140,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
-          "quantity": 1
-        }
-      ],
-      "subtotal": 140,
-      "gst": 25.2,
-      "discount": 14,
-      "total": 151.2,
-      "date": "10/11/2025, 1:46:10 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
-    },
-    {
-      "id": "9c3e",
-      "items": [
-        {
-          "itemId": 3,
-          "itemName": "Veg Biryani",
-          "category": "Rice & Biryani",
-          "price": 200,
-          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
-          "rating": 4.6,
-          "preparationTime": "20 mins",
-          "special": true,
-          "quantity": 3
-        },
-        {
-          "itemId": 2,
-          "itemName": "Dal Tadka",
-          "category": "Main Course",
-          "price": 140,
-          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
-          "rating": 4.5,
-          "preparationTime": "10 mins",
-          "special": false,
-          "quantity": 1
-        },
-        {
-          "itemId": 5,
-          "itemName": "Butter Naan",
-          "category": "Breads",
-          "price": 35,
-          "description": "Soft tandoor-baked naan brushed with butter.",
-          "availability": true,
-          "taxRate": 0.05,
-          "image": "https://i.pinimg.com/736x/fb/a1/ab/fba1abc348e524089bbbbbcbf4a561ec.jpg",
-          "rating": 4.3,
-          "preparationTime": "5 mins",
-          "special": false,
-          "quantity": 2
-        }
-      ],
-      "subtotal": 810,
-      "gst": 136.7,
-      "discount": 81,
-      "total": 865.7,
-      "date": "10/11/2025, 1:48:34 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
-    },
-    {
-      "id": "a36e",
-      "items": [
-        {
-          "itemId": 3,
-          "itemName": "Veg Biryani",
-          "category": "Rice & Biryani",
-          "price": 200,
-          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
-          "rating": 4.6,
-          "preparationTime": "20 mins",
-          "special": true,
-          "quantity": 2
-        },
-        {
-          "itemId": 2,
-          "itemName": "Dal Tadka",
-          "category": "Main Course",
-          "price": 140,
-          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
-          "rating": 4.5,
-          "preparationTime": "10 mins",
-          "special": false,
-          "quantity": 1
-        }
-      ],
-      "subtotal": 540,
-      "gst": 97.2,
-      "discount": 54,
-      "total": 583.2,
-      "date": "10/11/2025, 1:58:07 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
-    },
-    {
-      "id": "50b7",
-      "items": [
-        {
-          "itemId": 3,
-          "itemName": "Veg Biryani",
-          "category": "Rice & Biryani",
-          "price": 200,
-          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
-          "rating": 4.6,
-          "preparationTime": "20 mins",
-          "special": true,
-          "id": "858d",
-          "quantity": 2
-        },
         {
           "itemId": 2,
           "itemName": "Dal Tadka",
@@ -1227,6 +1064,21 @@
           "preparationTime": "10 mins",
           "special": false,
           "id": "f70a",
+          "quantity": 1
+        },
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "category": "Rice & Biryani",
+          "price": 200,
+          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "rating": 4.6,
+          "preparationTime": "20 mins",
+          "special": true,
+          "id": "858d",
           "quantity": 1
         },
         {
@@ -1243,18 +1095,386 @@
           "special": true,
           "id": "cb2a",
           "quantity": 1
+        },
+        {
+          "itemId": 12,
+          "itemName": "Gobi Manchurian",
+          "price": 160,
+          "image": "https://i.pinimg.com/1200x/fa/9e/72/fa9e721c16838d5b0e8fbc88bed9cbb8.jpg",
+          "quantity": 2,
+          "taxRate": 0.18
         }
       ],
-      "subtotal": 720,
-      "gst": 129.6,
-      "discount": 72,
-      "total": 777.6,
-      "date": "10/11/2025, 6:05:17 PM",
+      "subtotal": 840,
+      "gst": 151.2,
+      "discount": 84,
+      "total": 907.2,
+      "date": "10/11/2025, 8:49:40 PM",
       "paymentMethod": "Cash",
       "status": "Pending"
     },
     {
-      "id": "b4c3",
+      "id": "7c4e",
+      "employeeId": "3",
+      "employeeName": "Priya Sharma",
+      "items": [
+        {
+          "itemId": 2,
+          "itemName": "Dal Tadka",
+          "category": "Main Course",
+          "price": 140,
+          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "f70a",
+          "quantity": 2
+        },
+        {
+          "itemId": 6,
+          "itemName": "Tandoori Roti",
+          "category": "Breads",
+          "price": 25,
+          "description": "Crispy tandoori-style roti cooked in clay oven.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/1200x/8e/a0/30/8ea03007e17de03f8e9b2c2ec1ab8f90.jpg",
+          "rating": 4.2,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "9ae8",
+          "quantity": 3
+        },
+        {
+          "itemId": 13,
+          "itemName": "Masala Dosa",
+          "category": "South Indian",
+          "price": 120,
+          "description": "Crispy rice crepe filled with spiced potato mixture, served with chutney and sambar.",
+          "availability": true,
+          "taxRate": 0.12,
+          "image": "https://i.pinimg.com/736x/76/98/c3/7698c35478a01b3a90075c9af7388e5e.jpg",
+          "rating": 4.7,
+          "preparationTime": "12 mins",
+          "special": true,
+          "id": "b637",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 475,
+      "gst": 68.55,
+      "discount": 47.5,
+      "total": 496.04999999999995,
+      "date": "10/11/2025, 11:21:29 PM",
+      "paymentMethod": "Cash",
+      "status": "Pending"
+    },
+    {
+      "id": "b8ab",
+      "employeeId": "3",
+      "employeeName": "Priya Sharma",
+      "items": [
+        {
+          "itemId": 2,
+          "itemName": "Dal Tadka",
+          "category": "Main Course",
+          "price": 140,
+          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "f70a",
+          "quantity": 3
+        },
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "category": "Rice & Biryani",
+          "price": 200,
+          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "rating": 4.6,
+          "preparationTime": "20 mins",
+          "special": true,
+          "id": "858d",
+          "quantity": 1
+        },
+        {
+          "itemId": 6,
+          "itemName": "Tandoori Roti",
+          "category": "Breads",
+          "price": 25,
+          "description": "Crispy tandoori-style roti cooked in clay oven.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/1200x/8e/a0/30/8ea03007e17de03f8e9b2c2ec1ab8f90.jpg",
+          "rating": 4.2,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "9ae8",
+          "quantity": 3
+        }
+      ],
+      "subtotal": 695,
+      "gst": 115.35,
+      "discount": 69.5,
+      "total": 740.85,
+      "status": "Pending"
+    },
+    {
+      "id": "25f1",
+      "employeeId": null,
+      "employeeName": null,
+      "items": [
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "category": "Rice & Biryani",
+          "price": 200,
+          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "rating": 4.6,
+          "preparationTime": "20 mins",
+          "special": true,
+          "id": "858d",
+          "quantity": 1
+        },
+        {
+          "itemId": 1,
+          "itemName": "Paneer Butter Masala",
+          "category": "Main Course",
+          "price": 180,
+          "description": "Soft paneer cubes cooked in rich tomato and butter gravy, mildly spiced.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/09/be/24/09be24167434a60754de2256162d0b12.jpg",
+          "rating": 4.7,
+          "preparationTime": "15 mins",
+          "special": true,
+          "id": "cb2a",
+          "quantity": 1
+        },
+        {
+          "itemId": 2,
+          "itemName": "Dal Tadka",
+          "category": "Main Course",
+          "price": 140,
+          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "f70a",
+          "quantity": 1
+        },
+        {
+          "itemId": 6,
+          "itemName": "Tandoori Roti",
+          "category": "Breads",
+          "price": 25,
+          "description": "Crispy tandoori-style roti cooked in clay oven.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/1200x/8e/a0/30/8ea03007e17de03f8e9b2c2ec1ab8f90.jpg",
+          "rating": 4.2,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "9ae8",
+          "quantity": 3
+        }
+      ],
+      "subtotal": 595,
+      "gst": 97.35000000000001,
+      "discount": 59.5,
+      "total": 632.85,
+      "date": "10/12/2025, 1:16:28 AM",
+      "paymentMethod": "Cash",
+      "status": "Pending",
+      "customerName": "",
+      "customerContact": "",
+      "customerAddress": "",
+      "tableNo": ""
+    },
+    {
+      "id": "3dec",
+      "employeeId": null,
+      "employeeName": null,
+      "items": [
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "price": 200,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "quantity": 2,
+          "taxRate": 0.18
+        },
+        {
+          "itemId": 6,
+          "itemName": "Tandoori Roti",
+          "price": 25,
+          "image": "https://i.pinimg.com/1200x/8e/a0/30/8ea03007e17de03f8e9b2c2ec1ab8f90.jpg",
+          "quantity": 5,
+          "taxRate": 0.05
+        }
+      ],
+      "subtotal": 525,
+      "gst": 78.25,
+      "discount": 52.5,
+      "total": 550.75,
+      "date": "10/12/2025, 1:22:26 AM",
+      "paymentMethod": "Cash",
+      "status": "Pending",
+      "customerName": "",
+      "customerContact": "",
+      "customerAddress": "",
+      "tableNo": ""
+    },
+    {
+      "id": "231d",
+      "employeeId": "1",
+      "employeeName": "Amit Sharma",
+      "customerName": "",
+      "customerContact": "",
+      "customerAddress": "",
+      "tableNo": "",
+      "paymentMode": "Cash",
+      "status": "Pending",
+      "items": [
+        {
+          "itemId": 2,
+          "itemName": "Dal Tadka",
+          "category": "Main Course",
+          "price": 140,
+          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "f70a",
+          "quantity": 1
+        },
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "category": "Rice & Biryani",
+          "price": 200,
+          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "rating": 4.6,
+          "preparationTime": "20 mins",
+          "special": true,
+          "id": "858d",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 340,
+      "gst": 61.2,
+      "discount": 34,
+      "total": 367.2
+    },
+    {
+      "id": "3112",
+      "employeeId": "1",
+      "employeeName": "Amit Sharma",
+      "customerName": "",
+      "customerContact": "",
+      "customerAddress": "",
+      "tableNo": "",
+      "paymentMode": "Cash",
+      "status": "Pending",
+      "items": [
+        {
+          "itemId": 3,
+          "itemName": "Veg Biryani",
+          "category": "Rice & Biryani",
+          "price": 200,
+          "description": "Aromatic basmati rice cooked with mixed vegetables and Indian spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/1200x/72/e1/0b/72e10b76ecbfb101cc2b5491f02ed8be.jpg",
+          "rating": 4.6,
+          "preparationTime": "20 mins",
+          "special": true,
+          "id": "858d",
+          "quantity": 2
+        },
+        {
+          "itemId": 6,
+          "itemName": "Tandoori Roti",
+          "category": "Breads",
+          "price": 25,
+          "description": "Crispy tandoori-style roti cooked in clay oven.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/1200x/8e/a0/30/8ea03007e17de03f8e9b2c2ec1ab8f90.jpg",
+          "rating": 4.2,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "9ae8",
+          "quantity": 1
+        },
+        {
+          "itemId": 5,
+          "itemName": "Butter Naan",
+          "category": "Breads",
+          "price": 35,
+          "description": "Soft tandoor-baked naan brushed with butter.",
+          "availability": true,
+          "taxRate": 0.05,
+          "image": "https://i.pinimg.com/736x/fb/a1/ab/fba1abc348e524089bbbbbcbf4a561ec.jpg",
+          "rating": 4.3,
+          "preparationTime": "5 mins",
+          "special": false,
+          "id": "8bae",
+          "quantity": 1
+        },
+        {
+          "itemId": 2,
+          "itemName": "Dal Tadka",
+          "category": "Main Course",
+          "price": 140,
+          "description": "Yellow lentils cooked with ghee, onions, tomatoes, and tempered with spices.",
+          "availability": true,
+          "taxRate": 0.18,
+          "image": "https://i.pinimg.com/736x/58/bb/01/58bb01de209f533c0248c8371dd92f7f.jpg",
+          "rating": 4.5,
+          "preparationTime": "10 mins",
+          "special": false,
+          "id": "f70a",
+          "quantity": 1
+        }
+      ],
+      "subtotal": 600,
+      "gst": 100.2,
+      "discount": 60,
+      "total": 640.2
+    },
+    {
+      "id": "4d22",
+      "employeeId": "1",
+      "employeeName": "Amit Sharma",
+      "customerName": "vishal",
+      "customerContact": "15468465216",
+      "customerAddress": "surat",
+      "tableNo": "12",
+      "paymentMode": "Cash",
+      "status": "Served",
       "items": [
         {
           "itemId": 3,
@@ -1287,60 +1507,18 @@
           "quantity": 1
         },
         {
-          "itemId": 11,
-          "itemName": "Veg Hakka Noodles",
+          "itemId": 12,
+          "itemName": "Gobi Manchurian",
           "category": "Chinese",
-          "price": 150,
-          "description": "Stir-fried noodles with mixed vegetables.",
+          "price": 160,
+          "description": "Cauliflower fried and tossed in tangy Manchurian sauce.",
           "availability": true,
           "taxRate": 0.18,
-          "image": "https://i.pinimg.com/736x/6d/38/62/6d38627d880ef96368d8dc2a226eed90.jpg",
-          "rating": 4.4,
-          "preparationTime": "12 mins",
-          "special": false,
-          "id": "468a",
-          "quantity": 1
-        }
-      ],
-      "subtotal": 490,
-      "gst": 88.2,
-      "discount": 49,
-      "total": 529.2,
-      "date": "10/11/2025, 6:08:14 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
-    },
-    {
-      "id": "74d6",
-      "items": [
-        {
-          "itemId": 13,
-          "itemName": "Masala Dosa",
-          "category": "South Indian",
-          "price": 120,
-          "description": "Crispy rice crepe filled with spiced potato mixture, served with chutney and sambar.",
-          "availability": true,
-          "taxRate": 0.12,
-          "image": "https://i.pinimg.com/736x/76/98/c3/7698c35478a01b3a90075c9af7388e5e.jpg",
-          "rating": 4.7,
-          "preparationTime": "12 mins",
-          "special": true,
-          "id": "b637",
-          "quantity": 2
-        },
-        {
-          "itemId": 8,
-          "itemName": "Palak Paneer",
-          "category": "Main Course",
-          "price": 180,
-          "description": "Spinach and paneer cooked with mild spices.",
-          "availability": true,
-          "taxRate": 0.18,
-          "image": "https://i.pinimg.com/1200x/de/4d/21/de4d215b325b6c233830846f35a2d3ba.jpg",
+          "image": "https://i.pinimg.com/1200x/fa/9e/72/fa9e721c16838d5b0e8fbc88bed9cbb8.jpg",
           "rating": 4.6,
           "preparationTime": "15 mins",
-          "special": true,
-          "id": "77f0",
+          "special": false,
+          "id": "a449",
           "quantity": 1
         },
         {
@@ -1356,16 +1534,13 @@
           "preparationTime": "5 mins",
           "special": false,
           "id": "8bae",
-          "quantity": 1
+          "quantity": 2
         }
       ],
-      "subtotal": 455,
-      "gst": 62.949999999999996,
-      "discount": 45.5,
-      "total": 472.45000000000005,
-      "date": "10/11/2025, 6:13:23 PM",
-      "paymentMethod": "Cash",
-      "status": "Pending"
+      "subtotal": 570,
+      "gst": 93.5,
+      "discount": 57,
+      "total": 606.5
     }
   ],
   "invoices": []

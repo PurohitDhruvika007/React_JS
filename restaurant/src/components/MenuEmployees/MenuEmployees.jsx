@@ -1,179 +1,203 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import { useNavigate } from 'react-router';
-import { addOrder } from '../../slices/OrderSlice';
+// src/components/MenuEmployees/MenuEmployees.jsx
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import {
+    fetchOrders,
+    patchOrder,
+    createEmptyOrder,
+    selectOrder
+} from "../../slices/OrderSlice";
 
 export default function MenuEmployees() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { orders, selectedOrderId } = useSelector(s => s.orders);
+    const { currentUser: user } = useSelector(s => s.auth);
+
     const [menu, setMenu] = useState([]);
-    const [orderItems, setOrderItems] = useState([]);
-    const [loadingMenu, setLoadingMenu] = useState(true);
-    const [search, setSearch] = useState(""); // <-- Search state
+    const [localEdits, setLocalEdits] = useState({});
 
     useEffect(() => {
-        const fetchMenu = async () => {
-            try {
-                const res = await axios.get('http://localhost:3000/menu');
-                setMenu(res.data);
-            } catch (err) {
-                console.error('Error fetching menu:', err);
-            } finally {
-                setLoadingMenu(false);
-            }
-        };
-        fetchMenu();
-    }, []);
+        axios.get("http://localhost:3000/menu")
+            .then(r => setMenu(r.data))
+            .catch(console.error);
 
-    const handleAdd = (item) => {
-        setOrderItems(prevItems => {
-            const existing = prevItems.find(i => i.itemId === item.itemId);
-            if (existing) {
-                return prevItems.map(i =>
-                    i.itemId === item.itemId ? { ...i, quantity: i.quantity + 1 } : i
-                );
-            } else {
-                return [...prevItems, { ...item, quantity: 1 }];
-            }
+        dispatch(fetchOrders());
+    }, [dispatch]);
+
+    const selectedOrder = orders.find(o => o.id === selectedOrderId && o.employeeId === user.id);
+
+    const handleFieldChange = (field, value) => {
+        setLocalEdits(prev => ({ ...prev, [field]: value }));
+    };
+
+    const saveOrderFields = async (order) => {
+        const patch = {};
+        ["customerName", "customerContact", "customerAddress", "tableNo", "paymentMode", "status"].forEach(f => {
+            if (localEdits[f] !== undefined) patch[f] = localEdits[f];
         });
+        if (Object.keys(patch).length === 0) return;
+        await dispatch(patchOrder({ id: order.id, patch }));
+        setLocalEdits({});
     };
 
-    const handleRemove = (itemId) => {
-        setOrderItems(prevItems => prevItems.filter(i => i.itemId !== itemId));
+    const handleAddToOrder = async (item) => {
+        let order = selectedOrder;
+
+        if (!order) {
+            try {
+                const newOrder = await dispatch(createEmptyOrder({
+                    employeeId: user.id,
+                    employeeName: user.firstName
+                })).unwrap();
+
+                dispatch(selectOrder(newOrder.id));
+                order = { ...newOrder, items: newOrder.items || [] };
+            } catch (err) {
+                console.error("Error creating new order:", err);
+                return;
+            }
+        }
+
+        const existing = order.items.find(it => String(it.itemId) === String(item.itemId) || it.id === item.id);
+        const newItems = existing
+            ? order.items.map(it =>
+                (String(it.itemId) === String(item.itemId) || it.id === item.id)
+                    ? { ...it, quantity: (it.quantity || 1) + 1 }
+                    : it
+            )
+            : [...order.items, { ...item, quantity: 1 }];
+
+        const subtotal = newItems.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0), 0);
+        const gst = newItems.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0) * (it.taxRate || 0), 0);
+        const discount = subtotal * 0.1;
+        const total = subtotal + gst - discount;
+
+        await dispatch(patchOrder({ id: order.id, patch: { items: newItems, subtotal, gst, discount, total } }));
     };
 
-    const subtotal = orderItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    const gst = orderItems.reduce((sum, i) => sum + i.price * i.quantity * (i.taxRate || 0), 0);
-    const discount = subtotal * 0.1;
-    const total = subtotal + gst - discount;
+    const changeItemQty = async (itemId, delta) => {
+        if (!selectedOrder) return;
+
+        const items = selectedOrder.items.map(it =>
+            it.itemId === itemId || it.id === itemId
+                ? { ...it, quantity: Math.max(1, (it.quantity || 1) + delta) }
+                : it
+        );
+
+        const subtotal = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0), 0);
+        const gst = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0) * (it.taxRate || 0), 0);
+        const discount = subtotal * 0.1;
+        const total = subtotal + gst - discount;
+
+        await dispatch(patchOrder({ id: selectedOrder.id, patch: { items, subtotal, gst, discount, total } }));
+    };
+
+    const removeItem = async (itemId) => {
+        if (!selectedOrder) return;
+
+        const items = selectedOrder.items.filter(it => !(it.itemId === itemId || it.id === itemId));
+        const subtotal = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0), 0);
+        const gst = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0) * (it.taxRate || 0), 0);
+        const discount = subtotal * 0.1;
+        const total = subtotal + gst - discount;
+
+        await dispatch(patchOrder({ id: selectedOrder.id, patch: { items, subtotal, gst, discount, total } }));
+    };
 
     const handlePlaceOrder = async () => {
-        if (orderItems.length === 0) return alert("Please add at least one item!");
-
-        const order = {
-            items: orderItems,
-            subtotal,
-            gst,
-            discount,
-            total,
-            date: new Date().toLocaleString(),
-            paymentMethod: "Cash",
-            status: "Pending"
-        };
-
-        try {
-            const res = await axios.post('http://localhost:3000/orders', order);
-            dispatch(addOrder(res.data));
-            setOrderItems([]);
-            alert('Order placed successfully!');
-            navigate('/employee-dashboard/order-employees');
-        } catch (err) {
-            console.error('Error placing order:', err);
-            alert('Failed to place order.');
+        if (!selectedOrder) {
+            alert("No order selected.");
+            return;
         }
+
+        await saveOrderFields(selectedOrder);
+        alert("Order placed successfully!");
+
+        dispatch(selectOrder(null));
+        setLocalEdits({});
+
+        // Navigate to orders page
+        navigate("/employee-dashboard/order");  // ← updated to match the dashboard route
     };
-
-    if (loadingMenu) return <p>Loading menu...</p>;
-
-    // Filtered menu based on search
-    const filteredMenu = menu.filter(item =>
-        item.itemName.toLowerCase().includes(search.toLowerCase())
-    );
-
     return (
-        <div style={{ display: 'flex', padding: '20px' }}>
+        <div style={{ display: "flex", gap: 20, padding: 20 }}>
             {/* Menu */}
-            <div style={{ flex: 7 }}>
-                <h2>Menu</h2>
-
-                {/* 🔍 Search Bar */}
-                <input
-                    type="text"
-                    placeholder="Search item by name..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    style={{
-                        width: '100%',
-                        padding: '8px',
-                        marginBottom: '15px',
-                        borderRadius: '4px',
-                        border: '1px solid #ccc'
-                    }}
-                />
-
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {filteredMenu.length > 0 ? (
-                        filteredMenu.map(item => (
-                            <div
-                                key={item.itemId}
-                                style={{
-                                    border: '1px solid #ccc',
-                                    margin: '10px',
-                                    padding: '10px',
-                                    width: '220px'
-                                }}
+            <div style={{ flex: 7, background: "#fff", padding: 16, borderRadius: 8 }}>
+                <h2>🍽 Menu</h2>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+                    {menu.map(item => (
+                        <div key={item.itemId || item.id} style={{ width: 220, border: "1px solid #ddd", padding: 10, borderRadius: 8 }}>
+                            <img src={item.image} alt={item.itemName} style={{ width: "100%", height: 120, objectFit: "cover", borderRadius: 6 }} />
+                            <h4>{item.itemName}</h4>
+                            <p>₹{item.price}</p>
+                            <button
+                                onClick={() => handleAddToOrder(item)}
+                                style={{ background: "#ff7f50", color: "#fff", padding: "8px 12px", borderRadius: 6, border: "none" }}
                             >
-                                <img
-                                    src={item.image}
-                                    alt={item.itemName}
-                                    style={{
-                                        width: '100%',
-                                        height: '120px',
-                                        objectFit: 'cover'
-                                    }}
-                                />
-                                <h4>{item.itemName}</h4>
-                                <p><strong>Category:</strong> {item.category}</p>
-                                <p><strong>Price:</strong> ₹{item.price}</p>
-                                <button onClick={() => handleAdd(item)}>Add</button>
-                            </div>
-                        ))
-                    ) : (
-                        <p>No items found for “{search}”.</p>
-                    )}
-                </div>
-            </div>
-
-            {/* Order summary */}
-            <div style={{ flex: 3, marginLeft: '20px', border: '1px solid #ccc', padding: '10px' }}>
-                <h3>Current Order</h3>
-                <div>
-                    {orderItems.map(i => (
-                        <div
-                            key={i.itemId}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                marginBottom: '10px',
-                                borderBottom: '1px solid #eee',
-                                paddingBottom: '5px'
-                            }}
-                        >
-                            <img
-                                src={i.image}
-                                alt={i.itemName}
-                                style={{
-                                    width: '50px',
-                                    height: '50px',
-                                    objectFit: 'cover',
-                                    marginRight: '10px'
-                                }}
-                            />
-                            <div style={{ flex: 1 }}>
-                                <strong>{i.itemName}</strong>
-                                <p>Qty: {i.quantity}</p>
-                                <p>₹{i.price} x {i.quantity} = ₹{(i.price * i.quantity).toFixed(2)}</p>
-                            </div>
-                            <button onClick={() => handleRemove(i.itemId)}>Remove</button>
+                                ➕ Add
+                            </button>
                         </div>
                     ))}
                 </div>
-                <p>Subtotal: ₹{subtotal.toFixed(2)}</p>
-                <p>GST: ₹{gst.toFixed(2)}</p>
-                <p>Discount: ₹{discount.toFixed(2)}</p>
-                <h4>Total: ₹{total.toFixed(2)}</h4>
-                <button onClick={handlePlaceOrder}>Place Order</button>
+            </div>
+
+            {/* Current Order */}
+            <div style={{ flex: 3, background: "#fff", padding: 16, borderRadius: 8 }}>
+                <h3>🧾 Current Order</h3>
+                {!selectedOrder ? (
+                    <p>Adding items will create a new order automatically.</p>
+                ) : (
+                    <>
+                        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
+                            <input placeholder="Customer Name" value={localEdits.customerName || selectedOrder.customerName || ""} onChange={e => handleFieldChange("customerName", e.target.value)} />
+                            <input placeholder="Contact" value={localEdits.customerContact || selectedOrder.customerContact || ""} onChange={e => handleFieldChange("customerContact", e.target.value)} />
+                            <input placeholder="Address" value={localEdits.customerAddress || selectedOrder.customerAddress || ""} onChange={e => handleFieldChange("customerAddress", e.target.value)} />
+                            <input placeholder="Table No" value={localEdits.tableNo || selectedOrder.tableNo || ""} onChange={e => handleFieldChange("tableNo", e.target.value)} />
+                            <select value={localEdits.paymentMode || selectedOrder.paymentMode || "cash"} onChange={e => handleFieldChange("paymentMode", e.target.value)}>
+                                <option value="cash">Cash</option>
+                                <option value="upi">UPI</option>
+                                <option value="card">Card</option>
+                            </select>
+                            <select value={localEdits.status || selectedOrder.status || "pending"} onChange={e => handleFieldChange("status", e.target.value)}>
+                                <option value="pending">Pending</option>
+                                <option value="inprogress">In Progress</option>
+                                <option value="served">Served</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+
+                        {selectedOrder.items?.length === 0 ? <p>No items yet.</p> : selectedOrder.items.map(it => (
+                            <div key={it.id || it.itemId} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid #eee", padding: "8px 0" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                                    <img src={it.image} alt={it.itemName} style={{ width: 56, height: 56, objectFit: "cover", borderRadius: 6 }} />
+                                    <div>
+                                        <strong>{it.itemName}</strong>
+                                        <div>₹{it.price} × {it.quantity} = ₹{(it.price * it.quantity).toFixed(2)}</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button onClick={() => changeItemQty(it.itemId || it.id, 1)} style={{ marginRight: 6 }}>➕</button>
+                                    <button onClick={() => changeItemQty(it.itemId || it.id, -1)} style={{ marginRight: 6 }}>➖</button>
+                                    <button onClick={() => removeItem(it.itemId || it.id)}>❌</button>
+                                </div>
+                            </div>
+                        ))}
+
+                        <hr />
+                        <div>Subtotal: ₹{(selectedOrder.subtotal || 0).toFixed(2)}</div>
+                        <div>GST: ₹{(selectedOrder.gst || 0).toFixed(2)}</div>
+                        <div>Discount: ₹{(selectedOrder.discount || 0).toFixed(2)}</div>
+                        <h4>Total: ₹{(selectedOrder.total || 0).toFixed(2)}</h4>
+
+                        <button onClick={handlePlaceOrder} style={{ marginTop: 12, background: "#28a745", color: "#fff", border: "none", padding: "8px 12px", borderRadius: 6 }}>
+                            ✅ Place Order
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
