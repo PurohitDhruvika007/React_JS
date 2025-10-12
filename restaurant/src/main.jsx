@@ -12,4 +12,4 @@ root.render(
   </Provider>
 );
 
-//npm i axios,react-router,json-server,react-redux,@reduxjs/toolkit
+//npm i axios,react-router,json-server,react-redux,@reduxjs/toolkit,jspdf, html2canvas.

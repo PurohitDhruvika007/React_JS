@@ -37,7 +37,7 @@ export default function Navbar() {
                 <Link
                     to="/employee-dashboard"
                     style={{
-                        color: isActive("/employee-dashboard") && !isActive("order-employees")
+                        color: isActive("/employee-dashboard") && !isActive("/order") && !isActive("/profile") && !isActive("/dashboard")
                             ? "#ffe082"
                             : "#fff",
                         textDecoration: "none",
@@ -51,13 +51,37 @@ export default function Navbar() {
                 <Link
                     to="/employee-dashboard/order"
                     style={{
-                        color: isActive("/order-employees") ? "#ffe082" : "#fff",
+                        color: isActive("/order") ? "#ffe082" : "#fff",
                         textDecoration: "none",
                         fontWeight: "500",
                         fontSize: "18px",
                     }}
                 >
                     Orders
+                </Link>
+
+                <Link
+                    to="/employee-dashboard/profile"
+                    style={{
+                        color: isActive("/profile") ? "#ffe082" : "#fff",
+                        textDecoration: "none",
+                        fontWeight: "500",
+                        fontSize: "18px",
+                    }}
+                >
+                    Profile
+                </Link>
+
+                <Link
+                    to="/employee-dashboard/dashboard"
+                    style={{
+                        color: isActive("/dashboard") ? "#ffe082" : "#fff",
+                        textDecoration: "none",
+                        fontWeight: "500",
+                        fontSize: "18px",
+                    }}
+                >
+                    Dashboard
                 </Link>
 
                 {/* Logout Button */}
