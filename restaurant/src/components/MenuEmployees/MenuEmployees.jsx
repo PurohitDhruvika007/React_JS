@@ -174,10 +174,10 @@ export default function MenuEmployees() {
                 ) : (
                     <>
                         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 12 }}>
-                            <input placeholder="Customer Name" value={localEdits.customerName || selectedOrder.customerName || ""} onChange={e => handleFieldChange("customerName", e.target.value)} />
-                            <input placeholder="Contact" value={localEdits.customerContact || selectedOrder.customerContact || ""} onChange={e => handleFieldChange("customerContact", e.target.value)} />
-                            <input placeholder="Address" value={localEdits.customerAddress || selectedOrder.customerAddress || ""} onChange={e => handleFieldChange("customerAddress", e.target.value)} />
-                            <input placeholder="Table No" value={localEdits.tableNo || selectedOrder.tableNo || ""} onChange={e => handleFieldChange("tableNo", e.target.value)} />
+                            <input type="text" placeholder="Customer Name" value={localEdits.customerName || selectedOrder.customerName || ""} onChange={e => handleFieldChange("customerName", e.target.value)} />
+                            <input type="tel" maxLength={10} placeholder="Contact" value={localEdits.customerContact || selectedOrder.customerContact || ""} onChange={e => handleFieldChange("customerContact", e.target.value)} />
+                            <input type="text" placeholder="Address" value={localEdits.customerAddress || selectedOrder.customerAddress || ""} onChange={e => handleFieldChange("customerAddress", e.target.value)} />
+                            <input type="number" placeholder="Table No" value={localEdits.tableNo || selectedOrder.tableNo || ""} onChange={e => handleFieldChange("tableNo", e.target.value)} />
                             <select value={localEdits.paymentMode || selectedOrder.paymentMode || "cash"} onChange={e => handleFieldChange("paymentMode", e.target.value)}>
                                 <option value="cash">Cash</option>
                                 <option value="upi">UPI</option>
