@@ -24,11 +24,14 @@ export default function DashboardEmployees() {
             const filteredOrders = orders.filter(o => o.employeeId === currentUser.id);
             const filteredInvoices = invoices.filter(inv => inv.employeeId === currentUser.id);
 
-            // Merge current orders and previous invoices
             const combinedData = [
-                ...filteredOrders.map(o => ({ ...o, type: "current" })),
-                ...filteredInvoices.map(inv => ({ ...inv, type: "invoice" }))
+                ...filteredOrders.map(o => ({ ...o, type: "Order" })),
+                ...filteredInvoices.map(inv => ({ ...inv, type: "Invoice" }))
             ];
+
+            // Sort by date descending
+            combinedData.sort((a, b) => new Date(b.date || b.invoiceDate) - new Date(a.date || a.invoiceDate));
+
             setEmployeeData(combinedData);
         }
     }, [orders, invoices, currentUser]);
@@ -37,9 +40,9 @@ export default function DashboardEmployees() {
     const totalRevenue = employeeData.reduce((sum, o) => sum + o.total, 0);
     const avgOrderValue = totalOrders ? totalRevenue / totalOrders : 0;
 
-    // Line chart: revenue per order/invoice
+    // Line chart data
     const lineData = employeeData.map((o, index) => ({
-        name: `${o.type === "invoice" ? "Invoice" : "Order"} ${index + 1}`,
+        name: `${o.type} ${index + 1}`,
         Total: o.total,
         type: o.type
     }));
@@ -51,17 +54,14 @@ export default function DashboardEmployees() {
             itemCounts[item.itemName] = (itemCounts[item.itemName] || 0) + item.quantity;
         });
     });
-    const pieData = Object.keys(itemCounts).map(key => ({
-        name: key,
-        value: itemCounts[key]
-    }));
+    const pieData = Object.keys(itemCounts).map(key => ({ name: key, value: itemCounts[key] }));
 
     return (
         <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
             <h2 style={{ marginBottom: "20px" }}>{currentUser?.firstName} Dashboard</h2>
 
             {/* Summary Cards */}
-            <div style={{ display: "flex", gap: "20px", marginBottom: "40px" }}>
+            <div style={{ display: "flex", gap: "20px", marginBottom: "40px", flexWrap: "wrap" }}>
                 <div style={{ flex: 1, padding: "20px", background: "#f0f4f8", borderRadius: "10px", textAlign: "center", boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
                     <h3>Total Orders</h3>
                     <p style={{ fontSize: "24px", fontWeight: "bold" }}>{totalOrders}</p>
@@ -87,13 +87,7 @@ export default function DashboardEmployees() {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line
-                            type="monotone"
-                            dataKey="Total"
-                            stroke="#8884d8"
-                            activeDot={{ r: 8 }}
-                            name="Revenue"
-                        />
+                        <Line type="monotone" dataKey="Total" stroke="#8884d8" activeDot={{ r: 8 }} name="Revenue" />
                     </LineChart>
                 </div>
 
@@ -101,16 +95,7 @@ export default function DashboardEmployees() {
                 <div style={{ flex: 1, minWidth: "300px" }}>
                     <h4 style={{ textAlign: "center" }}>Items Sold Distribution</h4>
                     <PieChart width={400} height={300}>
-                        <Pie
-                            data={pieData}
-                            dataKey="value"
-                            nameKey="name"
-                            cx="50%"
-                            cy="50%"
-                            outerRadius={100}
-                            fill="#8884d8"
-                            label
-                        >
+                        <Pie data={pieData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#8884d8" label>
                             {pieData.map((entry, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
@@ -131,6 +116,39 @@ export default function DashboardEmployees() {
                         <Legend />
                         <Bar dataKey="Total" fill="#82ca9d" />
                     </BarChart>
+                </div>
+            </div>
+
+            {/* Recent Orders Table */}
+            <div>
+                <h4>Recent Orders & Invoices</h4>
+                <div className="table-responsive">
+                    <table className="table table-bordered table-hover">
+                        <thead className="table-dark">
+                            <tr>
+                                <th>Type</th>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Items</th>
+                                <th>Total (₹)</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {employeeData.slice(0, 10).map((o) => (
+                                <tr key={o.id + o.type}>
+                                    <td>{o.type}</td>
+                                    <td>{o.id}</td>
+                                    <td>{o.customerName || "-"}</td>
+                                    <td>{o.items.map(item => `${item.itemName} x${item.quantity}`).join(", ")}</td>
+                                    <td>{o.total.toFixed(2)}</td>
+                                    <td>{o.status}</td>
+                                    <td>{o.date || o.invoiceDate || "-"}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
