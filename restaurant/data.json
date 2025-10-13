@@ -1001,23 +1001,6 @@
       "id": "b13d"
     }
   ],
-  "orders": [
-    {
-      "id": "d6dc",
-      "employeeId": "3",
-      "employeeName": "Priya Sharma",
-      "customerName": "",
-      "customerContact": "",
-      "customerAddress": "",
-      "tableNo": "",
-      "paymentMode": "Cash",
-      "status": "Pending",
-      "items": [],
-      "subtotal": 0,
-      "gst": 0,
-      "discount": 0,
-      "total": 0
-    }
-  ],
+  "orders": [],
   "invoices": []
 }
