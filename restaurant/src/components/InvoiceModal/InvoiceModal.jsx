@@ -1,142 +1,194 @@
-import React, { useRef } from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+// InvoiceModal.js
+import React from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import './InvoiceModal.css';
 
-export default function InvoiceModal({ order, onClose }) {
-    const invoiceRef = useRef();
+// Base64 encoded restaurant logo (simple text-based logo)
+const DEFAULT_LOGO = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMTUwIDYwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMDAwMDAwIi8+Cjx0ZXh0IHg9Ijc1IiB5PSIzNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TaWduYXR1cmU8L3RleHQ+Cjx0ZXh0IHg9Ijc1IiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjRkZENzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SZXN0YXVyYW50PC90ZXh0Pgo8L3N2Zz4K';
 
+const InvoiceModal = ({ order, onClose }) => {
     if (!order) return null;
 
-    const { id, customerName, items, invoiceDate, subtotal, serviceCharge, gst, total } = order;
-
     const downloadPDF = async () => {
-        const element = invoiceRef.current;
-        const canvas = await html2canvas(element, { scale: 2 });
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-        pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`Invoice_${id}.pdf`);
+        const invoiceElement = document.getElementById('invoice-content');
+        if (!invoiceElement) return;
+
+        try {
+            const downloadBtn = document.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.disabled = true;
+                downloadBtn.textContent = "⏳ Generating PDF...";
+            }
+
+            // Use a simple approach without CORS
+            const canvas = await html2canvas(invoiceElement, {
+                scale: 2,
+                useCORS: false, // Set to false for base64 images
+                backgroundColor: '#ffffff',
+                allowTaint: false,
+            });
+
+            const imgData = canvas.toDataURL('image/png', 1.0);
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = pdf.internal.pageSize.getHeight();
+
+            const margin = 15;
+            const contentWidth = pdfWidth - 2 * margin;
+
+            const imgWidth = canvas.width;
+            const imgHeight = canvas.height;
+            const ratio = imgWidth / imgHeight;
+
+            let imgPDFWidth = contentWidth;
+            let imgPDFHeight = contentWidth / ratio;
+
+            if (imgPDFHeight > pdfHeight - 2 * margin) {
+                imgPDFHeight = pdfHeight - 2 * margin;
+                imgPDFWidth = imgPDFHeight * ratio;
+            }
+
+            const xPos = (pdfWidth - imgPDFWidth) / 2;
+            const yPos = margin;
+
+            pdf.addImage(imgData, 'PNG', xPos, yPos, imgPDFWidth, imgPDFHeight);
+            pdf.save(`Invoice-${order.invoiceNumber}-${order.customerName}.pdf`);
+
+            if (downloadBtn) {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = "📄 Download PDF";
+            }
+
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('❌ Failed to generate PDF. Please try again.');
+            const downloadBtn = document.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.disabled = false;
+                downloadBtn.textContent = "📄 Download PDF";
+            }
+        }
     };
 
     return (
-        <div
-            style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                backgroundColor: "rgba(0,0,0,0.5)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                zIndex: 1000,
-            }}
-        >
-            <div
-                style={{
-                    backgroundColor: "white",
-                    padding: "2rem",
-                    borderRadius: "10px",
-                    width: "420px",
-                    maxHeight: "90%",
-                    overflowY: "auto",
-                    position: "relative",
-                    boxShadow: "0px 0px 15px rgba(0,0,0,0.3)",
-                    fontFamily: "Arial, sans-serif",
-                    fontSize: "12px",
-                }}
-            >
-                {/* Close button */}
-                <button
-                    onClick={onClose}
-                    style={{
-                        position: "absolute",
-                        top: "10px",
-                        right: "10px",
-                        background: "transparent",
-                        border: "none",
-                        fontSize: "1.2rem",
-                        cursor: "pointer",
-                    }}
-                >
-                    ❌
-                </button>
+        <div className="invoice-modal-overlay">
+            <div className="invoice-modal-content" style={{
+                backgroundColor: '#ffffff',
+                color: '#000000'
+            }}>
+                <div id="invoice-content" className="invoice-pdf-content">
+                    {/* Header */}
+                    <div className="invoice-header">
+                        <div className="brand-section">
+                            <img
+                                src={DEFAULT_LOGO}
+                                alt="Signature Restaurant"
+                                className="restaurant-logo"
+                            />
+                            <div className="brand-info">
+                                <h1 className="restaurant-name">Signature</h1>
+                                <p className="tagline">Where Taste Becomes Art</p>
+                                <p className="website">www.signature.com</p>
+                            </div>
+                        </div>
+                        <div className="invoice-meta">
+                            <h2>INVOICE</h2>
+                            <p><strong>Invoice No:</strong> {order.invoiceNumber}</p>
+                            <p><strong>Date:</strong> {order.invoiceDate}</p>
+                        </div>
+                    </div>
 
-                {/* Invoice content */}
-                <div
-                    ref={invoiceRef}
-                    style={{
-                        padding: "0 20px",
-                        width: "100%",
-                    }}
-                >
-                    <h2 style={{ textAlign: "center", marginBottom: "5px" }}>🍴 My Restaurant</h2>
-                    <p style={{ textAlign: "center", margin: "0 0 10px 0", fontSize: "10px" }}>Receipt</p>
-                    <hr />
-                    <p><strong>Receipt ID:</strong> {id}</p>
-                    <p><strong>Customer:</strong> {customerName}</p>
-                    <p><strong>Date:</strong> {invoiceDate}</p>
-                    <hr />
+                    {/* Restaurant Info */}
+                    <div className="restaurant-info">
+                        <p>123 Food Street, Gourmet City - 123456</p>
+                        <p>Phone: +91 9876543210</p>
+                        <p>GSTIN: 29ABCDE1234F1Z5</p>
+                    </div>
 
-                    <table style={{ width: "100%", borderCollapse: "collapse", marginTop: "10px" }}>
-                        <thead>
-                            <tr style={{ borderBottom: "1px solid #000" }}>
-                                <th style={{ textAlign: "left" }}>Item</th>
-                                <th style={{ textAlign: "center" }}>Qty</th>
-                                <th style={{ textAlign: "right" }}>Price</th>
-                                <th style={{ textAlign: "right" }}>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {items.map((item, idx) => (
-                                <tr key={idx} style={{ borderBottom: "1px dotted #999" }}>
-                                    <td>{item.itemName || item.name}</td>
-                                    <td style={{ textAlign: "center" }}>{item.quantity}</td>
-                                    <td style={{ textAlign: "right" }}>₹{item.price}</td>
-                                    <td style={{ textAlign: "right" }}>₹{(item.price * item.quantity).toFixed(2)}</td>
+                    {/* Rest of your content remains the same */}
+                    <div className="details-grid">
+                        <div className="customer-details">
+                            <h3>Bill To:</h3>
+                            <p><strong>{order.customerName}</strong></p>
+                            <p>Contact: {order.customerContact}</p>
+                            {order.customerAddress && <p>Address: {order.customerAddress}</p>}
+                            {order.tableNo && <p>Table No: {order.tableNo}</p>}
+                        </div>
+                        <div className="order-details">
+                            <h3>Order Details:</h3>
+                            <p><strong>Server:</strong> {order.employeeName}</p>
+                            <p><strong>Payment Mode:</strong> {order.paymentMode}</p>
+                            <p><strong>Status:</strong> {order.paymentStatus}</p>
+                        </div>
+                    </div>
+
+                    <div className="items-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Price</th>
+                                    <th>Qty</th>
+                                    <th>Total</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {order.items?.map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.itemName || item.name}</td>
+                                        <td>₹{item.price}</td>
+                                        <td>{item.quantity}</td>
+                                        <td>₹{(item.price * item.quantity).toFixed(2)}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
 
-                    <hr style={{ margin: "10px 0" }} />
+                    <div className="invoice-totals">
+                        <div className="total-row">
+                            <span>Subtotal:</span>
+                            <span>₹{(order.subtotal || 0).toFixed(2)}</span>
+                        </div>
+                        <div className="total-row">
+                            <span>Service Charge (5%):</span>
+                            <span>₹{(order.serviceCharge || 0).toFixed(2)}</span>
+                        </div>
+                        <div className="total-row">
+                            <span>GST (5%):</span>
+                            <span>₹{(order.gst || 0).toFixed(2)}</span>
+                        </div>
+                        <div className="total-row grand-total">
+                            <span><strong>Grand Total:</strong></span>
+                            <span><strong>₹{(order.total || 0).toFixed(2)}</strong></span>
+                        </div>
+                    </div>
 
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span>Subtotal:</span> <span>₹{subtotal.toFixed(2)}</span>
+                    <div className="invoice-footer">
+                        <div className="signature-section">
+                            <div className="signature-line"></div>
+                            <p>Authorized Signature</p>
+                        </div>
+                        <div className="thank-you">
+                            <h3>Thank You for Dining With Us!</h3>
+                            <p>Visit Again - www.signature.com</p>
+                            <p className="tagline-footer">Where Taste Becomes Art</p>
+                        </div>
                     </div>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span>Service Charge (5%):</span> <span>₹{serviceCharge.toFixed(2)}</span>
-                    </div>
-                    <div style={{ display: "flex", justifyContent: "space-between" }}>
-                        <span>GST (5%):</span> <span>₹{gst.toFixed(2)}</span>
-                    </div>
-                    <hr />
-                    <div style={{ display: "flex", justifyContent: "space-between", fontWeight: "bold", fontSize: "14px" }}>
-                        <span>Total:</span> <span>₹{total.toFixed(2)}</span>
-                    </div>
-                    <p style={{ textAlign: "center", marginTop: "15px", fontSize: "10px" }}>Thank you for dining with us!</p>
                 </div>
 
-                {/* Download PDF button */}
-                <button
-                    onClick={downloadPDF}
-                    style={{
-                        marginTop: "1rem",
-                        width: "100%",
-                        padding: "0.5rem",
-                        backgroundColor: "#4caf50",
-                        color: "white",
-                        border: "none",
-                        borderRadius: "5px",
-                        cursor: "pointer",
-                    }}
-                >
-                    Download PDF
-                </button>
+                <div className="invoice-actions">
+                    <button onClick={downloadPDF} className="download-btn">
+                        📄 Download PDF
+                    </button>
+                    <button onClick={onClose} className="close-btn">
+                        Close
+                    </button>
+                </div>
             </div>
         </div>
     );
-}
+};
+
+export default InvoiceModal;

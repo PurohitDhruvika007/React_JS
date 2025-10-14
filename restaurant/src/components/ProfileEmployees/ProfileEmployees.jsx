@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import "./ProfileEmployees.css";
 
 export default function ProfileEmployees() {
     const { currentUser } = useSelector(state => state.auth);
@@ -45,32 +46,92 @@ export default function ProfileEmployees() {
         if (currentUser) fetchEmployeeData();
     }, [currentUser]);
 
-    if (loading) return <p>Loading profile...</p>;
-    if (!employeeData) return <p>Employee data not found.</p>;
+    if (loading) return (
+        <div className="profile-loading">
+            <div className="loading-spinner"></div>
+            <p>Loading profile...</p>
+        </div>
+    );
+
+    if (!employeeData) return (
+        <div className="profile-not-found">
+            <p>Employee data not found.</p>
+        </div>
+    );
 
     return (
-        <div style={{ padding: "20px", maxWidth: "700px", margin: "0 auto", background: "#fff", borderRadius: 10, boxShadow: "0 2px 10px rgba(0,0,0,0.1)" }}>
-            {/* Profile Header */}
-            <div style={{ textAlign: "center", marginBottom: 25 }}>
-                <img
-                    src={employeeData.profileImage || "https://via.placeholder.com/150"}
-                    alt={employeeData.firstName}
-                    style={{ width: 140, height: 140, borderRadius: "50%", objectFit: "cover", border: "3px solid #2e8b57" }}
-                />
-                <h2 style={{ marginTop: 12 }}>{employeeData.firstName}</h2>
-                <p style={{ color: "#555", fontWeight: "500" }}>{employeeData.role}</p>
-            </div>
+        <div className="profile-container">
+            <div className="profile-content">
+                {/* Profile Header */}
+                <div className="profile-header">
+                    <div className="profile-image-container">
+                        <img
+                            src={employeeData.profileImage || "https://via.placeholder.com/150"}
+                            alt={employeeData.firstName}
+                            className="profile-image"
+                        />
+                        <div className="profile-image-overlay"></div>
+                    </div>
+                    <h1 className="profile-name">{employeeData.firstName}</h1>
+                    <p className="profile-role">{employeeData.role}</p>
+                    <div className="profile-accent"></div>
+                </div>
 
-            {/* Employee Details */}
-            <div style={{ lineHeight: 1.8, fontSize: 16 }}>
-                <p><strong>Email:</strong> {employeeData.email}</p>
-                <p><strong>Address:</strong> {employeeData.address}</p>
-                <p><strong>Salary:</strong> ₹{employeeData.salary}</p>
-                <p><strong>Joining Date:</strong> {employeeData.joiningDate}</p>
-                <p><strong>Shift:</strong> {employeeData.shift}</p>
-                <p><strong>Total Orders:</strong> {employeeData.totalOrders}</p>
-                <p><strong>Total Sales:</strong> ₹{employeeData.totalSales}</p>
-                <p><strong>Manager ID:</strong> {employeeData.managerId}</p>
+                {/* Stats Cards */}
+                <div className="stats-grid">
+                    <div className="stat-card">
+                        <div className="stat-icon">📊</div>
+                        <div className="stat-info">
+                            <h3 className="stat-value">{employeeData.totalOrders}</h3>
+                            <p className="stat-label">Total Orders</p>
+                        </div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-icon">💰</div>
+                        <div className="stat-info">
+                            <h3 className="stat-value">₹{employeeData.totalSales}</h3>
+                            <p className="stat-label">Total Sales</p>
+                        </div>
+                    </div>
+                    <div className="stat-card">
+                        <div className="stat-icon">💼</div>
+                        <div className="stat-info">
+                            <h3 className="stat-value">₹{employeeData.salary}</h3>
+                            <p className="stat-label">Monthly Salary</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Employee Details */}
+                <div className="details-section">
+                    <h2 className="details-title">Personal Information</h2>
+                    <div className="details-grid">
+                        <div className="detail-item">
+                            <span className="detail-label">Email Address</span>
+                            <span className="detail-value">{employeeData.email}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Home Address</span>
+                            <span className="detail-value">{employeeData.address}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Joining Date</span>
+                            <span className="detail-value">{employeeData.joiningDate}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Work Shift</span>
+                            <span className="detail-value shift-badge">{employeeData.shift}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Manager ID</span>
+                            <span className="detail-value">{employeeData.managerId}</span>
+                        </div>
+                        <div className="detail-item">
+                            <span className="detail-label">Employee ID</span>
+                            <span className="detail-value employee-id">#{employeeData.id}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

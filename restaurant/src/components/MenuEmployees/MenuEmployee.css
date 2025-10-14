@@ -1,0 +1,721 @@
+/* MenuEmployees.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap");
+
+/* Menu Container */
+.menu-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    padding: 30px;
+    margin-left: 280px;
+    font-family: "Poppins", sans-serif;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease;
+    overflow-x: hidden;
+}
+
+.menu-container.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Background Elements */
+.menu-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.menu-background .bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+    filter: blur(40px);
+    animation: floatShape 25s infinite linear;
+}
+
+.menu-background .shape-1 {
+    width: 30vmin;
+    height: 30vmin;
+    top: 10%;
+    right: 5%;
+    animation-delay: 0s;
+}
+
+.menu-background .shape-2 {
+    width: 25vmin;
+    height: 25vmin;
+    bottom: 15%;
+    left: 3%;
+    animation-delay: -8s;
+}
+
+.menu-background .shape-3 {
+    width: 20vmin;
+    height: 20vmin;
+    top: 60%;
+    right: 15%;
+    animation-delay: -15s;
+}
+
+.menu-content {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Header */
+.menu-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.menu-title {
+    font-family: "Playfair Display", serif;
+    font-size: 3rem;
+    color: #ffd700;
+    margin-bottom: 10px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+}
+
+.title-accent {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #ffd700, transparent);
+    border-radius: 2px;
+}
+
+.menu-subtitle {
+    color: #b8b8b8;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+/* Layout */
+.menu-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 30px;
+    align-items: start;
+    max-width: 100%;
+}
+
+/* Menu Section */
+.menu-section {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Search Box */
+.search-box {
+    position: relative;
+    margin-bottom: 30px;
+    max-width: 100%;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #b8b8b8;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+/* Menu Grid - FIXED TO 2 COLUMNS */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 100%;
+}
+
+.menu-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    max-width: 100%;
+}
+
+.menu-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 215, 0, 0.3);
+    box-shadow: 0 15px 40px rgba(255, 215, 0, 0.1);
+}
+
+.menu-card-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.menu-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-card:hover .menu-card-image img {
+    transform: scale(1.1);
+}
+
+.menu-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.menu-card:hover .menu-card-overlay {
+    opacity: 1;
+}
+
+.add-to-order-btn {
+    background: linear-gradient(135deg, #ffd700 0%, #e6c200 100%);
+    color: #1a1a1a;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.add-to-order-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.menu-card-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.item-name {
+    color: #ffd700;
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.item-price {
+    color: #ffd700;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.add-btn-mobile {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.add-btn-mobile:hover {
+    background: rgba(255, 215, 0, 0.2);
+}
+
+/* Order Sidebar */
+.order-sidebar {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 30px;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 100%;
+}
+
+.order-header h3 {
+    color: #ffd700;
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.order-id {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Empty Order */
+.empty-order {
+    text-align: center;
+    padding: 40px 20px;
+    color: #b8b8b8;
+    max-width: 100%;
+}
+
+.empty-order-icon {
+    margin-bottom: 15px;
+    color: #ffd700;
+}
+
+/* Order Details Form */
+.order-details-form {
+    margin-bottom: 25px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.order-input,
+.order-select {
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.order-input:focus,
+.order-select:focus {
+    outline: none;
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+}
+
+.order-input.full-width {
+    grid-column: 1 / -1;
+    width: 100%;
+}
+
+.order-select {
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Order Items */
+.order-items {
+    margin-bottom: 25px;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.empty-items {
+    text-align: center;
+    padding: 20px;
+    color: #b8b8b8;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    max-width: 100%;
+}
+
+.items-list {
+    max-height: 300px;
+    overflow-y: auto;
+    max-width: 100%;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+    max-width: calc(100% - 100px);
+}
+
+.item-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.item-details {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.item-title {
+    color: #e8e8e8;
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.item-calculation {
+    color: #b8b8b8;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.item-controls {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.control-btn {
+    padding: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.control-btn.add {
+    border-color: rgba(255, 215, 0, 0.3);
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+}
+
+.control-btn.remove {
+    border-color: rgba(255, 165, 0, 0.3);
+    background: rgba(255, 165, 0, 0.1);
+    color: #ffa500;
+}
+
+.control-btn.delete {
+    border-color: rgba(255, 0, 0, 0.3);
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff6b6b;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Order Summary */
+.order-summary {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #b8b8b8;
+    font-size: 0.9rem;
+    max-width: 100%;
+}
+
+.summary-row.total {
+    color: #ffd700;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+/* Place Order Button */
+.place-order-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.place-order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.4);
+}
+
+/* Animations */
+@keyframes floatShape {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+    }
+
+    33% {
+        transform: translate(15px, -10px) rotate(120deg) scale(1.1);
+    }
+
+    66% {
+        transform: translate(-8px, 8px) rotate(240deg) scale(0.9);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(360deg) scale(1);
+    }
+}
+
+/* Responsive Design - FIXED FOR 2 COLUMNS */
+@media (max-width: 1200px) {
+    .menu-container {
+        margin-left: 250px;
+    }
+
+    .menu-layout {
+        grid-template-columns: 1fr 350px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .menu-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .order-sidebar {
+        position: static;
+        max-width: 100%;
+    }
+
+    /* Keep 2 columns on tablets */
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-container {
+        margin-left: 70px;
+        padding: 20px 15px;
+    }
+
+    .menu-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .order-sidebar {
+        position: static;
+    }
+
+    .menu-title {
+        font-size: 2.2rem;
+    }
+
+    /* Keep 2 columns on mobile for better layout */
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .order-input.full-width {
+        grid-column: 1;
+    }
+
+    .order-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .order-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .item-controls {
+        align-self: flex-end;
+    }
+
+    /* Adjust menu cards for 2 columns on mobile */
+    .menu-card {
+        min-height: 250px;
+    }
+
+    .menu-card-image {
+        height: 150px;
+    }
+
+    .menu-card-content {
+        padding: 15px;
+    }
+
+    .item-name {
+        font-size: 1rem;
+    }
+
+    .item-price {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-container {
+        margin-left: 60px;
+        padding: 15px 10px;
+    }
+
+    .menu-title {
+        font-size: 1.8rem;
+    }
+
+    .menu-section,
+    .order-sidebar {
+        padding: 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .order-input,
+    .order-select {
+        font-size: 16px;
+    }
+
+    /* Switch to 1 column only on very small screens */
+    @media (max-width: 380px) {
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+}
+
+.order-select {
+    color: white;
+    /* Text color inside dropdown options */
+    background: black;
+    /* Light background for readability */
+}
+
+.order-select option {
+    color: white;
+    /* Text color inside dropdown options */
+    background: black;
+    /* Background of dropdown options */
+}
+
+/* All input fields black background */
+.order-input,
+.search-input,
+.order-select {
+    background: #000;
+    /* black background */
+    color: #fff;
+    /* white text for readability */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.order-input:focus,
+.search-input:focus,
+.order-select:focus {
+    border-color: #ffd700;
+    /* keep gold outline on focus */
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    outline: none;
+}

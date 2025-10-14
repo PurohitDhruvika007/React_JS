@@ -2,102 +2,75 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/AuthSlice";
+import "./Navbar.css";
 
 export default function Navbar() {
     const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const isActive = (path) => location.pathname.includes(path);
+    const isActive = (path) => location.pathname === path;
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate("/login"); // redirect to login page
+        navigate("/login");
     };
 
     return (
-        <nav
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "#2e8b57",
-                color: "#fff",
-                padding: "12px 30px",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-            }}
-        >
-            {/* 🍃 Brand Name */}
-            <h1 style={{ margin: 0, fontFamily: "cursive", fontSize: "26px" }}>
-                🌿 Green Delight
-            </h1>
+        <nav className="navbar-vertical">
+            {/* Logo Section */}
+            <div className="nav-logo">
+                <div className="logo-img-circle">
+                    <img
+                        src="https://cdn5.f-cdn.com/contestentries/1510474/33623865/5cf041ec517d5_thumb900.jpg"
+                        alt="Signature Logo"
+                        className="logo-img"
+                    />
+                </div>
+                <h1 className="brand-name">Signature</h1>
+                <p className="brand-tagline">Where Taste Becomes Art</p>
+            </div>
 
-            {/* 🔗 Navigation Links + Logout */}
-            <div style={{ display: "flex", gap: "25px", alignItems: "center" }}>
+            {/* Navigation Links */}
+            <div className="nav-links">
                 <Link
                     to="/employee-dashboard"
-                    style={{
-                        color: isActive("/employee-dashboard") && !isActive("/order") && !isActive("/profile") && !isActive("/dashboard")
-                            ? "#ffe082"
-                            : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                        fontSize: "18px",
-                    }}
+                    className={`nav-link ${isActive("/employee-dashboard") ? "active" : ""}`}
                 >
-                    Menu
+                    <span className="nav-icon">🏠</span>
+                    <span className="nav-text">Dashboard</span>
+                </Link>
+
+                <Link
+                    to="/employee-dashboard/menu"
+                    className={`nav-link ${isActive("/employee-dashboard/menu") ? "active" : ""}`}
+                >
+                    <span className="nav-icon">📋</span>
+                    <span className="nav-text">Menu</span>
                 </Link>
 
                 <Link
                     to="/employee-dashboard/order"
-                    style={{
-                        color: isActive("/order") ? "#ffe082" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                        fontSize: "18px",
-                    }}
+                    className={`nav-link ${isActive("/employee-dashboard/order") ? "active" : ""}`}
                 >
-                    Orders
+                    <span className="nav-icon">🧾</span>
+                    <span className="nav-text">Orders</span>
                 </Link>
 
                 <Link
                     to="/employee-dashboard/profile"
-                    style={{
-                        color: isActive("/profile") ? "#ffe082" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                        fontSize: "18px",
-                    }}
+                    className={`nav-link ${isActive("/employee-dashboard/profile") ? "active" : ""}`}
                 >
-                    Profile
+                    <span className="nav-icon">👤</span>
+                    <span className="nav-text">Profile</span>
                 </Link>
+            </div>
 
-                <Link
-                    to="/employee-dashboard/dashboard"
-                    style={{
-                        color: isActive("/dashboard") ? "#ffe082" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                        fontSize: "18px",
-                    }}
-                >
-                    Dashboard
-                </Link>
-
-                {/* Logout Button */}
-                <button
-                    onClick={handleLogout}
-                    style={{
-                        backgroundColor: "#ff4d4f",
-                        color: "#fff",
-                        border: "none",
-                        padding: "6px 14px",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        fontWeight: "500",
-                    }}
-                >
-                    Logout
+            {/* Logout Section */}
+            <div className="nav-footer">
+                <button onClick={handleLogout} className="logout-btn">
+                    <span className="nav-icon">🚪</span>
+                    <span className="nav-text">Logout</span>
                 </button>
             </div>
         </nav>
