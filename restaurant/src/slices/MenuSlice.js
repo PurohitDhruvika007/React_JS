@@ -39,24 +39,71 @@ const MenuSlice = createSlice({
     name: "menu",
     initialState: {
         items: [],
-        status: "idle",
+        status: "idle", // 'idle' | 'loading' | 'succeeded' | 'failed'
         error: null,
     },
     reducers: {},
     extraReducers: (builder) => {
         builder
+            // Fetch Menu Cases
+            .addCase(fetchMenu.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
+            })
             .addCase(fetchMenu.fulfilled, (state, action) => {
+                state.status = "succeeded";
                 state.items = action.payload;
+                state.error = null;
+            })
+            .addCase(fetchMenu.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+
+            // Add Menu Item Cases
+            .addCase(addMenuItem.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
             })
             .addCase(addMenuItem.fulfilled, (state, action) => {
+                state.status = "succeeded";
                 state.items.push(action.payload);
+                state.error = null;
+            })
+            .addCase(addMenuItem.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+
+            // Update Menu Item Cases - Use itemId for finding the item
+            .addCase(updateMenuItem.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
             })
             .addCase(updateMenuItem.fulfilled, (state, action) => {
-                const index = state.items.findIndex((i) => i.id === action.payload.id);
+                state.status = "succeeded";
+                const index = state.items.findIndex((i) => i.itemId === action.payload.itemId);
                 if (index !== -1) state.items[index] = action.payload;
+                state.error = null;
+            })
+            .addCase(updateMenuItem.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
+            })
+
+            // Delete Menu Item Cases - Use itemId for deletion
+            .addCase(deleteMenuItem.pending, (state) => {
+                state.status = "loading";
+                state.error = null;
             })
             .addCase(deleteMenuItem.fulfilled, (state, action) => {
-                state.items = state.items.filter((i) => i.id !== action.payload);
+                state.status = "succeeded";
+                state.items = state.items.filter((i) => i.itemId !== action.payload);
+                state.error = null;
+            })
+            .addCase(deleteMenuItem.rejected, (state, action) => {
+                state.status = "failed";
+                state.error = action.error.message;
             });
     },
 });

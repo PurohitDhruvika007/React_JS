@@ -1,8 +1,9 @@
 // src/components/OrdersInvoicesManager/OrdersInvoicesManager.jsx
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./OrdersManager.css";
 
-export default function OrdersInvoicesManager() {
+export default function OrdersManager() {
     const [orders, setOrders] = useState([]);
     const [invoices, setInvoices] = useState([]);
     const [activeTab, setActiveTab] = useState("orders"); // "orders" or "invoices"
@@ -71,9 +72,9 @@ export default function OrdersInvoicesManager() {
 
     // Render table
     const renderTable = (data) => (
-        <div className="table-responsive">
-            <table className="table table-bordered table-hover">
-                <thead className="table-dark">
+        <div className="table-container">
+            <table className="orders-invoices-table">
+                <thead>
                     <tr>
                         <th>ID</th>
                         <th>Employee</th>
@@ -89,26 +90,28 @@ export default function OrdersInvoicesManager() {
                 <tbody>
                     {data.length === 0 ? (
                         <tr>
-                            <td colSpan="9" className="text-center">
+                            <td colSpan="9" className="no-data">
                                 No data found.
                             </td>
                         </tr>
                     ) : (
                         data.map((item) => (
-                            <tr key={item.id}>
-                                <td>{item.id}</td>
-                                <td>{item.employeeName || "-"}</td>
-                                <td>{item.customerName || "-"}</td>
-                                <td>{item.tableNo || "-"}</td>
-                                <td>
+                            <tr key={item.id} className="table-row">
+                                <td className="id-cell">{item.id}</td>
+                                <td className="employee-cell">{item.employeeName || "-"}</td>
+                                <td className="customer-cell">{item.customerName || "-"}</td>
+                                <td className="table-cell">{item.tableNo || "-"}</td>
+                                <td className="items-cell">
                                     {item.items
                                         .map((it) => `${it.itemName} x${it.quantity}`)
                                         .join(", ")}
                                 </td>
-                                <td>{item.total.toFixed(2)}</td>
-                                <td>{item.status}</td>
-                                <td>{item.paymentMethod || item.paymentMode || "-"}</td>
-                                <td>{item.date || item.invoiceDate || "-"}</td>
+                                <td className="total-cell">₹{item.total.toFixed(2)}</td>
+                                <td className={`status ${item.status.toLowerCase()}`}>
+                                    {item.status}
+                                </td>
+                                <td className="payment-cell">{item.paymentMethod || item.paymentMode || "-"}</td>
+                                <td className="date-cell">{item.date || item.invoiceDate || "-"}</td>
                             </tr>
                         ))
                     )}
@@ -118,69 +121,76 @@ export default function OrdersInvoicesManager() {
     );
 
     return (
-        <div className="container p-4">
-            <h2 className="mb-4">Orders & Invoices Manager</h2>
-
-            {/* Tabs */}
-            <div className="mb-3">
-                <button
-                    className={`btn ${activeTab === "orders" ? "btn-primary" : "btn-outline-primary"} me-2`}
-                    onClick={() => setActiveTab("orders")}
-                >
-                    Orders
-                </button>
-                <button
-                    className={`btn ${activeTab === "invoices" ? "btn-primary" : "btn-outline-primary"}`}
-                    onClick={() => setActiveTab("invoices")}
-                >
-                    Invoices
-                </button>
+        <div className="orders-invoices-wrapper">
+            {/* Header Section */}
+            <div className="page-header">
+                <h1 className="page-title">Orders & Invoices Manager</h1>
+                <p className="page-subtitle">Manage and track all restaurant orders and invoices</p>
             </div>
 
-            {/* Search Fields */}
-            <div className="mb-3 d-flex gap-2 flex-wrap">
-                <input
-                    type="text"
-                    placeholder="Search by ID"
-                    className="form-control"
-                    style={{ maxWidth: "200px" }}
-                    value={idSearch}
-                    onChange={(e) => setIdSearch(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Search by Customer"
-                    className="form-control"
-                    style={{ maxWidth: "200px" }}
-                    value={customerSearch}
-                    onChange={(e) => setCustomerSearch(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Search by Date"
-                    className="form-control"
-                    style={{ maxWidth: "200px" }}
-                    value={dateSearch}
-                    onChange={(e) => setDateSearch(e.target.value)}
-                />
-
-                <select
-                    className="form-select"
-                    style={{ maxWidth: "200px" }}
-                    value={statusFilter}
-                    onChange={(e) => setStatusFilter(e.target.value)}
-                >
-                    <option value="">All Status</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Served">Served</option>
-                    <option value="Completed">Completed</option>
-                </select>
+            {/* Tabs Section */}
+            <div className="tabs-section">
+                <div className="tabs-container">
+                    <button
+                        className={`tab-button ${activeTab === "orders" ? "active" : ""}`}
+                        onClick={() => setActiveTab("orders")}
+                    >
+                        Orders ({orders.length})
+                    </button>
+                    <button
+                        className={`tab-button ${activeTab === "invoices" ? "active" : ""}`}
+                        onClick={() => setActiveTab("invoices")}
+                    >
+                        Invoices ({invoices.length})
+                    </button>
+                </div>
             </div>
 
-            {/* Table */}
-            {activeTab === "orders"
-                ? renderTable(displayedOrders)
-                : renderTable(displayedInvoices)}
+            {/* Search & Filters Section */}
+            <div className="filters-section">
+                <div className="filters-container">
+                    <div className="search-group">
+                        <input
+                            type="text"
+                            placeholder="Search by ID"
+                            className="search-input"
+                            value={idSearch}
+                            onChange={(e) => setIdSearch(e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Search by Customer"
+                            className="search-input"
+                            value={customerSearch}
+                            onChange={(e) => setCustomerSearch(e.target.value)}
+                        />
+                        <input
+                            type="date"
+                            placeholder="Search by Date"
+                            className="search-input"
+                            value={dateSearch}
+                            onChange={(e) => setDateSearch(e.target.value)}
+                        />
+                    </div>
+                    <select
+                        className="filter-select"
+                        value={statusFilter}
+                        onChange={(e) => setStatusFilter(e.target.value)}
+                    >
+                        <option value="">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Served">Served</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            {/* Table Section */}
+            <div className="content-section">
+                {activeTab === "orders"
+                    ? renderTable(displayedOrders)
+                    : renderTable(displayedInvoices)}
+            </div>
         </div>
     );
 }

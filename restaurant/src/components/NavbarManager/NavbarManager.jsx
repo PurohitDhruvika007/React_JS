@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/AuthSlice";
+import "./NavbarManager.css";
 
 export default function NavbarManager() {
     const location = useLocation();
@@ -12,98 +13,72 @@ export default function NavbarManager() {
 
     const handleLogout = () => {
         dispatch(logout());
-        navigate("/login"); // redirect to login page
+        navigate("/login");
     };
 
     return (
-        <nav
-            style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                backgroundColor: "#2e8b57",
-                color: "#fff",
-                padding: "12px 30px",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.2)",
-            }}
-        >
-            {/* 🍃 Brand Name */}
-            <h1 style={{ margin: 0, fontFamily: "cursive", fontSize: "26px" }}>
-                🌿 Green Delight
-            </h1>
+        <nav className="navbar-vertical">
+            {/* Logo Section */}
+            <div className="nav-logo">
+                <div className="logo-img-circle">
+                    <img
+                        src="https://cdn5.f-cdn.com/contestentries/1510474/33623865/5cf041ec517d5_thumb900.jpg"
+                        alt="Signature Logo"
+                        className="logo-img"
+                    />
+                </div>
+                <h1 className="brand-name">Signature</h1>
+                <p className="brand-tagline">Where Taste Becomes Art</p>
+            </div>
 
-            {/* 🔗 Navigation Links + Logout */}
-            <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+            {/* Navigation Links */}
+            <div className="nav-links">
                 <Link
                     to="/manager-dashboard"
-                    style={{
-                        color: isActive("/manager-dashboard") ? "#ffd700" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                    }}
+                    className={`nav-link ${isActive("/manager-dashboard") ? "active" : ""}`}
                 >
-                    Dashboard
+                    <span className="nav-icon">📊</span>
+                    <span className="nav-text">Dashboard</span>
                 </Link>
 
                 <Link
                     to="/manager-dashboard/employees"
-                    style={{
-                        color: isActive("/manager-dashboard/employees") ? "#ffd700" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                    }}
+                    className={`nav-link ${isActive("/manager-dashboard/employees") ? "active" : ""}`}
                 >
-                    Employees
+                    <span className="nav-icon">👥</span>
+                    <span className="nav-text">Employees</span>
                 </Link>
 
                 <Link
                     to="/manager-dashboard/menus"
-                    style={{
-                        color: isActive("/manager-dashboard/menus") ? "#ffd700" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                    }}
+                    className={`nav-link ${isActive("/manager-dashboard/menus") ? "active" : ""}`}
                 >
-                    Menus
+                    <span className="nav-icon">🍽️</span>
+                    <span className="nav-text">Menus</span>
                 </Link>
 
                 <Link
                     to="/manager-dashboard/orders"
-                    style={{
-                        color: isActive("/manager-dashboard/orders") ? "#ffd700" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                    }}
+                    className={`nav-link ${isActive("/manager-dashboard/orders") ? "active" : ""}`}
                 >
-                    Orders
+                    <span className="nav-icon">🧾</span>
+                    <span className="nav-text">Orders</span>
                 </Link>
 
                 <Link
                     to="/manager-dashboard/profile"
-                    style={{
-                        color: isActive("/manager-dashboard/profile") ? "#ffd700" : "#fff",
-                        textDecoration: "none",
-                        fontWeight: "500",
-                    }}
+                    className={`nav-link ${isActive("/manager-dashboard/profile") ? "active" : ""}`}
                 >
-                    Profile
+                    <span className="nav-icon">👤</span>
+                    <span className="nav-text">Profile</span>
                 </Link>
+            </div>
 
-                {/* 🚪 Logout Button */}
-                <button
-                    onClick={handleLogout}
-                    style={{
-                        backgroundColor: "#ff4d4f",
-                        color: "#fff",
-                        border: "none",
-                        padding: "6px 14px",
-                        borderRadius: "4px",
-                        cursor: "pointer",
-                        fontWeight: "500",
-                        marginLeft: "10px",
-                    }}
-                >
-                    Logout
+            {/* Logout Section */}
+            <div className="nav-footer">
+                <button onClick={handleLogout} className="logout-btn">
+                    <span className="nav-icon">🚪</span>
+                    <span className="nav-text">Logout</span>
                 </button>
             </div>
         </nav>

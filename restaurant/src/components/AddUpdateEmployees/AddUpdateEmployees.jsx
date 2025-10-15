@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router";
+import "./AddUpdateEmployees.css";
 
 export default function AddUpdateEmployees() {
     const navigate = useNavigate();
@@ -79,63 +80,215 @@ export default function AddUpdateEmployees() {
     };
 
     return (
-        <div className="container p-4" style={{ maxWidth: "850px" }}>
-            {/* Image Upload */}
-            <div
-                className="border border-2 border-dashed rounded-3 d-flex align-items-center justify-content-center"
-                style={{ width: "180px", height: "180px", backgroundColor: "#f9f9f9", cursor: "pointer", position: "relative" }}
-            >
-                <input type="file" accept="image/*" onChange={handleFileChange} style={{ position: "absolute", width: "100%", height: "100%", opacity: 0, cursor: "pointer" }} />
-                {image ? (
-                    <img src={image} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "8px" }} />
-                ) : (
-                    <div className="text-center">
-                        <i className="bi bi-image" style={{ fontSize: "2rem", color: "#bbb" }}></i>
-                        <p className="fw-semibold mt-2">Upload Image</p>
-                    </div>
-                )}
+        <div className="add-update-employee">
+            {/* Header Section */}
+            <div className="employee-form-header">
+                <div className="header-content">
+                    <h1 className="page-title">
+                        {isUpdate ? "✏️ Update Employee" : "👥 Add New Employee"}
+                    </h1>
+                    <p className="page-subtitle">
+                        {isUpdate ? "Update employee details and information" : "Add a new team member to your restaurant"}
+                    </p>
+                </div>
             </div>
 
-            {/* Form */}
-            <form className="row mt-4 g-3 text-start" onSubmit={handleSubmit} style={{ width: "100%" }}>
-                <div className="col-md-6">
-                    <label>First Name</label>
-                    <input type="text" name="firstName" className="form-control" value={form.firstName} onChange={handleChange} required />
+            <div className="employee-form-container">
+                {/* Image Upload Section */}
+                <div className="image-upload-section">
+                    <div className="image-upload-card">
+                        <h3 className="upload-title">📷 Profile Picture</h3>
+                        <p className="upload-subtitle">Upload a clear photo of the employee</p>
+
+                        <div className="image-upload-area">
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                                className="file-input"
+                            />
+                            {image ? (
+                                <div className="image-preview">
+                                    <img src={image} alt="Preview" className="preview-image" />
+                                    <div className="image-overlay">
+                                        <span className="change-text">Change Image</span>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="upload-placeholder">
+                                    <div className="upload-icon">📸</div>
+                                    <p className="upload-text">Click to upload image</p>
+                                    <p className="upload-hint">JPG, PNG, WEBP (Max 5MB)</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-                <div className="col-md-6">
-                    <label>Last Name</label>
-                    <input type="text" name="lastName" className="form-control" value={form.lastName} onChange={handleChange} />
+
+                {/* Form Section */}
+                <div className="form-section">
+                    <form className="employee-form" onSubmit={handleSubmit}>
+
+                        {/* Personal Information Section */}
+                        <div className="form-section-group">
+                            <h3 className="section-title">👤 Personal Information</h3>
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label className="form-label">First Name *</label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        className="form-input"
+                                        value={form.firstName}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="Enter first name"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Last Name</label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        className="form-input"
+                                        value={form.lastName}
+                                        onChange={handleChange}
+                                        placeholder="Enter last name"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label className="form-label">Email Address *</label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        className="form-input"
+                                        value={form.email}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="employee@restaurant.com"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Password *</label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        className="form-input"
+                                        value={form.password}
+                                        onChange={handleChange}
+                                        required
+                                        placeholder="Enter secure password"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-group full-width">
+                                <label className="form-label">Address</label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    className="form-input"
+                                    value={form.address}
+                                    onChange={handleChange}
+                                    placeholder="Enter complete address"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Employment Details Section */}
+                        <div className="form-section-group">
+                            <h3 className="section-title">💼 Employment Details</h3>
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label className="form-label">Role</label>
+                                    <select
+                                        name="role"
+                                        className="form-input"
+                                        value={form.role}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="employee">Employee</option>
+                                        <option value="manager">Manager</option>
+                                        <option value="chef">Chef</option>
+                                        <option value="waiter">Waiter</option>
+                                        <option value="cashier">Cashier</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Salary (₹)</label>
+                                    <input
+                                        type="number"
+                                        name="salary"
+                                        className="form-input"
+                                        value={form.salary}
+                                        onChange={handleChange}
+                                        placeholder="Enter monthly salary"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="form-row">
+                                <div className="form-group">
+                                    <label className="form-label">Shift Timing</label>
+                                    <select
+                                        name="shift"
+                                        className="form-input"
+                                        value={form.shift}
+                                        onChange={handleChange}
+                                    >
+                                        <option value="">Select Shift</option>
+                                        <option value="Morning (9AM-5PM)">Morning (9AM-5PM)</option>
+                                        <option value="Evening (5PM-1AM)">Evening (5PM-1AM)</option>
+                                        <option value="Night (10PM-6AM)">Night (10PM-6AM)</option>
+                                        <option value="Flexible">Flexible</option>
+                                    </select>
+                                </div>
+                                <div className="form-group">
+                                    <label className="form-label">Joining Date</label>
+                                    <input
+                                        type="date"
+                                        name="joiningDate"
+                                        className="form-input"
+                                        value={form.joiningDate}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Form Actions */}
+                        <div className="form-actions">
+                            <button
+                                type="button"
+                                className="cancel-btn"
+                                onClick={() => navigate("/manager-dashboard/employees")}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                type="submit"
+                                className="submit-btn"
+                                disabled={loading || !image}
+                            >
+                                {loading ? (
+                                    <>
+                                        <div className="loading-spinner-small"></div>
+                                        {isUpdate ? "Updating..." : "Adding..."}
+                                    </>
+                                ) : (
+                                    <>
+                                        <span className="btn-icon">{isUpdate ? "💾" : "➕"}</span>
+                                        {isUpdate ? "Update Employee" : "Add Employee"}
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div className="col-md-6">
-                    <label>Email</label>
-                    <input type="email" name="email" className="form-control" value={form.email} onChange={handleChange} required />
-                </div>
-                <div className="col-md-6">
-                    <label>Password</label>
-                    <input type="password" name="password" className="form-control" value={form.password} onChange={handleChange} required />
-                </div>
-                <div className="col-md-6">
-                    <label>Address</label>
-                    <input type="text" name="address" className="form-control" value={form.address} onChange={handleChange} />
-                </div>
-                <div className="col-md-3">
-                    <label>Salary</label>
-                    <input type="number" name="salary" className="form-control" value={form.salary} onChange={handleChange} />
-                </div>
-                <div className="col-md-3">
-                    <label>Shift</label>
-                    <input type="text" name="shift" className="form-control" value={form.shift} onChange={handleChange} />
-                </div>
-                <div className="col-md-4">
-                    <label>Joining Date</label>
-                    <input type="date" name="joiningDate" className="form-control" value={form.joiningDate} onChange={handleChange} />
-                </div>
-                <div className="col-12 text-center mt-3">
-                    <button type="submit" className="btn px-4 fw-semibold" style={{ borderRadius: "8px", backgroundColor: "#ff8c00", color: "white" }} disabled={loading}>
-                        {loading ? "Saving..." : isUpdate ? "Save Changes" : "Add Employee"}
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     );
 }

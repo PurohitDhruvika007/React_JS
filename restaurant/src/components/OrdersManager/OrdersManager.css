@@ -1,0 +1,301 @@
+/* OrdersManager.css */
+
+.orders-invoices-wrapper {
+    margin-left: 280px;
+    padding: 30px;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    color: #fff;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Header Section */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.page-subtitle {
+    color: #b0b0b0;
+    font-size: 1.1rem;
+}
+
+/* Tabs Section */
+.tabs-section {
+    margin-bottom: 30px;
+}
+
+.tabs-container {
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.tab-button {
+    flex: 1;
+    padding: 15px 20px;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    color: #b0b0b0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tab-button.active {
+    background: rgba(255, 215, 0, 0.1);
+    color: #ffd700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.tab-button:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+}
+
+/* Filters Section */
+.filters-section {
+    margin-bottom: 30px;
+}
+
+.filters-container {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.search-group {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    font-family: "Poppins", sans-serif;
+}
+
+.search-input:focus {
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #666;
+}
+
+.filter-select {
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 2px solid #333;
+    background: #1a1a1a;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 200px;
+    font-family: "Poppins", sans-serif;
+}
+
+.filter-select:focus {
+    border-color: #ffd700;
+    outline: none;
+}
+
+/* Table Container */
+.table-container {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.orders-invoices-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.orders-invoices-table th {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 18px 20px;
+    text-align: left;
+    font-weight: 600;
+    color: #ffd700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.orders-invoices-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+.table-row {
+    transition: all 0.3s ease;
+}
+
+.table-row:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Cell Styles */
+.id-cell {
+    font-weight: 600;
+    color: #ffd700;
+}
+
+.employee-cell {
+    color: #e8e8e8;
+}
+
+.customer-cell {
+    color: #fff;
+    font-weight: 500;
+}
+
+.table-cell {
+    color: #b0b0b0;
+}
+
+.items-cell {
+    color: #b0b0b0;
+    max-width: 250px;
+}
+
+.total-cell {
+    color: #4caf50;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.payment-cell {
+    color: #e8e8e8;
+}
+
+.date-cell {
+    color: #b0b0b0;
+}
+
+.no-data {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-style: italic;
+}
+
+/* Status colors - Updated to match theme */
+.status {
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-align: center;
+    display: inline-block;
+    min-width: 100px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Specific statuses - Updated colors */
+.status.pending {
+    background: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+    border: 1px solid rgba(255, 152, 0, 0.3);
+}
+
+.status.served {
+    background: rgba(33, 150, 243, 0.1);
+    color: #2196f3;
+    border: 1px solid rgba(33, 150, 243, 0.3);
+}
+
+.status.completed {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .orders-invoices-wrapper {
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 768px) {
+    .orders-invoices-wrapper {
+        margin-left: 70px;
+        padding: 20px;
+    }
+
+    .filters-container {
+        flex-direction: column;
+    }
+
+    .search-group {
+        flex-direction: column;
+    }
+
+    .search-input {
+        min-width: auto;
+    }
+
+    .tabs-container {
+        flex-direction: column;
+    }
+
+    .orders-invoices-table th,
+    .orders-invoices-table td {
+        padding: 12px 15px;
+    }
+
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .orders-invoices-wrapper {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+}
