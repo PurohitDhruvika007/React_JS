@@ -10,7 +10,6 @@ import {
 } from "../../slices/OrderSlice";
 import "./MenuEmployee.css";
 
-
 export default function MenuEmployees() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -19,15 +18,22 @@ export default function MenuEmployees() {
     const { currentUser: user } = useSelector(s => s.auth);
 
     const [menu, setMenu] = useState([]);
+    const [categoryList, setCategoryList] = useState([]); // dynamic categories
     const [localEdits, setLocalEdits] = useState({});
     const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("All");
     const [isLoaded, setIsLoaded] = useState(false);
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         axios.get("http://localhost:3000/menu")
             .then(r => {
                 setMenu(r.data);
                 setIsLoaded(true);
+
+                // Get unique categories dynamically
+                const uniqueCategories = ["All", ...new Set(r.data.map(item => item.category))];
+                setCategoryList(uniqueCategories);
             })
             .catch(console.error);
 
@@ -124,9 +130,37 @@ export default function MenuEmployees() {
             return;
         }
 
-        await saveOrderFields(selectedOrder);
-        alert("Order placed successfully!");
+        const currentData = {
+            customerName: localEdits.customerName ?? selectedOrder.customerName,
+            customerContact: localEdits.customerContact ?? selectedOrder.customerContact,
+            customerAddress: localEdits.customerAddress ?? selectedOrder.customerAddress,
+            tableNo: localEdits.tableNo ?? selectedOrder.tableNo,
+            paymentMode: localEdits.paymentMode ?? selectedOrder.paymentMode,
+            status: localEdits.status ?? selectedOrder.status,
+        };
 
+        const newErrors = {};
+
+        for (const [key, value] of Object.entries(currentData)) {
+            if (!value || value.toString().trim() === "") {
+                newErrors[key] = true;
+            }
+        }
+
+        if (currentData.customerContact && currentData.customerContact.toString().length !== 10) {
+            newErrors.customerContact = true;
+        }
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            alert("Please fill all required fields correctly.");
+            return;
+        }
+
+        setErrors({});
+        await saveOrderFields(selectedOrder);
+
+        alert("Order placed successfully!");
         dispatch(selectOrder(null));
         setLocalEdits({});
 
@@ -135,7 +169,6 @@ export default function MenuEmployees() {
 
     return (
         <div className={`menu-container ${isLoaded ? 'loaded' : ''}`}>
-            {/* Background Elements */}
             <div className="menu-background">
                 <div className="bg-shape shape-1"></div>
                 <div className="bg-shape shape-2"></div>
@@ -145,17 +178,14 @@ export default function MenuEmployees() {
             <div className="menu-content">
                 {/* Header */}
                 <div className="menu-header">
-                    <h1 className="menu-title">
-                        🍽️ Restaurant Menu
-                        <span className="title-accent"></span>
-                    </h1>
+                    <h1 className="menu-title">🍽️ Restaurant Menu</h1>
                     <p className="menu-subtitle">Browse our exquisite selection of culinary delights</p>
                 </div>
 
                 <div className="menu-layout">
                     {/* Menu Section */}
                     <div className="menu-section">
-                        {/* Search Bar */}
+                        {/* Search Box */}
                         <div className="search-box">
                             <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
                                 <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
@@ -170,37 +200,48 @@ export default function MenuEmployees() {
                             />
                         </div>
 
+                        {/* Category Buttons */}
+                        <div className="category-buttons">
+                            {categoryList.map(cat => (
+                                <button
+                                    key={cat}
+                                    className={`category-btn ${category === cat ? "active" : ""}`}
+                                    onClick={() => setCategory(cat)}
+                                >
+                                    {cat}
+                                </button>
+                            ))}
+                        </div>
+
                         {/* Menu Grid */}
                         <div className="menu-grid">
-                            {filteredMenu.map(item => (
-                                <div key={item.itemId || item.id} className="menu-card">
-                                    <div className="menu-card-image">
-                                        <img src={item.image} alt={item.itemName} />
-                                        <div className="menu-card-overlay">
+                            {filteredMenu
+                                .filter(item => category === "All" || item.category === category)
+                                .map(item => (
+                                    <div key={item.itemId || item.id} className="menu-card">
+                                        <div className="menu-card-image">
+                                            <img src={item.image} alt={item.itemName} />
+                                            <div className="menu-card-overlay">
+                                                <button
+                                                    onClick={() => handleAddToOrder(item)}
+                                                    className="add-to-order-btn"
+                                                >
+                                                    ➕ Add to Order
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div className="menu-card-content">
+                                            <h3 className="item-name">{item.itemName}</h3>
+                                            <p className="item-price">₹{item.price}</p>
                                             <button
                                                 onClick={() => handleAddToOrder(item)}
-                                                className="add-to-order-btn"
+                                                className="add-btn-mobile"
                                             >
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M12 6V12M12 12V18M12 12H18M12 12H6"
-                                                        stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                                                </svg>
                                                 Add to Order
                                             </button>
                                         </div>
                                     </div>
-                                    <div className="menu-card-content">
-                                        <h3 className="item-name">{item.itemName}</h3>
-                                        <p className="item-price">₹{item.price}</p>
-                                        <button
-                                            onClick={() => handleAddToOrder(item)}
-                                            className="add-btn-mobile"
-                                        >
-                                            Add to Order
-                                        </button>
-                                    </div>
-                                </div>
-                            ))}
+                                ))}
                         </div>
                     </div>
 
@@ -208,26 +249,17 @@ export default function MenuEmployees() {
                     <div className="order-sidebar">
                         <div className="order-header">
                             <h3>🧾 Current Order</h3>
-                            {selectedOrder && (
-                                <span className="order-id">#{selectedOrder.id}</span>
-                            )}
+                            {selectedOrder && <span className="order-id">#{selectedOrder.id}</span>}
                         </div>
 
                         {!selectedOrder ? (
                             <div className="empty-order">
-                                <div className="empty-order-icon">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-                                        <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z"
-                                            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                        <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10"
-                                            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    </svg>
-                                </div>
+                                <div className="empty-order-icon">🛒</div>
                                 <p>Adding items will create a new order automatically.</p>
                             </div>
                         ) : (
                             <>
-                                {/* Order Details Form */}
+                                {/* Order Form */}
                                 <div className="order-details-form">
                                     <div className="form-grid">
                                         <input
@@ -284,9 +316,7 @@ export default function MenuEmployees() {
                                 {/* Order Items */}
                                 <div className="order-items">
                                     {selectedOrder.items?.length === 0 ? (
-                                        <div className="empty-items">
-                                            <p>No items yet.</p>
-                                        </div>
+                                        <div className="empty-items">No items yet.</div>
                                     ) : (
                                         <div className="items-list">
                                             {selectedOrder.items.map(it => (
@@ -299,24 +329,9 @@ export default function MenuEmployees() {
                                                         </div>
                                                     </div>
                                                     <div className="item-controls">
-                                                        <button
-                                                            onClick={() => changeItemQty(it.itemId || it.id, 1)}
-                                                            className="control-btn add"
-                                                        >
-                                                            ➕
-                                                        </button>
-                                                        <button
-                                                            onClick={() => changeItemQty(it.itemId || it.id, -1)}
-                                                            className="control-btn remove"
-                                                        >
-                                                            ➖
-                                                        </button>
-                                                        <button
-                                                            onClick={() => removeItem(it.itemId || it.id)}
-                                                            className="control-btn delete"
-                                                        >
-                                                            ❌
-                                                        </button>
+                                                        <button onClick={() => changeItemQty(it.itemId || it.id, 1)} className="control-btn add">➕</button>
+                                                        <button onClick={() => changeItemQty(it.itemId || it.id, -1)} className="control-btn remove">➖</button>
+                                                        <button onClick={() => removeItem(it.itemId || it.id)} className="control-btn delete">❌</button>
                                                     </div>
                                                 </div>
                                             ))}
@@ -328,26 +343,23 @@ export default function MenuEmployees() {
                                 <div className="order-summary">
                                     <div className="summary-row">
                                         <span>Subtotal:</span>
-                                        <span>₹{(selectedOrder.subtotal || 0).toFixed(2)}</span>
+                                        <span>₹{selectedOrder.subtotal?.toFixed(2) || 0}</span>
                                     </div>
                                     <div className="summary-row">
                                         <span>GST:</span>
-                                        <span>₹{(selectedOrder.gst || 0).toFixed(2)}</span>
+                                        <span>₹{selectedOrder.gst?.toFixed(2) || 0}</span>
                                     </div>
                                     <div className="summary-row">
                                         <span>Discount:</span>
-                                        <span>₹{(selectedOrder.discount || 0).toFixed(2)}</span>
+                                        <span>₹{selectedOrder.discount?.toFixed(2) || 0}</span>
                                     </div>
                                     <div className="summary-row total">
                                         <span>Total:</span>
-                                        <span>₹{(selectedOrder.total || 0).toFixed(2)}</span>
+                                        <span>₹{selectedOrder.total?.toFixed(2) || 0}</span>
                                     </div>
                                 </div>
 
-                                <button
-                                    onClick={handlePlaceOrder}
-                                    className="place-order-btn"
-                                >
+                                <button className="place-order-btn" onClick={handlePlaceOrder}>
                                     ✅ Place Order
                                 </button>
                             </>
