@@ -18,7 +18,7 @@ export default function MenuEmployees() {
     const { currentUser: user } = useSelector(s => s.auth);
 
     const [menu, setMenu] = useState([]);
-    const [categoryList, setCategoryList] = useState([]); // dynamic categories
+    const [categoryList, setCategoryList] = useState([]);
     const [localEdits, setLocalEdits] = useState({});
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState("All");
@@ -30,9 +30,7 @@ export default function MenuEmployees() {
             .then(r => {
                 setMenu(r.data);
                 setIsLoaded(true);
-
-                // Get unique categories dynamically
-                const uniqueCategories = ["All", ...new Set(r.data.map(item => item.category))];
+                const uniqueCategories = ["All", ...new Set(r.data.map(item => item.category).filter(Boolean))];
                 setCategoryList(uniqueCategories);
             })
             .catch(console.error);
@@ -42,9 +40,13 @@ export default function MenuEmployees() {
 
     const selectedOrder = orders.find(o => o.id === selectedOrderId && o.employeeId === user.id);
 
-    const filteredMenu = menu.filter(item =>
-        item.itemName.toLowerCase().includes(search.toLowerCase())
-    );
+    // Fixed filteredMenu: unique items by itemId + category filter + search
+    const filteredMenu = Array.from(new Set(menu.map(item => item.itemId)))
+        .map(id => menu.find(item => item.itemId === id))
+        .filter(item =>
+            item.itemName.toLowerCase().includes(search.toLowerCase()) &&
+            (category === "All" || (item.category && item.category === category))
+        );
 
     const handleFieldChange = (field, value) => {
         setLocalEdits(prev => ({ ...prev, [field]: value }));
@@ -62,14 +64,12 @@ export default function MenuEmployees() {
 
     const handleAddToOrder = async (item) => {
         let order = selectedOrder;
-
         if (!order) {
             try {
                 const newOrder = await dispatch(createEmptyOrder({
                     employeeId: user.id,
                     employeeName: user.firstName
                 })).unwrap();
-
                 dispatch(selectOrder(newOrder.id));
                 order = { ...newOrder, items: newOrder.items || [] };
             } catch (err) {
@@ -114,13 +114,11 @@ export default function MenuEmployees() {
 
     const removeItem = async (itemId) => {
         if (!selectedOrder) return;
-
         const items = selectedOrder.items.filter(it => !(it.itemId === itemId || it.id === itemId));
         const subtotal = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0), 0);
         const gst = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 0) * (it.taxRate || 0), 0);
         const discount = subtotal * 0.1;
         const total = subtotal + gst - discount;
-
         await dispatch(patchOrder({ id: selectedOrder.id, patch: { items, subtotal, gst, discount, total } }));
     };
 
@@ -142,9 +140,7 @@ export default function MenuEmployees() {
         const newErrors = {};
 
         for (const [key, value] of Object.entries(currentData)) {
-            if (!value || value.toString().trim() === "") {
-                newErrors[key] = true;
-            }
+            if (!value || value.toString().trim() === "") newErrors[key] = true;
         }
 
         if (currentData.customerContact && currentData.customerContact.toString().length !== 10) {
@@ -159,16 +155,14 @@ export default function MenuEmployees() {
 
         setErrors({});
         await saveOrderFields(selectedOrder);
-
         alert("Order placed successfully!");
         dispatch(selectOrder(null));
         setLocalEdits({});
-
         navigate("/employee-dashboard/order");
     };
 
     return (
-        <div className={`menu-container ${isLoaded ? 'loaded' : ''}`}>
+        <div className={`menu-container ${isLoaded ? "loaded" : ""}`}>
             <div className="menu-background">
                 <div className="bg-shape shape-1"></div>
                 <div className="bg-shape shape-2"></div>
@@ -176,7 +170,6 @@ export default function MenuEmployees() {
             </div>
 
             <div className="menu-content">
-                {/* Header */}
                 <div className="menu-header">
                     <h1 className="menu-title">🍽️ Restaurant Menu</h1>
                     <p className="menu-subtitle">Browse our exquisite selection of culinary delights</p>
@@ -185,12 +178,8 @@ export default function MenuEmployees() {
                 <div className="menu-layout">
                     {/* Menu Section */}
                     <div className="menu-section">
-                        {/* Search Box */}
                         <div className="search-box">
-                            <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                                <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z"
-                                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
+                            <i className="fas fa-search search-icon"></i>
                             <input
                                 type="text"
                                 placeholder="Search dishes..."
@@ -200,7 +189,6 @@ export default function MenuEmployees() {
                             />
                         </div>
 
-                        {/* Category Buttons */}
                         <div className="category-buttons">
                             {categoryList.map(cat => (
                                 <button
@@ -213,39 +201,28 @@ export default function MenuEmployees() {
                             ))}
                         </div>
 
-                        {/* Menu Grid */}
                         <div className="menu-grid">
-                            {filteredMenu
-                                .filter(item => category === "All" || item.category === category)
-                                .map(item => (
-                                    <div key={item.itemId || item.id} className="menu-card">
-                                        <div className="menu-card-image">
-                                            <img src={item.image} alt={item.itemName} />
-                                            <div className="menu-card-overlay">
-                                                <button
-                                                    onClick={() => handleAddToOrder(item)}
-                                                    className="add-to-order-btn"
-                                                >
-                                                    ➕ Add to Order
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div className="menu-card-content">
-                                            <h3 className="item-name">{item.itemName}</h3>
-                                            <p className="item-price">₹{item.price}</p>
-                                            <button
-                                                onClick={() => handleAddToOrder(item)}
-                                                className="add-btn-mobile"
-                                            >
-                                                Add to Order
-                                            </button>
-                                        </div>
+                            {filteredMenu.map(item => (
+                                <div key={item.itemId || item.id} className="menu-card">
+                                    <div className="menu-card-image">
+                                        <img src={item.image} alt={item.itemName} />
                                     </div>
-                                ))}
+                                    <div className="menu-card-content">
+                                        <h3 className="item-name">{item.itemName}</h3>
+                                        <p className="item-price">₹{item.price}</p>
+                                        <button
+                                            onClick={() => handleAddToOrder(item)}
+                                            className="add-to-order-btn"
+                                        >
+                                            Add to Order
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* Current Order Sidebar */}
+                    {/* Order Sidebar */}
                     <div className="order-sidebar">
                         <div className="order-header">
                             <h3>🧾 Current Order</h3>
@@ -259,7 +236,6 @@ export default function MenuEmployees() {
                             </div>
                         ) : (
                             <>
-                                {/* Order Form */}
                                 <div className="order-details-form">
                                     <div className="form-grid">
                                         <input
@@ -271,10 +247,13 @@ export default function MenuEmployees() {
                                         />
                                         <input
                                             type="tel"
-                                            maxLength={10}
+                                            maxLength="10"
                                             placeholder="Contact"
                                             value={localEdits.customerContact || selectedOrder.customerContact || ""}
-                                            onChange={e => handleFieldChange("customerContact", e.target.value)}
+                                            onChange={e => {
+                                                const value = e.target.value.replace(/[^0-9]/g, "");
+                                                handleFieldChange("customerContact", value);
+                                            }}
                                             className="order-input"
                                         />
                                         <input
@@ -313,7 +292,6 @@ export default function MenuEmployees() {
                                     </div>
                                 </div>
 
-                                {/* Order Items */}
                                 <div className="order-items">
                                     {selectedOrder.items?.length === 0 ? (
                                         <div className="empty-items">No items yet.</div>
@@ -325,7 +303,9 @@ export default function MenuEmployees() {
                                                         <img src={it.image} alt={it.itemName} className="item-image" />
                                                         <div className="item-details">
                                                             <strong className="item-title">{it.itemName}</strong>
-                                                            <div className="item-calculation">₹{it.price} × {it.quantity} = ₹{(it.price * it.quantity).toFixed(2)}</div>
+                                                            <div className="item-calculation">
+                                                                ₹{it.price} × {it.quantity} = ₹{(it.price * it.quantity).toFixed(2)}
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div className="item-controls">
@@ -339,7 +319,6 @@ export default function MenuEmployees() {
                                     )}
                                 </div>
 
-                                {/* Order Summary */}
                                 <div className="order-summary">
                                     <div className="summary-row">
                                         <span>Subtotal:</span>

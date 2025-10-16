@@ -658,35 +658,8 @@ export default function DashboardManager() {
                     </div>
                 )}
 
-                {/* Customer Insights */}
-                <div className="dashboard-card">
-                    <div className="card-header">
-                        <h2 className="card-title">👥 Customer Insights</h2>
-                    </div>
-                    <div className="metrics-grid">
-                        <div className="insight-metric">
-                            <div className="insight-icon">🔄</div>
-                            <div className="insight-content">
-                                <span className="insight-value">{customerMetrics.repeatCustomers}</span>
-                                <span className="insight-label">Repeat Customers</span>
-                            </div>
-                        </div>
-                        <div className="insight-metric">
-                            <div className="insight-icon">📊</div>
-                            <div className="insight-content">
-                                <span className="insight-value">{(customerMetrics.avgOrdersPerCustomer || 0).toFixed(1)}</span>
-                                <span className="insight-label">Avg Orders/Customer</span>
-                            </div>
-                        </div>
-                        <div className="insight-metric">
-                            <div className="insight-icon">💎</div>
-                            <div className="insight-content">
-                                <span className="insight-value">₹{(customerMetrics.avgCustomerValue || 0).toFixed(2)}</span>
-                                <span className="insight-label">Customer Lifetime Value</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     );

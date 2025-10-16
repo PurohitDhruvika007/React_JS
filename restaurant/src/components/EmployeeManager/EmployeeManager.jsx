@@ -101,7 +101,7 @@ export default function EmployeeManager() {
             {/* Header Section */}
             <div className="employee-header">
                 <div className="header-content">
-                    <h1 className="page-title">👥 Employee Management</h1>
+                    <h1 className="page-title">Employee Management</h1>
                     <p className="page-subtitle">Manage your restaurant team members and performance metrics</p>
                 </div>
             </div>

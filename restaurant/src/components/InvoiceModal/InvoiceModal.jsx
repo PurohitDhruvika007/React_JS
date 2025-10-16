@@ -1,11 +1,9 @@
-// InvoiceModal.js
 import React from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import './InvoiceModal.css';
 
-// Base64 encoded restaurant logo (simple text-based logo)
-const DEFAULT_LOGO = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTUwIiBoZWlnaHQ9IjYwIiB2aWV3Qm94PSIwIDAgMTUwIDYwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTUwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjMDAwMDAwIi8+Cjx0ZXh0IHg9Ijc1IiB5PSIzNSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE0IiBmaWxsPSIjZmZmZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5TaWduYXR1cmU8L3RleHQ+Cjx0ZXh0IHg9Ijc1IiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEwIiBmaWxsPSIjRkZENzAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5SZXN0YXVyYW50PC90ZXh0Pgo8L3N2Zz4K';
+const LOGO_URL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSprwjEBhiuk3hZfs9jmbUmaF5V6P_1ZPmURw&s';
 
 const InvoiceModal = ({ order, onClose }) => {
     if (!order) return null;
@@ -21,26 +19,20 @@ const InvoiceModal = ({ order, onClose }) => {
                 downloadBtn.textContent = "⏳ Generating PDF...";
             }
 
-            // Use a simple approach without CORS
             const canvas = await html2canvas(invoiceElement, {
                 scale: 2,
-                useCORS: false, // Set to false for base64 images
+                useCORS: true,
                 backgroundColor: '#ffffff',
-                allowTaint: false,
+                allowTaint: true,
             });
 
             const imgData = canvas.toDataURL('image/png', 1.0);
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
             const pdfHeight = pdf.internal.pageSize.getHeight();
-
             const margin = 15;
             const contentWidth = pdfWidth - 2 * margin;
-
-            const imgWidth = canvas.width;
-            const imgHeight = canvas.height;
-            const ratio = imgWidth / imgHeight;
-
+            const ratio = canvas.width / canvas.height;
             let imgPDFWidth = contentWidth;
             let imgPDFHeight = contentWidth / ratio;
 
@@ -73,23 +65,16 @@ const InvoiceModal = ({ order, onClose }) => {
 
     return (
         <div className="invoice-modal-overlay">
-            <div className="invoice-modal-content" style={{
-                backgroundColor: '#ffffff',
-                color: '#000000'
-            }}>
+            <div className="invoice-modal-content">
                 <div id="invoice-content" className="invoice-pdf-content">
                     {/* Header */}
                     <div className="invoice-header">
                         <div className="brand-section">
-                            <img
-                                src={DEFAULT_LOGO}
-                                alt="Signature Restaurant"
-                                className="restaurant-logo"
-                            />
+                            <img src={LOGO_URL} alt="Full Moon" className="restaurant-logo" />
                             <div className="brand-info">
-                                <h1 className="restaurant-name">Signature</h1>
-                                <p className="tagline">Where Taste Becomes Art</p>
-                                <p className="website">www.signature.com</p>
+                                <h1 className="restaurant-name">THE MOON</h1>
+                                <p className="tagline">Where Taste Meets Tranquility</p>
+                                <p className="website">www.themoon.com</p>
                             </div>
                         </div>
                         <div className="invoice-meta">
@@ -99,14 +84,12 @@ const InvoiceModal = ({ order, onClose }) => {
                         </div>
                     </div>
 
-                    {/* Restaurant Info */}
                     <div className="restaurant-info">
                         <p>123 Food Street, Gourmet City - 123456</p>
                         <p>Phone: +91 9876543210</p>
                         <p>GSTIN: 29ABCDE1234F1Z5</p>
                     </div>
 
-                    {/* Rest of your content remains the same */}
                     <div className="details-grid">
                         <div className="customer-details">
                             <h3>Bill To:</h3>
@@ -172,8 +155,8 @@ const InvoiceModal = ({ order, onClose }) => {
                         </div>
                         <div className="thank-you">
                             <h3>Thank You for Dining With Us!</h3>
-                            <p>Visit Again - www.signature.com</p>
-                            <p className="tagline-footer">Where Taste Becomes Art</p>
+                            <p>Visit Again - www.themoon.com</p>
+                            <p className="tagline-footer">Where Taste Meets Tranquility</p>
                         </div>
                     </div>
                 </div>

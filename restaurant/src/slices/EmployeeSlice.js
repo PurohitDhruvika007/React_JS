@@ -2,7 +2,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// Fetch employees
+// Fetch all employees
 export const fetchEmployees = createAsyncThunk(
     "employee/fetchEmployees",
     async () => {
@@ -11,7 +11,25 @@ export const fetchEmployees = createAsyncThunk(
     }
 );
 
-// Delete employee
+// Add a new employee
+export const addEmployee = createAsyncThunk(
+    "employee/addEmployee",
+    async (employeeData) => {
+        const response = await axios.post("http://localhost:3000/employees", employeeData);
+        return response.data;
+    }
+);
+
+// Update an existing employee
+export const updateEmployee = createAsyncThunk(
+    "employee/updateEmployee",
+    async ({ id, employeeData }) => {
+        const response = await axios.patch(`http://localhost:3000/employees/${id}`, employeeData);
+        return response.data;
+    }
+);
+
+// Delete an employee
 export const deleteEmployee = createAsyncThunk(
     "employee/deleteEmployee",
     async (id) => {
@@ -21,7 +39,7 @@ export const deleteEmployee = createAsyncThunk(
 );
 
 const initialState = {
-    list: [],   // important: matches what EmployeeManager reads
+    list: [],
     status: "idle",
     error: null,
 };
@@ -32,9 +50,8 @@ const employeeSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(fetchEmployees.pending, (state) => {
-                state.status = "loading";
-            })
+            // Fetch
+            .addCase(fetchEmployees.pending, (state) => { state.status = "loading"; })
             .addCase(fetchEmployees.fulfilled, (state, action) => {
                 state.status = "succeeded";
                 state.list = action.payload;
@@ -43,6 +60,16 @@ const employeeSlice = createSlice({
                 state.status = "failed";
                 state.error = action.error.message;
             })
+            // Add
+            .addCase(addEmployee.fulfilled, (state, action) => {
+                state.list.push(action.payload);
+            })
+            // Update
+            .addCase(updateEmployee.fulfilled, (state, action) => {
+                const index = state.list.findIndex(emp => emp.id === action.payload.id);
+                if (index !== -1) state.list[index] = action.payload;
+            })
+            // Delete
             .addCase(deleteEmployee.fulfilled, (state, action) => {
                 state.list = state.list.filter(emp => emp.id !== action.payload);
             });

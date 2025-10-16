@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { logout } from "../../slices/AuthSlice";
+import { FaTachometerAlt, FaUsers, FaUtensils, FaReceipt, FaUser, FaSignOutAlt } from "react-icons/fa";
 import "./NavbarManager.css";
 
 export default function NavbarManager() {
@@ -22,13 +23,13 @@ export default function NavbarManager() {
             <div className="nav-logo">
                 <div className="logo-img-circle">
                     <img
-                        src="https://cdn5.f-cdn.com/contestentries/1510474/33623865/5cf041ec517d5_thumb900.jpg"
-                        alt="Signature Logo"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSprwjEBhiuk3hZfs9jmbUmaF5V6P_1ZPmURw&s"
+                        alt="Full Moon Logo"
                         className="logo-img"
                     />
                 </div>
-                <h1 className="brand-name">Signature</h1>
-                <p className="brand-tagline">Where Taste Becomes Art</p>
+                <h1 className="brand-name">Full Moon</h1>
+                <p className="brand-tagline">Where Taste Meets Tranquility</p>
             </div>
 
             {/* Navigation Links */}
@@ -37,7 +38,7 @@ export default function NavbarManager() {
                     to="/manager-dashboard"
                     className={`nav-link ${isActive("/manager-dashboard") ? "active" : ""}`}
                 >
-                    <span className="nav-icon">📊</span>
+                    <FaTachometerAlt className="nav-icon" />
                     <span className="nav-text">Dashboard</span>
                 </Link>
 
@@ -45,7 +46,7 @@ export default function NavbarManager() {
                     to="/manager-dashboard/employees"
                     className={`nav-link ${isActive("/manager-dashboard/employees") ? "active" : ""}`}
                 >
-                    <span className="nav-icon">👥</span>
+                    <FaUsers className="nav-icon" />
                     <span className="nav-text">Employees</span>
                 </Link>
 
@@ -53,7 +54,7 @@ export default function NavbarManager() {
                     to="/manager-dashboard/menus"
                     className={`nav-link ${isActive("/manager-dashboard/menus") ? "active" : ""}`}
                 >
-                    <span className="nav-icon">🍽️</span>
+                    <FaUtensils className="nav-icon" />
                     <span className="nav-text">Menus</span>
                 </Link>
 
@@ -61,7 +62,7 @@ export default function NavbarManager() {
                     to="/manager-dashboard/orders"
                     className={`nav-link ${isActive("/manager-dashboard/orders") ? "active" : ""}`}
                 >
-                    <span className="nav-icon">🧾</span>
+                    <FaReceipt className="nav-icon" />
                     <span className="nav-text">Orders</span>
                 </Link>
 
@@ -69,7 +70,7 @@ export default function NavbarManager() {
                     to="/manager-dashboard/profile"
                     className={`nav-link ${isActive("/manager-dashboard/profile") ? "active" : ""}`}
                 >
-                    <span className="nav-icon">👤</span>
+                    <FaUser className="nav-icon" />
                     <span className="nav-text">Profile</span>
                 </Link>
             </div>
@@ -77,7 +78,7 @@ export default function NavbarManager() {
             {/* Logout Section */}
             <div className="nav-footer">
                 <button onClick={handleLogout} className="logout-btn">
-                    <span className="nav-icon">🚪</span>
+                    <FaSignOutAlt className="nav-icon" />
                     <span className="nav-text">Logout</span>
                 </button>
             </div>

@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate, useParams } from "react-router";
+import { useDispatch } from "react-redux";
+import { addEmployee, updateEmployee } from "../../slices/EmployeeSlice";
+import axios from "axios";
 import "./AddUpdateEmployees.css";
 
 export default function AddUpdateEmployees() {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const { id } = useParams();
     const [image, setImage] = useState(null);
     const [form, setForm] = useState({
@@ -21,6 +24,7 @@ export default function AddUpdateEmployees() {
     const [loading, setLoading] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
 
+    // Fetch employee data if updating
     useEffect(() => {
         if (id) {
             setIsUpdate(true);
@@ -64,10 +68,10 @@ export default function AddUpdateEmployees() {
         try {
             setLoading(true);
             if (isUpdate) {
-                await axios.patch(`http://localhost:3000/employees/${id}`, employeeData);
+                await dispatch(updateEmployee({ id, employeeData })).unwrap();
                 alert("Employee updated successfully!");
             } else {
-                await axios.post("http://localhost:3000/employees", employeeData);
+                await dispatch(addEmployee(employeeData)).unwrap();
                 alert("Employee added successfully!");
             }
             navigate("/manager-dashboard/employees");
@@ -81,135 +85,82 @@ export default function AddUpdateEmployees() {
 
     return (
         <div className="add-update-employee">
-            {/* Header Section */}
+            {/* Header */}
             <div className="employee-form-header">
                 <div className="header-content">
-                    <h1 className="page-title">
-                        {isUpdate ? "✏️ Update Employee" : "👥 Add New Employee"}
-                    </h1>
-                    <p className="page-subtitle">
-                        {isUpdate ? "Update employee details and information" : "Add a new team member to your restaurant"}
-                    </p>
+                    <h1 className="page-title">{isUpdate ? "✏️ Update Employee" : "Add New Employee"}</h1>
+                    <p className="page-subtitle">{isUpdate ? "Update employee details and information" : "Add a new team member to your restaurant"}</p>
                 </div>
             </div>
 
             <div className="employee-form-container">
-                {/* Image Upload Section */}
+                {/* Image Upload */}
                 <div className="image-upload-section">
                     <div className="image-upload-card">
                         <h3 className="upload-title">📷 Profile Picture</h3>
                         <p className="upload-subtitle">Upload a clear photo of the employee</p>
 
                         <div className="image-upload-area">
-                            <input
-                                type="file"
-                                accept="image/*"
-                                onChange={handleFileChange}
-                                className="file-input"
-                            />
-                            {image ? (
-                                <div className="image-preview">
-                                    <img src={image} alt="Preview" className="preview-image" />
-                                    <div className="image-overlay">
-                                        <span className="change-text">Change Image</span>
+                            <label htmlFor="file-upload" className="upload-label">
+                                {image ? (
+                                    <div className="image-preview">
+                                        <img src={image} alt="Preview" className="preview-image" />
+                                        <div className="image-overlay"><span className="change-text">Change Image</span></div>
                                     </div>
-                                </div>
-                            ) : (
-                                <div className="upload-placeholder">
-                                    <div className="upload-icon">📸</div>
-                                    <p className="upload-text">Click to upload image</p>
-                                    <p className="upload-hint">JPG, PNG, WEBP (Max 5MB)</p>
-                                </div>
-                            )}
+                                ) : (
+                                    <div className="upload-placeholder">
+                                        <div className="upload-icon">📸</div>
+                                        <p className="upload-text">Click to upload image</p>
+                                        <p className="upload-hint">JPG, PNG, WEBP (Max 5MB)</p>
+                                    </div>
+                                )}
+                            </label>
+                            <input id="file-upload" type="file" accept="image/*" onChange={handleFileChange} className="file-input" />
                         </div>
                     </div>
                 </div>
 
-                {/* Form Section */}
+                {/* Form */}
                 <div className="form-section">
                     <form className="employee-form" onSubmit={handleSubmit}>
-
-                        {/* Personal Information Section */}
+                        {/* Personal Info */}
                         <div className="form-section-group">
                             <h3 className="section-title">👤 Personal Information</h3>
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">First Name *</label>
-                                    <input
-                                        type="text"
-                                        name="firstName"
-                                        className="form-input"
-                                        value={form.firstName}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Enter first name"
-                                    />
+                                    <input type="text" name="firstName" className="form-input" value={form.firstName} onChange={handleChange} required placeholder="Enter first name" />
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Last Name</label>
-                                    <input
-                                        type="text"
-                                        name="lastName"
-                                        className="form-input"
-                                        value={form.lastName}
-                                        onChange={handleChange}
-                                        placeholder="Enter last name"
-                                    />
+                                    <input type="text" name="lastName" className="form-input" value={form.lastName} onChange={handleChange} placeholder="Enter last name" />
                                 </div>
                             </div>
 
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">Email Address *</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        className="form-input"
-                                        value={form.email}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="employee@restaurant.com"
-                                    />
+                                    <input type="email" name="email" className="form-input" value={form.email} onChange={handleChange} required placeholder="employee@restaurant.com" />
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Password *</label>
-                                    <input
-                                        type="password"
-                                        name="password"
-                                        className="form-input"
-                                        value={form.password}
-                                        onChange={handleChange}
-                                        required
-                                        placeholder="Enter secure password"
-                                    />
+                                    <input type="password" name="password" className="form-input" value={form.password} onChange={handleChange} required placeholder="Enter secure password" />
                                 </div>
                             </div>
 
                             <div className="form-group full-width">
                                 <label className="form-label">Address</label>
-                                <input
-                                    type="text"
-                                    name="address"
-                                    className="form-input"
-                                    value={form.address}
-                                    onChange={handleChange}
-                                    placeholder="Enter complete address"
-                                />
+                                <input type="text" name="address" className="form-input" value={form.address} onChange={handleChange} placeholder="Enter complete address" />
                             </div>
                         </div>
 
-                        {/* Employment Details Section */}
+                        {/* Employment Info */}
                         <div className="form-section-group">
                             <h3 className="section-title">💼 Employment Details</h3>
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">Role</label>
-                                    <select
-                                        name="role"
-                                        className="form-input"
-                                        value={form.role}
-                                        onChange={handleChange}
-                                    >
+                                    <select name="role" className="form-input" value={form.role} onChange={handleChange}>
                                         <option value="employee">Employee</option>
                                         <option value="manager">Manager</option>
                                         <option value="chef">Chef</option>
@@ -219,26 +170,14 @@ export default function AddUpdateEmployees() {
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Salary (₹)</label>
-                                    <input
-                                        type="number"
-                                        name="salary"
-                                        className="form-input"
-                                        value={form.salary}
-                                        onChange={handleChange}
-                                        placeholder="Enter monthly salary"
-                                    />
+                                    <input type="number" name="salary" className="form-input" value={form.salary} onChange={handleChange} placeholder="Enter monthly salary" />
                                 </div>
                             </div>
 
                             <div className="form-row">
                                 <div className="form-group">
                                     <label className="form-label">Shift Timing</label>
-                                    <select
-                                        name="shift"
-                                        className="form-input"
-                                        value={form.shift}
-                                        onChange={handleChange}
-                                    >
+                                    <select name="shift" className="form-input" value={form.shift} onChange={handleChange}>
                                         <option value="">Select Shift</option>
                                         <option value="Morning (9AM-5PM)">Morning (9AM-5PM)</option>
                                         <option value="Evening (5PM-1AM)">Evening (5PM-1AM)</option>
@@ -248,42 +187,16 @@ export default function AddUpdateEmployees() {
                                 </div>
                                 <div className="form-group">
                                     <label className="form-label">Joining Date</label>
-                                    <input
-                                        type="date"
-                                        name="joiningDate"
-                                        className="form-input"
-                                        value={form.joiningDate}
-                                        onChange={handleChange}
-                                    />
+                                    <input type="date" name="joiningDate" className="form-input" value={form.joiningDate} onChange={handleChange} />
                                 </div>
                             </div>
                         </div>
 
-                        {/* Form Actions */}
+                        {/* Actions */}
                         <div className="form-actions">
-                            <button
-                                type="button"
-                                className="cancel-btn"
-                                onClick={() => navigate("/manager-dashboard/employees")}
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                type="submit"
-                                className="submit-btn"
-                                disabled={loading || !image}
-                            >
-                                {loading ? (
-                                    <>
-                                        <div className="loading-spinner-small"></div>
-                                        {isUpdate ? "Updating..." : "Adding..."}
-                                    </>
-                                ) : (
-                                    <>
-                                        <span className="btn-icon">{isUpdate ? "💾" : "➕"}</span>
-                                        {isUpdate ? "Update Employee" : "Add Employee"}
-                                    </>
-                                )}
+                            <button type="button" className="cancel-btn" onClick={() => navigate("/manager-dashboard/employees")}>Cancel</button>
+                            <button type="submit" className="submit-btn" disabled={loading || !image}>
+                                {loading ? (<>Processing...</>) : (<> {isUpdate ? "💾 Update Employee" : "➕ Add Employee"} </>)}
                             </button>
                         </div>
                     </form>

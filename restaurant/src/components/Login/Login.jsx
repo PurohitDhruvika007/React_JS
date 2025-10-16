@@ -54,7 +54,7 @@ export default function Login() {
                         <div className="welcome-logo">
                             <div className="logo-circle">
                                 <img
-                                    src="https://cdn5.f-cdn.com/contestentries/1510474/33623865/5cf041ec517d5_thumb900.jpg"
+                                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSprwjEBhiuk3hZfs9jmbUmaF5V6P_1ZPmURw&s"
                                     alt="Signature Logo"
                                     className="logo"
                                 />
@@ -62,7 +62,7 @@ export default function Login() {
                         </div>
                         <h1 className="welcome-title">Welcome Back</h1>
                         <p className="welcome-subtitle">
-                            Continue your culinary journey with Signature Restaurant’s management system.
+                            Continue your culinary journey with THE MOON Restaurant’s management system.
                         </p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export default function Login() {
                 <div className="login-form-section">
                     <div className="login-card">
                         <div className="login-header">
-                            <h2>Welcome to Signature</h2>
+                            <h2>Welcome to THE MOON</h2>
                             <p>Please sign in to your account</p>
                         </div>
 

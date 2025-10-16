@@ -1,3 +1,4 @@
+// src/components/AddUpdateMenu/AddUpdateMenu.jsx
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addMenuItem, updateMenuItem, fetchMenu } from "../../slices/MenuSlice";
@@ -9,10 +10,13 @@ export default function AddUpdateMenu() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { items } = useSelector((state) => state.menu);
-    const [image, setImage] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [isUpdate, setIsUpdate] = useState(false);
+
     const fileInputRef = useRef(null);
+
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [image, setImage] = useState(null);
+    const [dragOver, setDragOver] = useState(false);
 
     const [form, setForm] = useState({
         itemName: "",
@@ -27,22 +31,36 @@ export default function AddUpdateMenu() {
         special: false,
     });
 
-    // Load existing item for update
+    // Fetch menu items if not loaded
     useEffect(() => {
-        dispatch(fetchMenu());
-    }, [dispatch]);
+        if (items.length === 0) dispatch(fetchMenu());
+    }, [dispatch, items.length]);
 
+    // Auto-fill form if updating
     useEffect(() => {
         if (id && items.length > 0) {
             setIsUpdate(true);
-            const item = items.find((i) => i.itemId === parseInt(id));
+            // Find the item by the string 'id' field from the URL
+            const item = items.find((i) => i.id === id);
 
             if (item) {
-                setForm(item);
+                setForm({
+                    itemName: item.itemName || "",
+                    category: item.category || "",
+                    price: item.price || 0,
+                    description: item.description || "",
+                    availability: item.availability ?? true,
+                    taxRate: item.taxRate || 0.18,
+                    image: item.image || "",
+                    rating: item.rating || 0,
+                    preparationTime: item.preparationTime || "",
+                    special: item.special ?? false,
+                });
                 setImage(item.image || null);
             }
         }
     }, [id, items]);
+
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
@@ -64,8 +82,7 @@ export default function AddUpdateMenu() {
         }
     };
 
-    // Drag-and-drop
-    const [dragOver, setDragOver] = useState(false);
+    // Drag and Drop
     const handleDragOver = (e) => {
         e.preventDefault();
         setDragOver(true);
@@ -87,9 +104,12 @@ export default function AddUpdateMenu() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!form.itemName || !form.price || !form.category) {
+            return alert("Please fill all required fields!");
+        }
         if (!image) return alert("Please upload an image.");
-        setLoading(true);
 
+        setLoading(true);
         try {
             if (isUpdate) {
                 await dispatch(updateMenuItem({ id, item: form }));
@@ -107,17 +127,12 @@ export default function AddUpdateMenu() {
         }
     };
 
-    const handleCancel = () => {
-        navigate("/manager-dashboard/menus");
-    };
+    const handleCancel = () => navigate("/manager-dashboard/menus");
 
     return (
         <div className="add-update-menu-wrapper">
-            {/* Header Section */}
             <div className="form-header">
-                <h1 className="form-title">
-                    {isUpdate ? "Update Menu Item" : "Add New Menu Item"}
-                </h1>
+                <h1 className="form-title">{isUpdate ? "✏️ Update Menu Item" : "➕ Add Menu Item"}</h1>
                 <p className="form-subtitle">
                     {isUpdate ? "Modify the menu item details below" : "Fill in the details to add a new menu item"}
                 </p>
@@ -142,7 +157,6 @@ export default function AddUpdateMenu() {
                                 className="file-input"
                                 onChange={handleFileChange}
                             />
-
                             {image ? (
                                 <div className="image-preview">
                                     <img src={image} alt="Menu preview" className="preview-image" />
