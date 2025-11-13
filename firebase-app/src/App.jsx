@@ -1,7 +1,7 @@
 import { auth, provider, db } from './Auth.js'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import './App.css'
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, doc, setDoc, deleteField, deleteDoc, updateDoc } from "firebase/firestore";
 import { useState } from 'react';
 
 function App() {
@@ -50,6 +50,24 @@ function App() {
     const querySnapshot = await getDocs(collection(db, "books"));
     querySnapshot.docs.forEach((doc) => console.log(doc.data()));
   }
+  const handleSetDoc = async () => {
+    await setDoc(doc(db, "books", "12345"), {
+      author: "ved vyas",
+      name: "bhagvat geeta",
+      price: 799.00
+    })
+    alert("set data successfully")
+  }
+  const handleDeleteData = async () => {
+    await deleteDoc(doc(db, "books", "12345"))
+    alert("data deleted successfully")
+  }
+  const handleDeleteFeild = async () => {
+    await updateDoc(doc(db, "books", "12345"), {
+      author: deleteField()
+    })
+    alert("delete feild successfully")
+  }
 
   return (
     <>
@@ -64,6 +82,10 @@ function App() {
 
       <button onClick={() => handleAddData()}>add data</button>
       <button onClick={() => handleReadData()}>read all data</button>
+      <button onClick={() => handleSetDoc()}>set data</button>
+      <button onClick={() => handleDeleteData()}>delete Data</button>
+      <button onClick={() => handleDeleteFeild()}>delete feild</button>
+
     </>
   )
 }
