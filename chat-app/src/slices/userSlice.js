@@ -43,18 +43,20 @@ export const signInWithGoogle = createAsyncThunk(
     async () => {
 
         const result = await signInWithPopup(auth, provider);
+
         const user = {
             name: result.user.displayName,
             email: result.user.email,
         };
-        await setDoc(doc(db, "users", email), {
-            email: email,
-            password: password
-        })
-        return user;
 
+        await setDoc(doc(db, "users", user.email), {
+            email: user.email,
+        });
+
+        return user;
     }
 );
+
 
 const userSlice = createSlice(
     {

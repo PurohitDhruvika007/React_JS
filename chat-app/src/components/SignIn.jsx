@@ -43,15 +43,18 @@ export default function SignIn() {
 
       <button
         onClick={async () => {
-
-          dispatch(signInWithGoogle());
-
-          navigate("/home");
-
+          try {
+            await dispatch(signInWithGoogle()).unwrap();
+            navigate("/home");
+          } catch (error) {
+            alert("Google Sign-in Failed!");
+            console.log(error);
+          }
         }}
       >
         Sign In with Google
       </button>
+
 
       <p>dont have an account ? <Link to="/signup">sign up</Link></p>
     </div>
