@@ -47,6 +47,10 @@ export const signInWithGoogle = createAsyncThunk(
             name: result.user.displayName,
             email: result.user.email,
         };
+        await setDoc(doc(db, "users", email), {
+            email: email,
+            password: password
+        })
         return user;
 
     }
@@ -93,8 +97,14 @@ const userSlice = createSlice(
             }).addCase(signInWithGoogle.pending, (state, action) => {
                 state.isLoading = true
             }).addCase(signInWithGoogle.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.users.push(action.payload)
+                const user = action.payload;
+                const isMatch = state.users.find((e) => e.email == user.email)
+                if (!isMatch) {
+                    state.users.push(user);
+                }
+                state.currentUser = user;
+                state.isLoading = false;
+                localStorage.setItem("user", JSON.stringify(user))
             }).addCase(signInWithGoogle.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = "signin with google rejected";

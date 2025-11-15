@@ -43,12 +43,11 @@ export default function SignIn() {
 
       <button
         onClick={async () => {
-          try {
-            await dispatch(signInWithGoogle()).unwrap();
-            navigate("/home");
-          } catch (error) {
-            alert("Google sign-in failed!");
-          }
+
+          dispatch(signInWithGoogle());
+
+          navigate("/home");
+
         }}
       >
         Sign In with Google
