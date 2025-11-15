@@ -5,6 +5,7 @@ import { provider } from '../../../firebase-app/src/Auth.js';
 import { setDoc, doc, getDocs, collection } from 'firebase/firestore';
 const initialState = {
     users: [],
+    currentUser: {},
     isLoading: false,
     error: ""
 }
@@ -31,6 +32,10 @@ export const signUp = createAsyncThunk('user/signup', async ({ email, password }
         name: userCredential.user.displayName,
         email: userCredential.user.email
     }
+    await setDoc(doc(db, "users", email), {
+        email: email,
+        password: password
+    })
     return user;
 })
 export const signInWithGoogle = createAsyncThunk(
@@ -51,6 +56,11 @@ const userSlice = createSlice(
     {
         name: "user",
         initialState: initialState,
+        reducers: {
+            getuser: (state) => {
+                state.currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+            }
+        },
         extraReducers: (builder) => {
             builder.addCase(signIn.pending, (state, action) => {
                 state.isLoading = true
@@ -60,18 +70,23 @@ const userSlice = createSlice(
                 if (!isMatch) {
                     state.users.push(user);
                 }
+                state.currentUser = user;
                 state.isLoading = false;
-
-                alert("user signin successfully")
+                localStorage.setItem("user", JSON.stringify(user))
             }).addCase(signIn.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = "sign in process rejected";
             }).addCase(signUp.pending, (state, action) => {
                 state.isLoading = true
             }).addCase(signUp.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.users.push(action.payload)
-                alert("sign up successfully")
+                const user = action.payload;
+                const isMatch = state.users.find((e) => e.email == user.email)
+                if (!isMatch) {
+                    state.users.push(user);
+                }
+                state.currentUser = user;
+                state.isLoading = false;
+                localStorage.setItem("user", JSON.stringify(user))
             }).addCase(signUp.rejected, (state, action) => {
                 state.isLoading = false
                 state.error = "sign up process rejected";
@@ -92,3 +107,4 @@ const userSlice = createSlice(
 )
 
 export default userSlice.reducer;
+export const { getuser } = userSlice.actions;

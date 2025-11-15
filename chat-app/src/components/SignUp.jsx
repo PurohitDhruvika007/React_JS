@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp } from '../slices/userSlice';
+import { useNavigate, Link } from 'react-router';
+import SignIn from './SignIn';
 
 export default function SignUp() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
@@ -12,7 +15,11 @@ export default function SignUp() {
             <h1>Sign Up page</h1>
             <input type="text" placeholder='enter the email..' value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="text" placeholder='enter the password..' value={password} onChange={(e) => setPassword(e.target.value)} />
-            <button onClick={() => dispatch(signUp({ email, password }))}>Sign Up</button>
+            <button onClick={() => {
+                dispatch(signUp({ email, password }));
+                navigate("/home")
+            }}>Sign Up</button>
+            <p>already have an account ? <Link to="/">sign in</Link></p>
         </div>
     )
 }
