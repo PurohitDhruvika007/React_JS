@@ -12,6 +12,7 @@ export default function SignIn() {
   const { users } = useSelector((state) => state.user)
   return (
     <div>
+      <h1>sign in page</h1>
       {
         Array.isArray(users) && users.map((user, id) => (
           <h2 key={id}>{user.email}</h2>

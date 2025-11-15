@@ -55,8 +55,13 @@ const userSlice = createSlice(
             builder.addCase(signIn.pending, (state, action) => {
                 state.isLoading = true
             }).addCase(signIn.fulfilled, (state, action) => {
+                const user = action.payload;
+                const isMatch = state.users.find((e) => e.email == user.email)
+                if (!isMatch) {
+                    state.users.push(user);
+                }
                 state.isLoading = false;
-                state.users.push(action.payload)
+
                 alert("user signin successfully")
             }).addCase(signIn.rejected, (state, action) => {
                 state.isLoading = false;

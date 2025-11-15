@@ -9,7 +9,7 @@ export default function SignUp() {
     const { users } = useSelector((state) => state.user)
     return (
         <div>
-            <h1>Sign Up</h1>
+            <h1>Sign Up page</h1>
             <input type="text" placeholder='enter the email..' value={email} onChange={(e) => setEmail(e.target.value)} />
             <input type="text" placeholder='enter the password..' value={password} onChange={(e) => setPassword(e.target.value)} />
             <button onClick={() => dispatch(signUp({ email, password }))}>Sign Up</button>
