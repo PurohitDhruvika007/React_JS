@@ -3,6 +3,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithP
 import { auth, db } from '../firebase.js'
 import { provider } from '../../../firebase-app/src/Auth.js';
 import { setDoc, doc, getDocs, collection } from 'firebase/firestore';
+
 const initialState = {
     users: [],
     currentUser: {},
