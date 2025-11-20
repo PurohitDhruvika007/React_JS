@@ -2,11 +2,11 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import SignIn from './components/SignIn'
-import SignUp from './components/SignUp'
-import Home from './components/Home'
+import SignIn from './components/SignIn/SignIn'
+import SignUp from './components/SignUp/SignUp'
+import Home from './components/Home/Home'
 import { Route, Routes } from 'react-router'
-import ChatPage from './components/ChatPage'
+import ChatPage from './components/ChatPage/ChatPage'
 
 function App() {
   const [count, setCount] = useState(0)

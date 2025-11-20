@@ -47,7 +47,7 @@ const chatSlice = createSlice({
             state.isLoading = true
         }).addCase(sendMessage.fulfilled, (state, action) => {
             state.isLoading = false;
-            alert("message sent successfully");
+
         }).addCase(sendMessage.rejected, (state) => {
             state.error = "message is not able to sent";
             alert("message is not able to sent");

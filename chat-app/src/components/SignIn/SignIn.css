@@ -1,0 +1,137 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FULL SCREEN + CENTER CONTENT */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* NO SCROLL */
+    background: #e5ddd5;
+    /* WhatsApp background tone */
+    font-family: "Poppins", sans-serif;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* PERFECT VERTICAL CENTER */
+}
+
+/* MAIN WRAPPER */
+.signin-container {
+    width: 100%;
+    height: auto;
+    /* don't stretch full height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CARD BOX */
+.signin-card {
+    background: #ffffff;
+    width: 350px;
+    /* FIXED perfect size (not full width) */
+    padding: 25px 28px;
+    border-radius: 18px;
+    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.18);
+    text-align: center;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* TITLE */
+.signin-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #075E54;
+    margin-bottom: 20px;
+}
+
+/* INPUT FIELDS */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.signin-input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1.8px solid #cccccc;
+    font-size: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.signin-input:focus {
+    border-color: #128C7E;
+}
+
+/* BUTTONS */
+.signin-btn {
+    width: 100%;
+    padding: 12px;
+    background: #128C7E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-top: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.signin-btn:hover {
+    background: #0d6e63;
+}
+
+.google-btn {
+    width: 100%;
+    padding: 11px;
+    margin-top: 12px;
+    background: #ffffff;
+    border: 1.5px solid #cccccc;
+    color: black;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.google-btn:hover {
+    background: #f2f2f2;
+}
+
+/* SIGNUP TEXT */
+.signup-text {
+    margin-top: 15px;
+    font-size: 14px;
+    color: black;
+}
+
+.signup-link {
+    color: #128C7E;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-link:hover {
+    text-decoration: none;
+}
+
+/* FADE ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

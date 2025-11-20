@@ -1,0 +1,106 @@
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.home-page {
+
+    height: 100vh;
+    width: 400px;
+    background: #e5ddd5;
+    /* WhatsApp background tone */
+    display: flex;
+    flex-direction: column;
+
+    /* SCROLL ONLY ON HOME PAGE */
+}
+
+/* HEADER */
+.home-header {
+    background: #075E54;
+    /* WhatsApp green */
+    padding: 18px 25px;
+    color: white;
+    width: 100%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.25);
+
+}
+
+.welcome-title {
+    font-size: 24px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.welcome-title span {
+    color: #c5f5ee;
+}
+
+.subtitle {
+    font-size: 14px;
+    margin-top: 4px;
+    opacity: 0.9;
+}
+
+/* USERS LIST */
+.users-grid {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 600px;
+    overflow-y: auto;
+    /* WhatsApp-like left column */
+    margin: 0 auto;
+}
+
+/* USER CARD */
+.user-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.user-card:hover {
+    transform: translateY(-2px);
+    background: #f3f3f3;
+}
+
+/* AVATAR */
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #128C7E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* EMAIL TEXT */
+.email-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+/* LOADING TEXT */
+.loading {
+    text-align: center;
+    margin-top: 40px;
+    color: #075E54;
+}
