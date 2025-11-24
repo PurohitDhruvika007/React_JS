@@ -60,16 +60,6 @@ This app allows users to **sign in, chat, update messages like WhatsApp, and del
 
 ---
 
-## 🔮 Future Enhancements
-
-- Typing indicator  
-- Media & File sharing  
-- Push notifications  
-- Group chat support  
-- Dark mode UI  
-
----
-
 ## Output
 https://chatapp-kohl-two.vercel.app/
 
