@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
 import { auth, db } from '../firebase.js'
-import { provider } from '../../../firebase-app/src/Auth.js';
+import { provider } from '../firebase.js';
 import { setDoc, doc, getDocs, collection } from 'firebase/firestore';
 
 const initialState = {
