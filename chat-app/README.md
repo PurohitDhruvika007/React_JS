@@ -1,4 +1,4 @@
-<details>
+
   <summary>📱 Chat-App Description (Click to Expand)</summary>
 
 # Chat-App
@@ -73,4 +73,4 @@ This app allows users to **sign in, chat, update messages like WhatsApp, and del
 
 ## Output
 
-</details>
+
