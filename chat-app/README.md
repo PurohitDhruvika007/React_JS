@@ -1,5 +1,4 @@
 
-  <summary>📱 Chat-App Description (Click to Expand)</summary>
 
 # Chat-App
 
