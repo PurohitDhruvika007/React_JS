@@ -5,15 +5,17 @@
     box-sizing: border-box;
 }
 
-/* MAIN WRAPPER */
+/* MAIN CHAT WRAPPER */
 .chat-wrapper {
-    width: 100%;
-    max-width: 500px;
+    width: 420px;
+    /* WhatsApp Web width */
     height: 100vh;
     margin: auto;
     background: #e5ddd5;
     display: flex;
     flex-direction: column;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
 /* HEADER */
@@ -24,43 +26,35 @@
     color: white;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     position: sticky;
     top: 0;
     z-index: 10;
 }
 
-/* Username (fixed long name issue) */
 .chat-header h2 {
     flex: 1;
-    max-width: 70%;
-    white-space: nowrap;
+    max-width: 75%;
     overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 600;
-}
-
-/* Optional circular profile icon */
-.profile-icon {
-    width: 35px;
-    height: 35px;
-    background: #128c7e;
-    border-radius: 50%;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
 }
 
 /* CHAT VIEW */
 .chat-view {
     flex: 1;
     width: 100%;
-    padding: 20px;
+    padding: 18px;
     overflow-y: auto;
-    background-color: rgb(245, 250, 244);
+
+    /* WhatsApp background image */
+    background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+    background-size: cover;
+    background-repeat: repeat;
+    background-position: center;
+
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -70,23 +64,23 @@
 .chat-bubble {
     max-width: 75%;
     padding: 10px 14px;
-    border-radius: 12px;
+    border-radius: 10px;
     font-size: 15px;
     line-height: 1.4;
     word-break: break-word;
 }
 
-/* Sender bubble */
+/* Sender bubble (right side) */
 .sender {
     align-self: flex-end;
-    background: #d6f7bd;
+    background: #dcf8c6;
     border-bottom-right-radius: 0;
 }
 
-/* Receiver bubble */
+/* Receiver bubble (left side) */
 .receiver {
     align-self: flex-start;
-    background: #ffffff;
+    background: white;
     border-bottom-left-radius: 0;
 }
 
@@ -103,9 +97,10 @@
     bottom: 0;
 }
 
+/* Input box */
 .chat-input-bar input {
     flex: 1;
-    padding: 12px;
+    padding: 12px 15px;
     font-size: 15px;
     border-radius: 25px;
     border: 1px solid #ccc;
@@ -113,33 +108,74 @@
     background: white;
 }
 
+/* SEND BUTTON */
 .chat-input-bar button {
-    padding: 12px 20px;
-    background: #075e54;
+    width: 48px;
+    height: 48px;
     border: none;
-    border-radius: 25px;
-    color: white;
+    background: #075e54;
+    border-radius: 50%;
     cursor: pointer;
-    font-size: 15px;
-    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* WhatsApp send icon */
+.chat-input-bar button::before {
+    content: "";
+    display: block;
+
+    width: 22px;
+    height: 22px;
+
+    /* Make icon white */
 }
 
 .chat-input-bar button:hover {
     background: #064e47;
 }
 
-/* RESPONSIVE */
+/* MOBILE RESPONSIVE */
 @media (max-width: 480px) {
     .chat-wrapper {
-        max-width: 100%;
+        width: 100%;
     }
+}
 
-    .chat-header h2 {
-        max-width: 60%;
-        font-size: 16px;
-    }
+.chat-input-bar button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    background: #075e54;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
 
-    .chat-input-bar button {
-        padding: 10px 16px;
-    }
+/* Hide button text */
+.chat-input-bar button {
+    color: transparent !important;
+    font-size: 0 !important;
+}
+
+/* WhatsApp Send (Paper Plane) icon */
+.chat-input-bar button::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background-image: url("https://cdn-icons-png.flaticon.com/512/709/709586.png");
+    /* WHATSAPP STYLE */
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: invert(1);
+    /* make icon white */
+}
+
+/* Hover */
+.chat-input-bar button:hover {
+    background: #064e47;
 }

@@ -5,43 +5,41 @@
     box-sizing: border-box;
 }
 
-/* FULL SCREEN + CENTER CONTENT */
-html,
+/* FULL SCREEN AREA */
 body {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
-    /* NO SCROLL */
-    background: #e5ddd5;
-    /* WhatsApp background tone */
+    height: 100vh;
     font-family: "Poppins", sans-serif;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    /* PERFECT VERTICAL CENTER */
+
+    /* Official WhatsApp Chat Wallpaper */
+    background: url("https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 /* MAIN WRAPPER */
 .signin-container {
     width: 100%;
-    height: auto;
-    /* don't stretch full height */
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* CARD BOX */
+/* CARD BOX (WhatsApp Web Style) */
 .signin-card {
     background: #ffffff;
-    width: 350px;
-    /* FIXED perfect size (not full width) */
-    padding: 25px 28px;
-    border-radius: 18px;
-    box-shadow: 0px 4px 18px rgba(0, 0, 0, 0.18);
+    width: 360px;
+    padding: 30px 32px;
+    border-radius: 16px;
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+
     text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.35s ease-in-out;
 }
 
 /* TITLE */
@@ -54,12 +52,12 @@ body {
 
 /* INPUT FIELDS */
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 16px;
 }
 
 .signin-input {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border-radius: 10px;
     border: 1.8px solid #cccccc;
     font-size: 15px;
@@ -71,16 +69,15 @@ body {
     border-color: #128C7E;
 }
 
-/* BUTTONS */
+/* MAIN BUTTON */
 .signin-btn {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     background: #128C7E;
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 16px;
-    margin-top: 5px;
+    font-size: 17px;
     cursor: pointer;
     transition: 0.2s;
 }
@@ -89,12 +86,13 @@ body {
     background: #0d6e63;
 }
 
+/* GOOGLE BUTTON */
 .google-btn {
     width: 100%;
-    padding: 11px;
+    padding: 12px;
     margin-top: 12px;
     background: #ffffff;
-    border: 1.5px solid #cccccc;
+    border: 1.8px solid #cccccc;
     color: black;
     border-radius: 10px;
     font-size: 15px;
@@ -106,28 +104,22 @@ body {
     background: #f2f2f2;
 }
 
-/* SIGNUP TEXT */
+/* SIGN UP */
 .signup-text {
-    margin-top: 15px;
+    margin-top: 16px;
     font-size: 14px;
-    color: black;
 }
 
 .signup-link {
     color: #128C7E;
     font-weight: 600;
-    text-decoration: none;
 }
 
-.signup-link:hover {
-    text-decoration: none;
-}
-
-/* FADE ANIMATION */
+/* ANIMATION */
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(12px);
     }
 
     to {
