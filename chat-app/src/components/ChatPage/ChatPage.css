@@ -170,6 +170,8 @@
     background-image: url("https://cdn-icons-png.flaticon.com/512/709/709586.png");
     /* WHATSAPP STYLE */
     background-size: cover;
+    position: relative;
+    right: 10px;
     background-repeat: no-repeat;
     filter: invert(1);
     /* make icon white */
@@ -178,4 +180,96 @@
 /* Hover */
 .chat-input-bar button:hover {
     background: #064e47;
+}
+
+/* RESPONSIVE CHAT PAGE */
+@media (max-width: 480px) {
+
+    .chat-wrapper {
+        width: 100%;
+        height: 100vh;
+        border-left: none;
+        border-right: none;
+    }
+
+    .chat-header {
+        padding: 10px 14px;
+    }
+
+    .chat-header h2 {
+        font-size: 15px;
+        max-width: 80%;
+    }
+
+    .chat-view {
+        padding: 14px;
+        gap: 8px;
+    }
+
+    .chat-bubble {
+        max-width: 85%;
+        font-size: 14px;
+        padding: 8px 12px;
+    }
+
+    .chat-input-bar {
+        padding: 8px;
+        gap: 8px;
+    }
+
+    .chat-input-bar input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .chat-input-bar button {
+        width: 42px;
+        height: 42px;
+    }
+
+    .chat-input-bar button::after {
+        width: 19px;
+        height: 19px;
+        right: 8px;
+    }
+}
+
+
+@media (max-width: 360px) {
+
+    .chat-header h2 {
+        font-size: 14px;
+        max-width: 70%;
+    }
+
+    .chat-view {
+        padding: 10px;
+        gap: 6px;
+    }
+
+    .chat-bubble {
+        max-width: 90%;
+        font-size: 13px;
+        padding: 7px 10px;
+    }
+
+    .chat-input-bar {
+        padding: 6px;
+    }
+
+    .chat-input-bar input {
+        padding: 9px 12px;
+        font-size: 13px;
+    }
+
+    .chat-input-bar button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .chat-input-bar button::after {
+        width: 17px;
+        height: 17px;
+        right: 6px;
+    }
 }

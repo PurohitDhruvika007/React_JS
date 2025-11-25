@@ -127,3 +127,62 @@ body {
         transform: translateY(0);
     }
 }
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 430px) {
+    body {
+        padding: 20px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .signin-card {
+        width: 100%;
+        max-width: 350px;
+        padding: 25px 20px;
+    }
+
+    .signin-title {
+        font-size: 22px;
+    }
+
+    .signin-input {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .signin-btn {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .google-btn {
+        font-size: 14px;
+        padding: 11px;
+    }
+
+    .signup-text {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 350px) {
+    .signin-card {
+        padding: 20px 16px;
+    }
+
+    .signin-title {
+        font-size: 20px;
+    }
+
+    .signin-input,
+    .signin-btn,
+    .google-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .signup-text {
+        font-size: 12px;
+    }
+}
