@@ -24,51 +24,95 @@ export default function AddProducts() {
         e.preventDefault();
         try {
             await dispatch(addProduct(product)).unwrap();
-            navigate("/home"); // go back to product list
+            navigate("/home");
         } catch (err) {
             console.error("Failed to add product:", err);
         }
     };
 
     return (
-        <div className="add-product-container">
+        <div className="add-product-page">
+            <Navbar />
+            <div className="add-product-container">
+                <div className="add-product-card">
+                    <h1>Add Product</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder=" "
+                                value={product.title}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Product Title</label>
+                        </div>
 
-            <h1>Add Product</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Product Title"
-                    value={product.title}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="number"
-                    name="price"
-                    placeholder="Price"
-                    value={product.price}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="category"
-                    placeholder="Category"
-                    value={product.category}
-                    onChange={handleChange}
-                    required
-                />
-                <input
-                    type="text"
-                    name="image"
-                    placeholder="Image URL"
-                    value={product.image}
-                    onChange={handleChange}
-                    required
-                />
-                <button type="submit">Add Product</button>
-            </form>
+                        <div className="input-group">
+                            <input
+                                type="number"
+                                name="price"
+                                placeholder=" "
+                                value={product.price}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Price ($)</label>
+                        </div>
+
+                        <div className="input-group">
+                            <select
+                                name="category"
+                                value={product.category}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled hidden>Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Footwear">Footwear</option>
+                                <option value="Home">Home</option>
+                                <option value="Fashion">Fashion</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Books">Books</option>
+                            </select>
+                            <label>Category</label>
+                        </div>
+
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="image"
+                                placeholder=" "
+                                value={product.image}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Image URL</label>
+                        </div>
+
+                        {product.image && (
+                            <div className="image-preview">
+                                <img src={product.image} alt="Preview" />
+                            </div>
+                        )}
+
+                        <div className="button-group">
+                            <button type="submit" className="submit-btn">
+                                Add Product
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel-btn"
+                                onClick={() => navigate("/home")}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }

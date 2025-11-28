@@ -5,15 +5,19 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #1B3C53, #234C6A, #456882);
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
+}
+
+/* Sign-in page wrapper */
+.signin-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* Sign-in container */
 .signin-container {
-    width: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,12 +29,13 @@ body {
     background: #E3E3E3;
     border-radius: 15px;
     padding: 35px 30px;
-    width: 360px;
-    max-width: 100%;
+    width: 400px;
+    max-width: 95%;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
     gap: 20px;
+    align-items: center;
     transition: transform 0.3s;
 }
 
@@ -46,6 +51,14 @@ body {
     font-weight: 700;
 }
 
+/* Input group */
+.input-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 /* Input fields */
 .signin-input {
     width: 100%;
@@ -55,6 +68,7 @@ body {
     font-size: 16px;
     color: #1B3C53;
     transition: 0.3s;
+    box-sizing: border-box;
 }
 
 .signin-input:focus {
@@ -94,11 +108,17 @@ body {
     background-color: #1B3C53;
 }
 
-/* Input group spacing */
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* Signup text */
+.signup-text {
+    font-size: 14px;
+    color: #1B3C53;
+    text-align: center;
+}
+
+.signup-text span {
+    color: #4FD1C5;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 /* Responsive */
@@ -106,6 +126,17 @@ body {
     .signin-card {
         width: 90%;
         padding: 30px 25px;
+    }
+
+    .signin-title {
+        font-size: 24px;
+    }
+
+    .signin-input,
+    .signin-btn,
+    .google-btn {
+        font-size: 15px;
+        padding: 10px;
     }
 }
 
@@ -116,75 +147,54 @@ body {
     }
 
     .signin-title {
-        font-size: 24px;
+        font-size: 22px;
     }
 
     .signin-input,
     .signin-btn,
     .google-btn {
         font-size: 14px;
-        padding: 10px;
+        padding: 8px;
     }
 }
 
-/* Card */
-.signin-card {
-    background: #E3E3E3;
-    border-radius: 15px;
-    padding: 30px 25px;
-    width: 360px;
-    /* card width */
-    max-width: 100%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* center content */
-    gap: 20px;
-}
-
-/* Input group spacing */
+/* Input group */
 .input-group {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    width: 100%;
-    align-items: center;
-    /* center inputs */
+    gap: 0;
+    /* remove space between inputs */
 }
 
-/* Input fields */
+/* Optional: remove margin from inputs if needed */
 .signin-input {
-    width: 80%;
-    /* smaller than card */
-    max-width: 280px;
-    /* optional max-width */
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #456882;
-    font-size: 15px;
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 0;
+    /* remove rounding if you want fully flush */
+    border-top: 1px solid #456882;
+    border-bottom: 1px solid #456882;
+    border-left: 1px solid #456882;
+    border-right: 1px solid #456882;
+    font-size: 16px;
     color: #1B3C53;
-    transition: 0.3s;
     box-sizing: border-box;
 }
 
-.signin-input:focus {
-    outline: none;
-    border: 2px solid #4FD1C5;
-    box-shadow: 0 0 6px rgba(79, 209, 197, 0.5);
+.signin-input:first-child {
+    border-top-left-radius: 8px;
+    /* keep rounded corners for top input */
+    border-top-right-radius: 8px;
 }
 
-/* Buttons */
-.signin-btn,
-.google-btn {
-    width: 80%;
-    /* same as input */
-    max-width: 280px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: none;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-    font-weight: 600;
+.signin-input:last-child {
+    border-bottom-left-radius: 8px;
+    /* keep rounded corners for bottom input */
+    border-bottom-right-radius: 8px;
+}
+
+.signin-input:not(:last-child) {
+    border-bottom: none;
+    /* remove double border between inputs */
 }

@@ -1,9 +1,9 @@
-// src/components/UpdateProducts/UpdateProducts.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { updateProduct } from "../../slices/ProductSlice";
 import axios from "axios";
+import Navbar from "../Navbar/Navbar";
 import "./UpdateProducts.css";
 
 export default function UpdateProducts() {
@@ -43,7 +43,7 @@ export default function UpdateProducts() {
         try {
             await dispatch(updateProduct({ id: Number(id), updatedProduct: formData })).unwrap();
             alert("Product updated successfully!");
-            navigate("/home"); // go back to product list
+            navigate("/home");
         } catch (error) {
             console.error("Failed to update product:", error);
         }
@@ -52,43 +52,81 @@ export default function UpdateProducts() {
     if (loading) return <p>Loading product details...</p>;
 
     return (
-        <div className="update-product-container">
-            <h1>Update Product</h1>
-            <div className="update-product-form">
-                <label>Title:</label>
-                <input
-                    type="text"
-                    name="title"
-                    value={formData.title}
-                    onChange={handleChange}
-                />
+        <div className="update-product-page">
+            <Navbar />
+            <div className="update-product-container">
+                <div className="update-product-card">
+                    <h1>Update Product</h1>
+                    <form>
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="title"
+                                placeholder=" "
+                                value={formData.title}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Product Title</label>
+                        </div>
 
-                <label>Price:</label>
-                <input
-                    type="number"
-                    name="price"
-                    value={formData.price}
-                    onChange={handleChange}
-                />
+                        <div className="input-group">
+                            <input
+                                type="number"
+                                name="price"
+                                placeholder=" "
+                                value={formData.price}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Price ($)</label>
+                        </div>
 
-                <label>Category:</label>
-                <input
-                    type="text"
-                    name="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                />
+                        <div className="input-group">
+                            <select
+                                name="category"
+                                value={formData.category}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="" disabled hidden>Select Category</option>
+                                <option value="Electronics">Electronics</option>
+                                <option value="Footwear">Footwear</option>
+                                <option value="Home">Home</option>
+                                <option value="Fashion">Fashion</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Bags">Bags</option>
+                                <option value="Books">Books</option>
+                            </select>
+                            <label>Category</label>
+                        </div>
 
-                <label>Image URL:</label>
-                <input
-                    type="text"
-                    name="image"
-                    value={formData.image}
-                    onChange={handleChange}
-                />
+                        <div className="input-group">
+                            <input
+                                type="text"
+                                name="image"
+                                placeholder=" "
+                                value={formData.image}
+                                onChange={handleChange}
+                                required
+                            />
+                            <label>Image URL</label>
+                        </div>
 
-                <button onClick={handleUpdate}>Update Product</button>
-                <button onClick={() => navigate("/home")}>Cancel</button>
+                        {formData.image && (
+                            <div className="image-preview">
+                                <img src={formData.image} alt="Preview" />
+                            </div>
+                        )}
+
+                        <button type="button" className="submit-btn" onClick={handleUpdate}>
+                            Update Product
+                        </button>
+                        <button type="button" className="cancel-btn" onClick={() => navigate("/home")}>
+                            Cancel
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     );
