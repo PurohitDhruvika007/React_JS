@@ -91,3 +91,10 @@ The project is organized into reusable components and Redux slices for state man
 ---
  
 ### live demo:- https://productmanagement-rho.vercel.app/
+
+---
+
+## video
+
+https://github.com/user-attachments/assets/7714dedc-5238-4565-9086-5dccd330aaf0
+
